@@ -1,0 +1,39 @@
+Automatisierungsvorrichtung für einen Reprap 3D-Drucker
+
+
+Erfinder: Joachim Glauche, Kliment Yanev
+
+Dokumentiert von: Joachim Glauche am 14.12.2012
+
+Lizenz dieses Dokumentes GNU FDL
+http://www.gnu.org/licenses/fdl.txt
+
+
+
+
+
+
+Als Ausgangspunkt der Erfindung dient ein Reprap Prusa I3 in der Holz-Box-Ausführung (1, 2) (auch im späteren Reprap ganannt). Dieser baut Kunststoffmodelle additiv im FFF ("Fused Filament Fabrication") genannten Verfahren auf. Als Ausgangsmaterial wird ein Kunststoffdraht aus PLA oder ABS verwendet, dieser wird in der verwendeten Reprap über ein Zahnrad gefördert und in einer Düse erhitzt. 
+Der verwendete Reprap hat eine beheitzbare Bauplattform, auf dieser ist eine Glasplatte und eine ca. 1mm Dicke Platte aus Carbon-faserverstärkter Kunststoff (CFK) geklemmt. Die CFK-Platte ist maßgeblich für die Erfindung, da sie hervorragende Eigenschaften als Basismaterial vorweist: Wenn aufgewärmt (ca. 60°C für PLA, 110°C für ABS), hält die heiße Extrusion (ca. 190°C bei PLA, 230°C bei ABS) der Düse auf der Platte, nach dem Abkühlen auf ca. Raumtemperatur lösen sich die fertigen Kunststoffteile mit geringem Kraftaufwand wieder von der CFK-Platte.
+
+Um den Reprap zu automatisieren, wurde eine weitere Achse eingebaut die parallel zur X-Achse läuft. Diese Achse wird mit einem DC Motor mit Getriebe Typ PGM-37DC12/77 angetrieben, über eine Kupplung (siehe Datei coupling.scad) und ein Stück Aquariumschlauch ist eine M5-Gewindestange verbunden. Die Gewindestange bewegt einen Schlitten (siehe axis.scad). Für die Steuerung der Achse sind zwei Mikroschalter angebracht, von der Elektronischen Steuerung wird ein handelsüblicher DC-Motortreiber verwendet. 
+
+Diese Achse ist mit Aluminium-Profilen verschraubt. Diese sind so angebracht, dass ein Profil die Aufgabe eines "Schiebe-Arms" bekommt. Dieses Profil ist so groß wie die verfügbare Druckfläche und schiebt fertige, abgekühlte Kunststoffteile von der Platte.
+
+Der Arbeitsablauf ist wie folgt:  Nach dem Druckvorgang wird die X Achse in die "Home"-Position gefahren, die Y-Achse auf die maximale Position (vorne). Ein zusätzlich angebrachter Lüfter wird angeschaltet und nach einer Anzahl von n Minuten (n ist nach den Experimenten ca. 5-6 für PLA), wird die zusätzliche Achse in Bewegung gesetzt. Der DC-Motor dreht so lange, bis der Schlitten der Achse den Endschalter erreicht. Dabei kollidiert der "Schiebe-Arm" mit den gedruckten Teilen und drückt diese in in die Verfahr-Richtung. Der DC-Motor mit dem Getriebe erzeugt so viel Kraft, dass dieser die Achse weiterbewegt, sollte sich das oder die Kunststoffteil(e) nicht direkt lösen. Die dadurch erhöhte Kraft auf den Kunststoffteilen löst diese dann nach kurzer Zeit. Die Teile fallen neben die Bauplatform in einen dort angebrachten Behälter.
+Nachdem der Mikroschalter erreicht wird, wird die Richtung des Motors geändert  und der Lüfter zur Abkühlung der Teile ausgeachaltet und die beheitzte Bauplattform wieder für den nächsten Druck aufgewärmt. Nachdem der zweite Endschalter erreicht ist, wird der DC-Motor abgeschaltet. Der nächste Druck kann automatisch gestartet werden.
+
+
+
+
+1: Prusa I3 Repository https://github.com/josefprusa/Prusa3 
+2: Prusa I3 Dokumentation http://78.47.92.212/i3_documentation_pics/ 
+
+
+
+
+
+
+
+
+
