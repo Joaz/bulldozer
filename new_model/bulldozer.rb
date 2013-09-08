@@ -29,6 +29,9 @@ class BedPlate
 	attr_accessor :size
 	def initialize(size)
 		@size=size		
+		
+		@bolt_positions = [{x:12.5,y:12.5},{x:12.5+200,y:12.5},{x:12.5,y:12.5+200},{x:12.5+200,y:12.5+200}]
+		
 	end
 
 	def output
@@ -40,17 +43,29 @@ class BedPlate
 	end	
 	
 	def show
-		output+bolts
+		output+bolts+nuts
 	end
 
 
 	def bolts
-		bolts =  Bolt.new(3,25).output.translate(x:12.5,y:12.5)
-		bolts += Bolt.new(3,25).output.translate(x:12.5+200,y:12.5)
-		bolts += Bolt.new(3,25).output.translate(x:12.5,y:12.5+200)
-		bolts += Bolt.new(3,25).output.translate(x:12.5+200,y:12.5+200)
-		bolts
+		bolt = ScadObject.new		
+		@bolt_positions.each do |pos|
+			bolt += Bolt.new(3,25).output.translate(pos)		
+		end
+		bolt
 	end
+
+	def nuts
+		nut_height = Nut.new(3,no_bom:true).height + 0.05
+		nut = ScadObject.new	
+		(0..2).each do |i| 		
+			@bolt_positions.each do |pos|
+				nut += Nut.new(3).show.	translate(pos).translate(z:@size[:z]+i*nut_height)
+			end		
+		end
+
+		nut 
+	end	
 	
 
 end
@@ -72,6 +87,7 @@ assembly+=bed_plate.show.translate(z:20)
 assembly+=tslot_rectangle(225,500, TSlot.new(size:30,configuration:2), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30))    
 #assembly+=Bolt.new(3,35).output
 #assembly=TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8).show
+
 
 #puts @@bom.output
 puts "$fn=64;"+assembly.output
