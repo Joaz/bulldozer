@@ -49,9 +49,9 @@ class BedPlate
 
 	def bolts
 		@bolt_positions.each do |pos|
-			bolt += Bolt.new(3,25).output.translate(pos)		
+			@bolt += Bolt.new(3,25).output.translate(pos)		
 		end
-		bolt
+		@bolt
 	end
 
 	def nuts
