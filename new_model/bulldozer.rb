@@ -48,7 +48,6 @@ class BedPlate
 
 
 	def bolts
-		bolt = ScadObject.new		
 		@bolt_positions.each do |pos|
 			bolt += Bolt.new(3,25).output.translate(pos)		
 		end
@@ -57,14 +56,14 @@ class BedPlate
 
 	def nuts
 		nut_height = Nut.new(3,no_bom:true).height + 0.05
-		nut = ScadObject.new	
+	
 		(0..2).each do |i| 		
 			@bolt_positions.each do |pos|
-				nut += Nut.new(3).show.	translate(pos).translate(z:@size[:z]+i*nut_height)
+				@nut += Nut.new(3).show.	translate(pos).translate(z:@size[:z]+i*nut_height)
 			end		
 		end
 
-		nut 
+		@nut 
 	end	
 	
 
