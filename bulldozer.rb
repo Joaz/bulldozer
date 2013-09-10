@@ -40,7 +40,7 @@ assembly=ScadObject.new
 
 
 
-assembly+= YPlateAssembly.new(length:500,rod_size:12,position:10).show.translate(z:0)
+assembly+= YPlateAssembly.new(length:470,rod_size:12,position:100).show.translate(z:3.5,y:30,x:35)
 #assembly+=rod(500).translate(x:11.5,z:20.5)
 #assembly+=rod(500).translate(x:200+10,z:20)
 #assembly+=Lm_uu.new(inner_diameter:12).show.rotate(x:90).translate(x:15,z:20,y:100)
@@ -49,7 +49,7 @@ assembly+= YPlateAssembly.new(length:500,rod_size:12,position:10).show.translate
 #assembly+=Lm_uu.new(inner_diameter:12).show.rotate(x:90).translate(x:210,z:20,y:150)
  
  
-#assembly+=tslot_rectangle(225,500, TSlot.new(size:30,configuration:2), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30))    
+assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30))    
 #assembly+=Bolt.new(3,35).output
 #assembly=TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8).show
 

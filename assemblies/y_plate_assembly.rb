@@ -12,8 +12,8 @@ class YPlateAssembly
   def show
     bed_plate=BedPlate.new(x:@args[:bed_size_x],y:@args[:bed_size_y],z:@args[:bed_size_z])
     holder_left=BedPlateBearingMount.new
-    fixed = Rod.new().show.translate(x:holder_left.rod_position_x,z:holder_left.rod_position_z)   
-    fixed += Rod.new().show.translate(x:@args[:bed_size_x]-holder_left.rod_position_x,z:holder_left.rod_position_z)      
+    fixed = Rod.new(length:@args[:length]).show.translate(x:holder_left.rod_position_x,z:holder_left.rod_position_z)   
+    fixed += Rod.new(length:@args[:length]).show.translate(x:@args[:bed_size_x]-holder_left.rod_position_x,z:holder_left.rod_position_z)      
     
     moving_table = holder_left.output.translate(x:0,z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/2)          
     # holders on the right side
