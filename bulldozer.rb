@@ -52,7 +52,7 @@ assembly+= YPlateAssembly.new(length:470,rod_size:12,position:100).show.translat
 assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30))    
 #assembly+=Bolt.new(3,35).output
 #assembly=TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8).show
-
+assembly = Nema17.new.show
 #puts @@bom.output
 puts "$fn=64;"+assembly.output
 #puts TSlot.new(size:40,configuration:2).output
