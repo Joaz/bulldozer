@@ -13,7 +13,7 @@ class BedPlate
 	
 		r = r-bolts		
 		return r.color("SaddleBrown")	
-	end	
+	end
 	
 	def show
 		output+bolts+nuts
