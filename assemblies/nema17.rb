@@ -46,8 +46,8 @@ class Nema17
 
 
 		motor = base+flange+shaft
-		# move motor that sides are at 0
-		motor.translate(x:@motor_OD/2,y:@motor_OD/2,z:@motor_height/2)		
+		# move motor that z is 0
+		motor.translate(z:@motor_height/2)		
 	end
 	
 	def outline
