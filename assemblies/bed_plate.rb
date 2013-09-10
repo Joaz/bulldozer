@@ -1,22 +1,27 @@
 class BedPlate
 	attr_accessor :size
-	def initialize(size)
-		@size=size		
+	def initialize(args={})
+		@size=args
 		
 		@bolt_positions = [{x:12.5,y:12.5},{x:12.5+200,y:12.5},{x:12.5,y:12.5+200},{x:12.5+200,y:12.5+200}]
-		
+	  
+	  @@bom.add(description) unless args[:no_bom] == true
+	  @bolt_height = @size[:z]
 	end
 
+  def description
+    "laminated plywood cut #{@size[:x]}x#{@size[:y]}, thickness=#{@size[:z]}mm"
+  end
+  
 	def output
 		r = cube([@size[:x],@size[:y],@size[:z]])
-		@@bom.add("laminated plywood cut #{@size[:x]}x#{@size[:y]}, thickness=#{@size[:z]}mm")
-	
+
 		r = r-bolts		
 		return r.color("SaddleBrown")	
 	end
 	
 	def show
-		output+bolts+nuts
+		output+bolts+nuts(3)+heatbed+nuts
 	end
 
 	def bolts
@@ -26,17 +31,25 @@ class BedPlate
 		@bolt
 	end
 
-	def nuts
-		nut_height = Nut.new(3,no_bom:true).height + 0.05
+	def nuts(count=1)
+		@nut_height = Nut.new(3,no_bom:true).height + 0.05
 	
-		(0..2).each do |i| 		
+		(1..count).each do |i| 		
 			@bolt_positions.each do |pos|
-				@nut += Nut.new(3).show.	translate(pos).translate(z:@size[:z]+i*nut_height)
+				@nut += Nut.new(3).show.	translate(pos).translate(z:@bolt_height)
 			end		
+		  @bolt_height += @nut_height
 		end
 
 		@nut 
 	end	
+	
+	def heatbed
+	  bed = Heatbed.new
+	  output = bed.show.translate(x:5,y:5,z:@bolt_height)
+	  @bolt_height+= bed.size[:z]
+	  output
+	end
 	
 
 end
