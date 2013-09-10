@@ -15,10 +15,10 @@ class YPlateAssembly
     fixed = Rod.new().show.translate(x:holder_left.rod_position_x,z:holder_left.rod_position_z)   
     fixed += Rod.new().show.translate(x:@args[:bed_size_x]-holder_left.rod_position_x,z:holder_left.rod_position_z)      
     
-    moving_table = holder_left.output.translate(x:0,z:-@args[:bed_size_z],y:(@args[:bed_size_x]-holder_left.holder_length)/2)          
+    moving_table = holder_left.output.translate(x:0,z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/2)          
     # holders on the right side
-    moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_x]-holder_left.holder_length)/5)          
-    moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_x]-holder_left.holder_length)/5*4)          
+    moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/5)          
+    moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/5*4)          
    
     moving_table += bed_plate.show
     assembly = fixed + moving_table.translate(y:@args[:position])
