@@ -5,6 +5,9 @@ class Bearing
     @args = args
     @args[:type] ||= "608"
     @args[:sealing] ||= "ZZ"
+    @args[:margin] ||= 0.0
+    @args[:outer_rim_cut] ||= 0.0
+    
     
     prepare_data
       
@@ -25,6 +28,9 @@ class Bearing
   end
   
   def output
+     bearing = cylinder(d:@size[:outer_diameter]+@args[:margin],h:@size[:thickness])
+     bearing+= cylinder(d:@size[:outer_rim],h:@args[:outer_rim_cut]).translate(z:-@args[:outer_rim_cut]/2) 
+     bearing
   end
   
   def show

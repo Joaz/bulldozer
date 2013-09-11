@@ -37,9 +37,6 @@ assembly=ScadObject.new
 
 
 
-
-
-
 assembly+= YPlateAssembly.new(length:470,rod_size:12,position:100).show.translate(z:3.5,y:30,x:35)
 #assembly+=rod(500).translate(x:11.5,z:20.5)
 #assembly+=rod(500).translate(x:200+10,z:20)
@@ -47,7 +44,6 @@ assembly+= YPlateAssembly.new(length:470,rod_size:12,position:100).show.translat
 
 #assembly+=Lm_uu.new(inner_diameter:12).show.rotate(x:90).translate(x:15,z:20,y:200)
 #assembly+=Lm_uu.new(inner_diameter:12).show.rotate(x:90).translate(x:210,z:20,y:150)
- 
  
 assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30))    
 #assembly+=Bolt.new(3,35).output
@@ -57,9 +53,12 @@ assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2), TSl
 assembly += Nema17.new.show.rotate(y:90).translate(x:100,y:445)
 assembly += Nema17.new.show.translate(x:-25,y:250,z:-50)
 assembly += Nema17.new.show.translate(x:320,y:250,z:-50)
-
 assembly += AcmeRod.new.show.translate(x:-25,y:250,z:22)
 assembly += AcmeRod.new.show.translate(x:320,y:250,z:22)
+assembly+= ZAxisAssembly.new.show 
+
+
+
 #puts @@bom.output
 puts "$fn=32;"+assembly.output
 #puts TSlot.new(size:40,configuration:2).output

@@ -20,7 +20,7 @@ class YPlateAssembly
     moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/5)          
     moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/5*4)          
    
-    moving_table += bed_plate.show
+    moving_table += bed_plate.show.translate(z:-1)
     assembly = fixed + moving_table.translate(y:@args[:position])
     
   end
