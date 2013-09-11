@@ -9,7 +9,8 @@ class AcmeRod
 		@args[:bottom_diameter] = 5
 		@args[:top_length] = 20
 		@args[:top_diameter] = 5
-
+    
+    @args[:total_length] = @args[:bottom_length] + @args[:length] + @args[:top_length]
 
 
 		@@bom.add(description) unless args[:no_bom] == true
@@ -20,8 +21,16 @@ class AcmeRod
 	end
 
 	def show
-		acme
+		acme+bearings
 	end	
+	
+	def bearings
+	  b_bottom = Bearing.new(:type => "625")
+	  b_top = Bearing.new(:type => "625")
+	  bearings = b_bottom.show.translate(z:@args[:bottom_length]-3-b_bottom.size[:thickness])
+	  bearings += b_top.show.translate(z:@args[:total_length]-@args[:top_length]+3)
+	  bearings
+	end
 
 	def acme
 		
