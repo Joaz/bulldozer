@@ -4,7 +4,7 @@ class ZAxisAssembly
     @args[:position] ||= 280
     @args[:left_pos] = -30  # left of y t-slot
     @args[:right_pos] = 325 # right of y-tslot
-    @args[:height] = 450 # total height from bottom
+    @args[:height] = 430 # total height from bottom
     
   end
  

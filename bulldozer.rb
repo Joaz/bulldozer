@@ -58,6 +58,48 @@ assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2), TSl
 assembly+= ZAxisAssembly.new.show 
 
 
+class Belt
+	def initialize(args={})
+		@args=args
+		@args[:belt_thickness] ||= 0.9
+		@args[:width] ||= 6
+		# TODO: BOM entry for this one
+	end
+
+	def show
+
+		
+		belt = line(200)
+		belt+= turn_180(13)
+		belt+= line(420).translate(z:-13-@args[:belt_thickness])
+		belt+= turn_180(13).mirror(y:1).translate(y:420)
+		belt+= line(200).translate(y:220)
+
+
+		belt.color("DarkSlateGray")
+	end
+	
+	def line(length)
+		cube([@args[:width], length, @args[:belt_thickness]])
+	end
+
+	def turn_180(diameter)
+		turn = cylinder(d:diameter+@args[:belt_thickness]*2,h:@args[:width])
+		cut_cyl1 = cylinder(d:diameter,h:@args[:width]+0.2).translate(z:-0.1)
+		cut_cyl2 = cylinder(d:diameter,h:@args[:width]+0.2).translate(z:-0.1, y:diameter/2)
+		turn -= hull(cut_cyl1,cut_cyl2)
+
+		turn.rotate(y:90).translate(z:-diameter/2+@args[:belt_thickness]/2)
+	
+	end	
+	
+end
+
+assembly += Belt.new.show.translate(x:150,y:40)
+
+
+
+
 #puts @@bom.output
 puts "$fn=64;"+assembly.output
 #puts TSlot.new(size:40,configuration:2).output
