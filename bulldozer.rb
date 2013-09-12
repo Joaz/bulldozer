@@ -51,14 +51,13 @@ assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2), TSl
 
 #sketch
 # y motor sketch
-#assembly += Nema17.new.show.rotate(y:90).translate(x:100,y:445)
-
+assembly += Nema17.new.show.rotate(y:90).translate(x:95,y:460,z:-7-14)
+assembly += Belt.new.show.translate(x:150,y:40,z:-14)
 
 
 assembly+= ZAxisAssembly.new.show 
 
 
-assembly += Belt.new.show.translate(x:150,y:40)
 
 
 
