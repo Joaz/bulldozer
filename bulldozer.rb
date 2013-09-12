@@ -50,16 +50,15 @@ assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2), TSl
 #assembly=TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8).show
 
 #sketch
-assembly += Nema17.new.show.rotate(y:90).translate(x:100,y:445)
-assembly += Nema17.new.show.translate(x:-25,y:250,z:-50)
-assembly += Nema17.new.show.translate(x:320,y:250,z:-50)
-assembly += AcmeRod.new.show.translate(x:-25,y:250,z:22)
-assembly += AcmeRod.new.show.translate(x:320,y:250,z:22)
+# y motor sketch
+#assembly += Nema17.new.show.rotate(y:90).translate(x:100,y:445)
+
+
+
 assembly+= ZAxisAssembly.new.show 
 
 
-
 #puts @@bom.output
-puts "$fn=32;"+assembly.output
+puts "$fn=64;"+assembly.output
 #puts TSlot.new(size:40,configuration:2).output
 

@@ -34,7 +34,7 @@ class Bearing
   end
   
   def show
-    if @size[:inner_rim] && @size[:outer_rim]
+    if @size[:inner_rim].to_f > 0 && @size[:outer_rim].to_f > 0
       bearing = cylinder(d:@size[:outer_diameter],h:@size[:thickness])
       bearing-= cylinder(d:@size[:outer_rim],h:@size[:thickness]+0.2).translate(z:-0.1)
       bearing = bearing.color("Silver")
