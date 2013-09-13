@@ -5,7 +5,7 @@ class Belt
 		@args[:width] ||= 6
 		@args[:turn_diameter] ||= 13
 		@args[:longest_side_length] ||= 420
-		@args[:top_side_length] ||= 400
+		@args[:top_side_length] ||= 408
 		@args[:position] ||= 200
 
 

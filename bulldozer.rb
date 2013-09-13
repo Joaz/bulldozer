@@ -50,15 +50,47 @@ assembly+= YPlateAssembly.new(length:470,rod_size:12,position:100).show.translat
 class YBeltHolder < CrystalScad::Assembly
   
   def show
-    base = cube([40,10,16])
-    
-    base += cube([35,10,10]).translate(z:16)
-    base -= cube([20.2,10.2,1.5]).translate(x:15-0.1,y:-0.1,z:16)
-    
-    
-    base.mirror(z:1)
+		belt_holder(true)
   end
 
+	def output
+		belt_holder(false)
+	end
+
+	
+	def belt_holder_base(with_hardware=false)
+	  base = cube([50,10,16]).translate(x:-5)
+    
+    base += cube([30,10,5]).translate(z:16)
+    base -= cube([20.2,10.2,1.2]).translate(x:15-0.1,y:-0.1,z:16)
+		
+		bolt = Bolt.new(3,12,additional_length:5)
+	  base -= bolt.output.mirror(z:1).translate(y:5,x:25,z:21.5)
+		base += bolt.show.mirror(z:1).translate(y:5,x:25,z:21.5) if with_hardware == true
+		# this bolt needs a washer    
+		washer = Washer.new(3.2)		
+		base += washer.show.translate(y:5,x:25,z:21.0) if with_hardware == true
+		
+		
+  end
+
+	def belt_holder(with_hardware=false)
+		base = belt_holder_base(with_hardware)
+
+		
+		bolt = Bolt.new(4,40,additional_length:5)
+		base += bolt.show.rotate(x:90).translate(y:35,x:0,z:10) if with_hardware == true
+
+		bolt = Bolt.new(4,40,additional_length:5)
+		base += bolt.show.rotate(x:90).translate(y:35,x:35,z:10) if with_hardware == true
+		
+		belt_holder2 = belt_holder_base(with_hardware)	  
+
+		base += belt_holder2.translate(y:23)
+
+    base.mirror(z:1)
+	end
+	
 end
 
 assembly += Nema17.new.show.rotate(y:90).translate(x:95,y:460,z:-7-14)
