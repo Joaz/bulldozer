@@ -8,7 +8,7 @@ class Bearing < CrystalScad::Assembly
     @args[:margin] ||= 0.0
     @args[:outer_rim_cut] ||= 0.0
     @args[:flange] ||= false
-
+		@args[:transformations] ||= nil
     
     prepare_data
       
@@ -23,6 +23,7 @@ class Bearing < CrystalScad::Assembly
     
     }
     @size = chart[@args[:type]]
+		@height = @size[:thickness]
   end
   
   def description
@@ -35,6 +36,7 @@ class Bearing < CrystalScad::Assembly
     if @args[:flange] == true
       bearing += cylinder(d:@size[:flange_diameter].to_f, h:@size[:flange_width])      
     end
+		bearing.transformations+=@args[:transformations] if @args[:transformations]
     bearing
   end
   
@@ -60,8 +62,12 @@ class Bearing < CrystalScad::Assembly
       flange-= cylinder(d:@size[:outer_diameter],h:@size[:thickness]+0.2).translate(z:-0.1)
       bearing+=flange.color("Silver")
     end
-    
-    bearing
-  end
+
+		
+		bearing.transformations+=@args[:transformations] if @args[:transformations]
+
+	  bearing
+	
+	end
     	  
 end
