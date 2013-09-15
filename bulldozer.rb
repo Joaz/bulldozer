@@ -1,8 +1,5 @@
 #!/usr/bin/ruby1.9.3
 
-#while inotifywait -e close_write bulldozer.rb; do ./bulldozer.rb > bulldozer.scad; done
-
-
 require "rubygems"
 require "crystalscad"
 require "require_all"
@@ -58,9 +55,8 @@ assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
 
 
 
-#assembly+= ZAxisAssembly.new.show 
+assembly+= ZAxisAssembly.new.show 
 
-#assembly += Bearing.new(:type => "624", :flange=>true).show.rotate(y:90)
 
 
 file = File.open("bom.txt","w")

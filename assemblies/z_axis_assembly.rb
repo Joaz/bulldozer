@@ -9,8 +9,8 @@ class ZAxisAssembly
   end
  
   def show
-      tslot_left = TSlotMachining.new(size:30,configuration:2,holes:"front",bolt_size:8,bolt_length:30)
-      tslot_right = TSlotMachining.new(size:30,configuration:2,holes:"front",bolt_size:8,bolt_length:30)
+      tslot_left = TSlotMachining.new(size:30,configuration:2,holes:"front",bolt_size:5,bolt_length:30)
+      tslot_right = TSlotMachining.new(size:30,configuration:2,holes:"front",bolt_size:5,bolt_length:30)
       tslot_top = TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30)
   
       assembly = tslot_left.show(@args[:height]).translate(x:@args[:left_pos],y:@args[:position],z:-60).color("Silver")
@@ -22,12 +22,12 @@ class ZAxisAssembly
   end
   
   def z_axis_drive
-    assembly += Nema17.new.show.translate(x:@args[:left_pos]+7,y:250,z:-50)
-    assembly += Nema17.new.show.translate(x:@args[:right_pos]-7,y:250,z:-50)
-    assembly += AcmeRod.new.show.translate(x:@args[:left_pos]+7,y:250,z:22)
-    assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-7,y:250,z:22)
-    assembly += Coupling.new.show.translate(x:@args[:left_pos]+7,y:250,z:5)
-    assembly += Coupling.new.show.translate(x:@args[:right_pos]-7,y:250,z:5)
+    assembly += Nema17.new.show.translate(x:@args[:left_pos]+7,y:@args[:position]-25,z:-50)
+    assembly += Nema17.new.show.translate(x:@args[:right_pos]-7,y:@args[:position]-25,z:-50)
+    assembly += AcmeRod.new.show.translate(x:@args[:left_pos]+7,y:@args[:position]-25,z:22)
+    assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-7,y:@args[:position]-25,z:22)
+    assembly += Coupling.new.show.translate(x:@args[:left_pos]+7,y:@args[:position]-25,z:5)
+    assembly += Coupling.new.show.translate(x:@args[:right_pos]-7,y:@args[:position]-25,z:5)
     
     assembly
   end

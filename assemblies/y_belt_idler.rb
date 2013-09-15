@@ -35,8 +35,8 @@ class YBeltIdler < CrystalScad::Assembly
 
 		# mounting holes
 		
-		assembly += Bolt.new(8,25).show.rotate(x:90	).translate(x:7,y:8,z:10)	
-		assembly += Bolt.new(8,25).show.rotate(x:90	).translate(x:7,y:8,z:50)	
+		assembly += Bolt.new(5,25).show.rotate(x:90	).translate(x:7,y:8,z:10)	
+		assembly += Bolt.new(5,25).show.rotate(x:90	).translate(x:7,y:8,z:50)	
 
 
 		assembly
