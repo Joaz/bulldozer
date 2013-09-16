@@ -1,13 +1,13 @@
 class AcmeRod
 	  def initialize(args={})		
 		@args=args			
-		@args[:length] ||= 310
+		@args[:length] ||= 330
 		@args[:diameter] ||= 10.0
 		@args[:pitch] ||= 2.0
 		# these shouldn't be default... 
 		@args[:bottom_length] = 20
 		@args[:bottom_diameter] = 5
-		@args[:top_length] = 20
+		@args[:top_length] = 0
 		@args[:top_diameter] = 5
     
     @args[:total_length] = @args[:bottom_length] + @args[:length] + @args[:top_length]
@@ -19,16 +19,24 @@ class AcmeRod
 	def description
 		"ACME Rod"
 	end
+	
+	def output
+	  acme
+	end
 
 	def show
 		acme+bearings
 	end	
 	
+	def drawing
+	  output.rotate(y:90).projection
+	end
+	
 	def bearings
 	  b_bottom = Bearing.new(:type => "625")
-	  b_top = Bearing.new(:type => "625")
+	  b_top = Bearing.new(:type => "61800")
 	  bearings = b_bottom.show.translate(z:@args[:bottom_length]-3-b_bottom.size[:thickness])
-	  bearings += b_top.show.translate(z:@args[:total_length]-@args[:top_length]+3)
+	  bearings += b_top.show.translate(z:@args[:total_length]-@args[:top_length]-5)
 	  bearings
 	end
 
