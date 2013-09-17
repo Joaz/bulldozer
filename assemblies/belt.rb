@@ -15,7 +15,7 @@ class Belt
 	def show
 
 		belt= turn_180(@args[:turn_diameter])
-		belt+= turn_180(@args[:turn_diameter]).mirror(y:1).translate(y:420)
+		belt+= turn_180(@args[:turn_diameter]).mirror(y:1).translate(y:@args[:longest_side_length])
 				
 		belt+= line(@args[:longest_side_length]).translate(z:-@args[:turn_diameter]-@args[:belt_thickness])
 		
