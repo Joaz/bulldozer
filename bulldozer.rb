@@ -6,17 +6,15 @@ require "require_all"
 
 require_all "assemblies"
 
-
-
-
 include CrystalScad
-
-
 
 @@printed_color="Bisque"
 @tslot_simple = true
  
 
+
+# FIXME: update the mounting of the tslot
+# FIXME: move this into an Assembly
 def tslot_rectangle(x,y,tslot_type_x,tslot_type_y)
 	size = tslot_type_x.args[:size]
 	# x 
@@ -55,109 +53,12 @@ assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2,simpl
 
 assembly+= ZAxisAssembly.new(tslot_simple:true).show
 
-class AcmeNut < CrystalScad::Assembly
-  def initialize(args={})
-    @args = args
-    @args[:shape] = "cylinder"
-    super
-  end
-  
-  def show
-    return cylinder_nut(false) if @args[:shape] == "cylinder"
-    return hex_nut(false) if @args[:shape] == "hexagonal"
-  end
 
-  def output
-    return cylinder_nut(true) if @args[:shape] == "cylinder"
-    return hex_nut(true) if @args[:shape] == "hexagonal"
-  end
-  
-  def cylinder_nut(output)
-    nut = cylinder(d:22,h:20)
-    if output == false
-      nut -= cylinder(d:10,h:20.2).translate(z:-0.1)
-    else
-      nut += cylinder(d:12,h:30).translate(z:-5)
-    end
-    nut.color("Goldenrod")
-  end
-  
-  def hex_nut
-    # todo
-  end
-  
-  
-end
-
-class XAxisAssembly < CrystalScad::Assembly
-  def initialize(args={})
-    @args=args
-    @args[:position] ||= 15
-  end
-  
-  def show
-    # z bearings
-    axis  = Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:40,x:15,z:-50)
-    axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:40,x:15,z:35)
-    
-    axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:40,x:15+270,z:-30)
-    axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:40,x:15+270,z:35)
-
-    axis += TSlot.new(size:30).show(300).rotate(y:90).color("Silver")
-    axis += Rod.new(length:300).show.rotate(z:-90).translate(y:15,z:15)
-    axis += Rod.new(length:300).show.rotate(z:-90).translate(y:-15,z:-15)
-    axis += Lm_uu.new(inner_diameter:12).rotate(y:90).translate(y:15,z:15,x:@args[:position]+20)
-    axis += Lm_uu.new(inner_diameter:12).rotate(y:90).translate(y:-15,z:-15,x:@args[:position])
-    axis += Lm_uu.new(inner_diameter:12).rotate(y:90).translate(y:-15,z:-15,x:@args[:position]+40)
-    #axis += Belt.new(longest_side_length:280,top_side_length:250).show.rotate(z:-90,y:90).translate(x:13,y:-10,z:10)
-    #axis += Nema17.new.show.rotate(x:180).translate(x:13,y:-5,z:75)
-    axis += AcmeNut.new.show.translate(x:-23,y:15,z:-5)
-    
-    axis +=  Nema17.new.show.rotate(x:90).translate(x:30,y:95,z:25)
-    axis += Belt.new(longest_side_length:270,top_side_length:250,position:20).show.rotate(z:-90,y:180).translate(x:30,y:30,z:25-7)
-   
-		axis += XAxisMountingPart.new.show.translate(x:-5,y:-30,z:30)
-	
-    # now need parts that fit into the t-slot on the ends and get tightened by M8
-    # t-slot dimensions
-    # opening = 8.1
-    # wall 2.3
-    # rectangular slot beind wall: 16.2x2.1-2.2
-   
-   end
-end
-
-class XAxisMountingPart < CrystalScad::Assembly
-	
-	def description
-		"printed part: X axis mount part"
-	end	
-	
-	def part
-		assembly = cube([60,60,6])
-		#assembly += cube([6,60,60]).translate(x:-6)
-		b = Bolt.new(8,20,:type => "7380").output.translate(y:45,x:45,z:-6)
-		assembly += b
-
-		assembly	
-	end
-		
-	def show
-    part.rotate(y:90)
-	end
-	
-	def output
-	  part
-	end
-end
 subassembly = XAxisMountingPart.new.output
 
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15,z:0)
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15+270,z:0)
 
-
-#x_sketch += Bolt.new(4,20).rotate(x:90).translate(y:20,z:-35,x:45)
-#x_sketch += Nut.new(4).rotate(x:90).translate(y:0,z:-35,x:45)
 
 assembly += XAxisAssembly.new.show.translate(z:90+0,y:240)
 
@@ -177,5 +78,5 @@ if subassembly
   file.puts "$fn=64;"+subassembly.scad_output
   file.close
 end
-#puts TSlot.new(size:40,configuration:2).output
+
 
