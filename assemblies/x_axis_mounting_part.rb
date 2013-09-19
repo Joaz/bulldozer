@@ -8,7 +8,7 @@ class XAxisMountingPart < CrystalScad::Assembly
 		assembly = cube([30,30,6]).translate(x:30,y:30)
 		
 		#assembly += cube([6,60,60]).translate(x:-6)
-		b = Bolt.new(8,20,:type => "7380").output.translate(y:45,x:45,z:-6)
+		b = Bolt.new(8,20,type:"7380").output.translate(y:45,x:45,z:-6)
     if output == true
       assembly -= b
     else
@@ -34,7 +34,7 @@ class XAxisMountingPart < CrystalScad::Assembly
   def tslot_insert_wall
     wall = cube([16,2,20]).translate(x:7,y:2.4)
     wall += cube([8.6,4.6,20]).translate(x:10.7,y:2.4+2)  
-#    wall += cube([8.1,2.5,20]).translate(x:10.95,y:-0.1)  
+    wall += cube([8.1,2.5,20]).translate(x:10.95,y:-0.1)  
 
   end
   
