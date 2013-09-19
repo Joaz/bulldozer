@@ -116,7 +116,7 @@ class XAxisAssembly < CrystalScad::Assembly
     axis +=  Nema17.new.show.rotate(x:90).translate(x:30,y:95,z:25)
     axis += Belt.new(longest_side_length:270,top_side_length:250,position:20).show.rotate(z:-90,y:180).translate(x:30,y:30,z:25-7)
    
-		axis += XAxisMountingPart.new.show.translate(z:-30, y:-30,x:-6)
+		axis += XAxisMountingPart.new.show.translate(x:-5,y:-30,z:30)
 	
     # now need parts that fit into the t-slot on the ends and get tightened by M8
     # t-slot dimensions
@@ -132,16 +132,25 @@ class XAxisMountingPart < CrystalScad::Assembly
 	def description
 		"printed part: X axis mount part"
 	end	
-		
-	def show
-		assembly = cube([6,60,60])
-		b = Bolt.new(8,20).output.rotate(y:90).translate(y:45,z:15)
+	
+	def part
+		assembly = cube([60,60,6])
+		#assembly += cube([6,60,60]).translate(x:-6)
+		b = Bolt.new(8,20,:type => "7380").output.translate(y:45,x:45,z:-6)
 		assembly += b
 
-		assembly
+		assembly	
+	end
+		
+	def show
+    part.rotate(y:90)
+	end
+	
+	def output
+	  part
 	end
 end
-
+subassembly = XAxisMountingPart.new.output
 
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15,z:0)
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15+270,z:0)
@@ -156,6 +165,17 @@ assembly += XAxisAssembly.new.show.translate(z:90+0,y:240)
 file = File.open("bom.txt","w")
 file.puts @@bom.output
 file.close
-puts "$fn=64;"+assembly.scad_output
+
+if assembly
+  file = File.open("bulldozer.scad","w")
+  file.puts "$fn=64;"+assembly.scad_output
+  file.close
+end
+
+if subassembly
+  file = File.open("part.scad","w")
+  file.puts "$fn=64;"+subassembly.scad_output
+  file.close
+end
 #puts TSlot.new(size:40,configuration:2).output
 
