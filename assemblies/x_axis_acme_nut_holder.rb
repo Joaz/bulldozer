@@ -4,8 +4,9 @@ class XAxisAcmeNutHolder < CrystalScad::Assembly
 		"printed part: X axis acme nut holder"
 	end	
 	
-	def part(output=false)
+	def main_part(output=false)
 		assembly = cube([60,30,6]).translate(x:0,y:30)
+		assembly += bolt_holder
 		assembly += cube([30,30,18]).translate(x:0,y:30)
 		
 		
@@ -30,12 +31,33 @@ class XAxisAcmeNutHolder < CrystalScad::Assembly
     assembly
   end
   
+  def bolt_holder(height=18,no_bom=true)
+    res = cube([30,46,height]).translate(y:21)
+    b = Bolt.new(4,40, no_bom:no_bom) 
+    
+    res -= b.output.translate(x:15,y:25,z:-1) 
+    res -= b.output.translate(x:15,y:25+38.6,z:-1) 
+    
+  end
+  
+  def clamp(output=false)
+    res = cube([30,30,12]).translate(x:0,y:30)
+	  res+= bolt_holder(12)
+	  
+		nut = AcmeNut.new(no_bom:true)    	
+		res -= nut.output.rotate(y:90).translate(x:5,y:45,z:12)
+  end
+  
   def output
-    part(true)
+    res = main_part(true)
+    res += clamp(true).translate(y:-50)
   end
   
   def show
-   part.rotate(y:90).mirror(x:1)
+    res = main_part.rotate(y:90).mirror(x:1).color(@@printed_color)
+    res+= clamp.rotate(y:90).translate(x:-30).color(@@printed_color)
+    res += Bolt.new(4,40).show.rotate(y:90).translate(y:25,z:-15,x:-30) 
+    res += Bolt.new(4,40).show.rotate(y:90).translate(y:63,z:-15,x:-30) 
   end
     
 end

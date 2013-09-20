@@ -54,8 +54,8 @@ assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2,simpl
 assembly+= ZAxisAssembly.new(tslot_simple:true).show
 
 
-#subassembly = XAxisMountingPart.new.output
-subassembly = XAxisAcmeNutHolder.new.output
+subassembly = XAxisMountingPart.new.output
+#subassembly = XAxisAcmeNutHolder.new.output
 
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15,z:0)
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15+270,z:0)

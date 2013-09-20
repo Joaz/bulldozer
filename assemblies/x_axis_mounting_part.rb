@@ -7,25 +7,48 @@ class XAxisMountingPart < CrystalScad::Assembly
 	def part(output=false)
 		assembly = cube([30,30,6]).translate(x:30,y:30)
 		
-		#assembly += cube([6,60,60]).translate(x:-6)
-		b = Bolt.new(8,20,type:"7380").output.translate(y:45,x:45,z:-6)
-    if output == true
-      assembly -= b
-    else
-  		assembly += b
-    end
-    
+   
     assembly += tslot_insert.translate(x:30,y:30)
 #    assembly += TSlot.new(size:30).show(300).color("Silver").translate(x:30,y:30)
 		
 		assembly += rod_holder.translate(x:15,y:45)
 		assembly += rod_holder.translate(x:45,y:15)
 
-    assembly += hull(cube([10,1,20]).translate(x:30,y:20),cube([10,1,20]).translate(x:20,y:30))
+    assembly += nut_traps(10,output)
+    
+    assembly += hull(cube([10,1,20]).translate(x:30,y:20),cube([10,1,20]).translate(x:19,y:30))
 		
-		assembly	
+		assembly = assembly.color(@@printed_color)	
+		b = Bolt.new(8,20,type:"7380").output.translate(y:45,x:45,z:-6)
+    if output == true
+      assembly -= b
+    else
+  		assembly += b
+    end
+    assembly
 	end
   
+  def nut_traps(height=18,output=false)
+    res = cube([30,46,height]).translate(y:21)
+    b = Bolt.new(4,40, no_bom:true) 
+    
+    res -= b.output.translate(x:15,y:25,z:-1) 
+    res -= b.output.translate(x:15,y:25+38.6,z:-1) 
+    
+    nuts = [Nut.new(4),Nut.new(4)]
+    
+    res-= nuts[0].output.translate(x:15,y:25,z:height-3) 
+    res-= nuts[1].output.translate(x:15,y:25+38.6,z:height-3) 
+    
+    if output == false
+      res+= nuts[0].show.translate(x:15,y:25,z:height-3) 
+      res+= nuts[1].show.translate(x:15,y:25+38.6,z:height-3) 
+    end
+    res
+    
+    
+  end
+
   def rod_holder
     res =cube([30,30,20]).translate(x:-15,y:-15)
     res -= cylinder(d:12,h:20).translate(z:2.5)
