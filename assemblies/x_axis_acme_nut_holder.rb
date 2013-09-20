@@ -7,16 +7,16 @@ class XAxisAcmeNutHolder < CrystalScad::Assembly
 	def main_part(output=false)
 		assembly = cube([60,30,6]).translate(x:0,y:30)
 		assembly += bolt_holder
-		assembly += cube([30,30,18]).translate(x:0,y:30)
+		assembly += cube([30,30,17]).translate(x:0,y:30)
 		
 		
 		
 		nut = AcmeNut.new
 
     
-		assembly += nut.show.rotate(y:90).translate(x:5,y:45,z:18) if output == false
+		assembly += nut.show.rotate(y:90).translate(x:5,y:45,z:17) if output == false
 		
-		assembly -= nut.output.rotate(y:90).translate(x:5,y:45,z:18)
+		assembly -= nut.output.rotate(y:90).translate(x:5,y:45,z:17)
 		
 		
 		
