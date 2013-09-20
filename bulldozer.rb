@@ -54,9 +54,9 @@ assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
 assembly+= ZAxisAssembly.new(tslot_simple:true).show
 
 
-#subassembly = XAxisMountingPart.new.output
+subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
-subassembly = JHead.new.show
+#subassembly = JHead.new.show
 
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15,z:0)
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15+270,z:0)

@@ -11,10 +11,10 @@ class XAxisMountingPart < CrystalScad::Assembly
     assembly += tslot_insert.translate(x:30,y:30)
 #    assembly += TSlot.new(size:30).show(300).color("Silver").translate(x:30,y:30)
 		
-		assembly += rod_holder.translate(x:15,y:45)
+		assembly += rod_holder.translate(x:-45,y:15).rotate(z:-90)
 		assembly += rod_holder.translate(x:45,y:15)
 
-    assembly += nut_traps(10,output)
+    assembly += nut_traps(8,output)
     
     assembly += hull(cube([10,1,20]).translate(x:30,y:20),cube([10,1,20]).translate(x:19,y:30))
 		
@@ -29,7 +29,8 @@ class XAxisMountingPart < CrystalScad::Assembly
 	end
   
   def nut_traps(height=18,output=false)
-    res = cube([30,46,height]).translate(y:21)
+    res = cube([22,46,height]).translate(x:8,y:21)
+    res -= cube([30,20,height+0.1]).translate(y:35)
     b = Bolt.new(4,40, no_bom:true) 
     
     res -= b.output.translate(x:15,y:25,z:-1) 
@@ -50,14 +51,16 @@ class XAxisMountingPart < CrystalScad::Assembly
   end
 
   def rod_holder
-    res =cube([30,30,20]).translate(x:-15,y:-15)
-    res -= cylinder(d:12,h:20).translate(z:2.5)
+    res = cube([30,30,6]).translate(x:-15,y:-15)
+    res = cube([30,15,20]).translate(x:-15,y:0)
+    res += cylinder(d:30,h:20)
+    res -= cylinder(d:12.4,h:20).translate(z:2.5)
   end
   
   def tslot_insert_wall
-    wall = cube([16,2,20]).translate(x:7,y:2.4)
-    wall += cube([8.6,4.6,20]).translate(x:10.7,y:2.4+2)  
-    wall += cube([8.1,2.5,20]).translate(x:10.95,y:-0.1)  
+    wall = cube([15.8,2,20]).translate(x:7.1,y:2.4)
+    wall += cube([8.6,4.6,20]).translate(x:10.7,y:2.4+1.6)  
+    wall += cube([8.0,2.5,20]).translate(x:11,y:-0.1)  
 
   end
   

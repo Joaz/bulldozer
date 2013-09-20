@@ -16,10 +16,11 @@ class AcmeNut < CrystalScad::Assembly
   end
   
   def cylinder_nut(output)
-    nut = cylinder(d:22,h:20)
     if output == false
+      nut = cylinder(d:22,h:20.5)
       nut -= cylinder(d:10,h:20.2).translate(z:-0.1)
     else
+      nut = cylinder(d:22,h:20)
       nut += cylinder(d:13,h:40).translate(z:-10)
     end
     nut.color("Goldenrod")
