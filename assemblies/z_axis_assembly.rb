@@ -1,4 +1,4 @@
-class ZAxisAssembly
+class ZAxisAssembly < CrystalScad::Assembly
   def initialize(args={})
     @args = args
     @args[:position] ||= 280
@@ -22,12 +22,12 @@ class ZAxisAssembly
   end
   
   def z_axis_drive
-    assembly += Nema17.new.show.translate(x:@args[:left_pos]+7,y:@args[:position]-25,z:-50)
-    assembly += Nema17.new.show.translate(x:@args[:right_pos]-7,y:@args[:position]-25,z:-50)
-    assembly += AcmeRod.new.show.translate(x:@args[:left_pos]+7,y:@args[:position]-25,z:22)
-    assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-7,y:@args[:position]-25,z:22)
-    assembly += Coupling.new.show.translate(x:@args[:left_pos]+7,y:@args[:position]-25,z:5)
-    assembly += Coupling.new.show.translate(x:@args[:right_pos]-7,y:@args[:position]-25,z:5)
+    assembly += Nema17.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-25,z:-50)
+    assembly += Nema17.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-25,z:-50)
+    assembly += AcmeRod.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-25,z:22)
+    assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-25,z:22)
+    assembly += Coupling.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-25,z:5)
+    assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-25,z:5)
     
     assembly
   end

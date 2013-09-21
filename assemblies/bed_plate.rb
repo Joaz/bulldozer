@@ -3,7 +3,7 @@ class BedPlate
 	def initialize(args={})
 		@size=args
 		
-		@bolt_positions = [{x:12.5,y:12.5},{x:12.5+200,y:12.5},{x:12.5,y:12.5+200},{x:12.5+200,y:12.5+200}]
+		@bolt_positions = [{x:9,y:9},{x:9+206,y:9},{x:9,y:9+206},{x:9+206,y:9+206}]
 	  
 	  @@bom.add(description) unless args[:no_bom] == true
 	  @bolt_height = @size[:z]

@@ -64,7 +64,7 @@ assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15,z:0)
 assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15+270,z:0)
 
 
-assembly += XAxisAssembly.new.show.translate(z:105+0,y:240)
+assembly += XAxisAssembly.new.show.translate(z:105+0,y:240,x:-2.5)
 
 
 file = File.open("bom.txt","w")
