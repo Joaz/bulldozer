@@ -12,11 +12,16 @@ class MGS < CrystalScad::Assembly
 
 	def show
 		gear_distance = (@args[:big_gear]+@args[:small_gear])/2*@args[:gear_module]
-		res = big_gear.translate(x:gear_distance).translate(z:4)		
+		res = big_gear.translate(x:gear_distance).translate(z:6)		
 		res += shaft.translate(x:gear_distance)
-		res += cylinder(d:@args[:small_gear]*@args[:gear_module],h:7).translate(z:3.5)		
-		res += Nema17.new.show.translate(z:-60)	
+		res += motor_gear.translate(z:5.5)		
+		res += Nema17.new.show.rotate(z:60).translate(z:-60)	
 
+	end
+
+	def motor_gear
+		res = cylinder(d:@args[:small_gear]*@args[:gear_module],h:5)
+		res += cylinder(d2:@args[:small_gear]*@args[:gear_module],d1:10,h:7.9).translate(z:-7.9)
 	end
 
 	def big_gear

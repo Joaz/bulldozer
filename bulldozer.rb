@@ -60,8 +60,8 @@ subassembly = MGS.new.show
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
 
-assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15,z:0)
-assembly += Rod.new(length:370).show.rotate(x:90).translate(y:280,x:15+270,z:0)
+assembly += Rod.new(length:370).show.rotate(x:90).translate(y:283,x:15,z:0)
+assembly += Rod.new(length:370).show.rotate(x:90).translate(y:283,x:15+265,z:0)
 
 
 assembly += XAxisAssembly.new.show.translate(z:105+0,y:240,x:-2.5)
