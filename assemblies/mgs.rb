@@ -8,6 +8,7 @@ class MGS < CrystalScad::Assembly
 		# - gears
 		# - filament drive gear
 		# - shaft
+		# - idler grub screw
 	end	
 
 	def show
@@ -17,11 +18,29 @@ class MGS < CrystalScad::Assembly
 		res += motor_gear.translate(z:5.5)		
 		res += Nema17.new.show.rotate(z:60).translate(z:-60)	
 
+		hotend = JHead.new.show
+		hotend += cylinder(d:3,h:150).color("Red")
+	
+		res += hotend.translate(x:-2.5,y:7.5,z:-80).rotate(x:-30,y:-90)
+		
+		
+		res += idler.translate(x:15,y:-14,z:-6)
+
+		res
+	end		
+	
+	def idler
+		idler = Bearing.new(type:"608").show
+		idler += cylinder(d:8, h:16).translate(z:-5)
+
+		idler.color("Tan")
+		
 	end
 
 	def motor_gear
 		res = cylinder(d:@args[:small_gear]*@args[:gear_module],h:5)
 		res += cylinder(d2:@args[:small_gear]*@args[:gear_module],d1:10,h:7.9).translate(z:-7.9)
+		res.color("DarkGray")	
 	end
 
 	def big_gear
@@ -39,8 +58,15 @@ class MGS < CrystalScad::Assembly
 	end
 
 	def shaft
-		res = cylinder(d:5,h:30).color("Gainsboro").translate(z:-12)
-		res += drive_gear.translate(z:-9) #.rotate(x:180).translate(z:4)
+		res = cylinder(d:5,h:30).color("Gainsboro").translate(z:-11.5)
+	#	res += Washer.new(5.3).show.translate(z:5)
+#		res += Washer.new(5.3).show.translate(z:4)
+		res += drive_gear.translate(z:-7)
+		res += Bearing.new(type:"625").show.translate(z:-12)
+		res += Washer.new(5.3).show.translate(z:14)
+		res += Bearing.new(type:"625").show.translate(z:15)
+		
+
 	end
 
 end
