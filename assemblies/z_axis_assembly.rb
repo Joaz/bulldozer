@@ -4,7 +4,7 @@ class ZAxisAssembly < CrystalScad::Assembly
     @args[:position] ||= 280
     @args[:left_pos] = -30  # left of y t-slot
     @args[:right_pos] = 325 # right of y-tslot
-    @args[:height] = 430 # total height from bottom
+    @args[:height] = 470 # total height from bottom
     @args[:tslot_simple] ||= false
   end
  

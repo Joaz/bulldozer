@@ -36,9 +36,9 @@ assembly=CrystalScadObject.new
 
 
 
-assembly+= YPlateAssembly.new(length:470,rod_size:12,position:-30).show.translate(z:3.5,y:30,x:35)
+assembly+= YPlateAssembly.new(length:469-60-4,rod_size:12,position:-20+230).show.translate(z:3.5,y:30,x:35)
 
-assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
+assembly+=tslot_rectangle(225+60+10,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
 
 
@@ -51,8 +51,6 @@ assembly+=tslot_rectangle(225+60+10,520, TSlot.new(size:30,configuration:2,simpl
 # FIXME: YBeltHolder and BedPlateBearingMount are both missing wood screws 
 
 
-assembly+= ZAxisAssembly.new(tslot_simple:true).show
-
 
 
 subassembly = MGS.new.show
@@ -60,11 +58,12 @@ subassembly = MGS.new.show
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
 
-assembly += Rod.new(length:370).show.rotate(x:90).translate(y:283,x:15,z:0)
-assembly += Rod.new(length:370).show.rotate(x:90).translate(y:283,x:15+265,z:0)
+assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15,z:2)
+assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15+265,z:2)
 
+assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
 
-assembly += XAxisAssembly.new.show.translate(z:105+0,y:240,x:-2.5)
+assembly += XAxisAssembly.new.show.translate(z:105+0,y:240+50,x:-2.5)
 
 
 file = File.open("bom.txt","w")

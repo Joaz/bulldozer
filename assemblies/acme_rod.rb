@@ -1,7 +1,7 @@
 class AcmeRod
 	  def initialize(args={})		
 		@args=args			
-		@args[:length] ||= 330
+		@args[:length] ||= 370
 		@args[:diameter] ||= 10.0
 		@args[:pitch] ||= 2.0
 		# these shouldn't be default... 
