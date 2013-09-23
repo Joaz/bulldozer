@@ -62,10 +62,15 @@ class YBeltHolder < CrystalScad::Assembly
 		end
 
 
-
-		base += tensioner.translate(y:23)
-
-    base.mirror(z:1)
+    
+		if with_hardware==true
+  		base += tensioner.translate(y:23)
+      base.mirror(z:1)
+	  else
+	    base = base.rotate(x:-90)
+	    base += tensioner.rotate(x:-90).translate(y:22)
+	  end
+	  base
 	end
 	
 end

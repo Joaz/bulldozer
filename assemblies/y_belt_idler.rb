@@ -1,6 +1,13 @@
 class YBeltIdler < CrystalScad::Assembly
 	def show
-		
+    idler
+	end
+	
+	def output
+	  idler(true).rotate(x:90)
+	end
+	
+	def idler(output=false)			
 		parts = [ 
 			Washer.new(4.3),
 			Bearing.new(type:"624",flange:true),
@@ -16,7 +23,7 @@ class YBeltIdler < CrystalScad::Assembly
 		bolt_assembly += stack({method:"output"}, *parts)
 		bolt_assembly = bolt_assembly.translate(x:x*-1,y:y*-1,z:z*-1)
 
-
+    
 		bolt_assembly_show = bolt.show
 		bolt_assembly_show += stack({method:"show"}, *parts)
 		bolt_assembly_show = bolt_assembly_show.translate(x:x*-1,y:y*-1,z:z*-1)
@@ -31,14 +38,20 @@ class YBeltIdler < CrystalScad::Assembly
 		assembly -= hull(cylinder(d:18,h:13),cylinder(d:18,h:13).translate(y:40)).translate(x:12,z:24,y:-20)
 		assembly = assembly.color(@@printed_color)
 		
-		assembly += bolt_assembly_show.translate(x:12,z:20)
+		assembly += bolt_assembly_show.translate(x:12,z:20) if output == false
 
 		# mounting holes
+		bolts = [Bolt.new(5,25),Bolt.new(5,25)]
+
+
+		assembly -= bolts[0].output.rotate(x:90	).translate(x:7,y:8,z:10)	
+		assembly -= bolts[1].output.rotate(x:90	).translate(x:7,y:8,z:50)	
 		
-		assembly += Bolt.new(5,25).show.rotate(x:90	).translate(x:7,y:8,z:10)	
-		assembly += Bolt.new(5,25).show.rotate(x:90	).translate(x:7,y:8,z:50)	
+		assembly += bolts[0].show.rotate(x:90	).translate(x:7,y:8,z:10)	if output == false
+		assembly += bolts[1].show.rotate(x:90	).translate(x:7,y:8,z:50)	if output == false
 
 
 		assembly
-	end
+  end
+  
 end
