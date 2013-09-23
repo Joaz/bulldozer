@@ -53,7 +53,8 @@ assembly+=tslot_rectangle(225+60+10,470, TSlot.new(size:30,configuration:2,simpl
 
 
 
-subassembly = MGS.new.show
+#subassembly = MGS.new.show
+subassembly = MicroswitchD3V.new.show
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
@@ -63,7 +64,7 @@ assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15+265,z:
 
 assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
 
-assembly += XAxisAssembly.new.show.translate(z:105+0,y:240+50,x:-2.5)
+assembly += XAxisAssembly.new.show.translate(z:88+0,y:240+50,x:-2.5)
 
 
 def save(file,output,start_text=nil)
