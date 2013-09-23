@@ -66,20 +66,34 @@ assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
 assembly += XAxisAssembly.new.show.translate(z:105+0,y:240+50,x:-2.5)
 
 
-file = File.open("bom.txt","w")
-file.puts @@bom.output
-file.close
-
-if assembly
-  file = File.open("bulldozer.scad","w")
-  file.puts "$fn=64;"+assembly.scad_output
+def save(file,output,start_text=nil)
+  file = File.open(file,"w")
+  file.puts start_text unless start_text == nil
+  file.puts output
   file.close
 end
 
-if subassembly
-  file = File.open("part.scad","w")
-  file.puts "$fn=64;"+subassembly.scad_output
-  file.close
+save("bom.txt",@@bom.output)
+save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
+save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
+
+parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler]
+unless Dir.exists?("output")
+  Dir.mkdir("output")
 end
+
+parts.each do |part|
+  name = part.to_s.downcase
+  save("output/#{name}.scad",part.new.output.scad_output,"$fn=64;")
+  if ARGV[0] == "build"
+    puts "Building #{name}..."
+    system("openscad -o output/#{name}.stl output/#{name}.scad")
+  end
+
+end
+
+  
+  
+
 
 
