@@ -9,7 +9,7 @@ require_all "assemblies"
 include CrystalScad
 
 @@printed_color="Bisque"
-@tslot_simple = true
+@tslot_simple = false
  
 
 
@@ -49,11 +49,14 @@ assembly+=tslot_rectangle(225+60+10,470, TSlot.new(size:30,configuration:2,simpl
 #assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
 
 # FIXME: YBeltHolder and BedPlateBearingMount are both missing wood screws 
+assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
 
 
 
 
-subassembly = MGS.new.show
+subassembly = YRodHolder.new.show
+
+#subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.show
 #subassembly = XAxisMountingPart.new.output
@@ -63,9 +66,9 @@ subassembly = MGS.new.show
 assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15,z:2)
 assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15+265,z:2)
 
-assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
+#assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
 
-assembly += XAxisAssembly.new.show.translate(z:88+0,y:240+50,x:-2.5)
+#assembly += XAxisAssembly.new.show.translate(z:88+0,y:240+50,x:-2.5)
 
 
 def save(file,output,start_text=nil)
@@ -79,7 +82,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler]
+parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
