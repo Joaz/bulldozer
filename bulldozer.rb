@@ -53,9 +53,9 @@ assembly+=tslot_rectangle(225+60+10,470, TSlot.new(size:30,configuration:2,simpl
 
 
 
-#subassembly = MGS.new.show
+subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
-subassembly = ZMotorMount.new.show
+#subassembly = ZMotorMount.new.show
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show

@@ -6,6 +6,7 @@ class Bearing < CrystalScad::Assembly
     @args[:type] ||= "608"
     @args[:sealing] ||= "ZZ"
     @args[:margin] ||= 0.0
+    @args[:margin_diameter] ||= 0.0    
     @args[:outer_rim_cut] ||= 0.0
     @args[:flange] ||= false
 		@args[:transformations] ||= nil
@@ -16,7 +17,7 @@ class Bearing < CrystalScad::Assembly
   end
   
   def prepare_data
-    chart = {"608" => {inner_diameter:8,outer_diameter:22,thickness:7},
+    chart = {"608" => {inner_diameter:8,outer_diameter:22,thickness:7, inner_rim:12, outer_rim:19},
              "624" => {inner_diameter:4,outer_diameter:13,thickness:5, inner_rim:6.3, outer_rim:11.0, flange_diameter:15, flange_width:1},
              "625" => {inner_diameter:5,outer_diameter:16,thickness:5, inner_rim:7.5, outer_rim:13.5},
            "61800" => {inner_diameter:10,outer_diameter:19,thickness:5},
@@ -31,8 +32,12 @@ class Bearing < CrystalScad::Assembly
   end
   
   def output
-    bearing = cylinder(d:@size[:outer_diameter]+@args[:margin],h:@size[:thickness])
-    bearing+= cylinder(d:@size[:outer_rim],h:@args[:outer_rim_cut]).translate(z:-@args[:outer_rim_cut]/2) 
+    bearing = cylinder(d:@size[:outer_diameter]+@args[:margin_diameter],h:@size[:thickness]+@args[:margin]).translate(z:-@args[:margin]/2)
+    
+    if @args[:outer_rim_cut].to_f > 0 
+      bearing+= cylinder(d:@size[:outer_rim],h:@args[:outer_rim_cut]).translate(z:-@args[:outer_rim_cut]) 
+      bearing+= cylinder(d:@size[:outer_rim],h:@args[:outer_rim_cut]).translate(z:@size[:thickness]) 
+    end
     if @args[:flange] == true
       bearing += cylinder(d:@size[:flange_diameter].to_f, h:@size[:flange_width])      
     end

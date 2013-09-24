@@ -13,27 +13,42 @@ class MGS < CrystalScad::Assembly
 
 	def show
 		gear_distance = (@args[:big_gear]+@args[:small_gear])/2*@args[:gear_module]
-		res = big_gear.translate(x:gear_distance).translate(z:6)		
-		res += shaft.translate(x:gear_distance)
+
+    part = cube([50,60,6]).translate(x:-25,y:-38,z:-13)
+
+		res = big_gear.translate(x:gear_distance).translate(z:6).rotate(z:-60)		
+    
+    # lower shaft bearing
+    bearing = Bearing.new(type:"625",margin:2,outer_rim_cut:2)
+    
+    part-= bearing.output.translate(x:gear_distance).rotate(z:-60).translate(z:-11.5) 
+    res += bearing.show.translate(x:gear_distance).rotate(z:-60).translate(z:-11.5)
+
+      
+		res += shaft.translate(x:gear_distance).rotate(z:-60).translate(z:0.50)	
 		res += motor_gear.translate(z:5.5)		
-		res += Nema17.new.show.rotate(z:60).translate(z:-60)	
+		res += Nema17.new.show.rotate(z:0).translate(z:-60)	
 
 		hotend = JHead.new.show
 		hotend += cylinder(d:3,h:150).color("Red")
 	
-		res += hotend.translate(x:-2.5,y:7.5,z:-80).rotate(x:-30,y:-90)
+		res += hotend.translate(x:-2,y:7.5,z:-85).rotate(x:-30,y:-90).rotate(z:-60)
 		
 		
-		res += idler.translate(x:15,y:-14,z:-6)
+		res += idler.rotate(z:90).translate(x:-5,y:-30,z:-11.5)
 
-		res
+    filament_endstop = MicroswitchD3V.new
+    res += filament_endstop.rotate(x:-90,z:-90).translate(x:-13,y:40,z:2.5)
+
+
+
+    part+=res
+   # res
+		part
 	end		
 	
 	def idler
-		idler = Bearing.new(type:"608").show
-		idler += cylinder(d:8, h:16).translate(z:-5)
-
-		idler.color("Tan")
+    idler = MGSIdler.new.show
 		
 	end
 
@@ -62,7 +77,8 @@ class MGS < CrystalScad::Assembly
 	#	res += Washer.new(5.3).show.translate(z:5)
 #		res += Washer.new(5.3).show.translate(z:4)
 		res += drive_gear.translate(z:-7)
-		res += Bearing.new(type:"625").show.translate(z:-12)
+		
+		#res += Bearing.new(type:"625").show.translate(z:-12)
 		res += Washer.new(5.3).show.translate(z:14)
 		res += Bearing.new(type:"625").show.translate(z:15)
 		

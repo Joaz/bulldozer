@@ -19,7 +19,7 @@ class XAxisAssembly < CrystalScad::Assembly
     axis += Lm_uu.new(inner_diameter:12).rotate(y:90).translate(y:-15,z:-15,x:@args[:position])
     axis += Lm_uu.new(inner_diameter:12).rotate(y:90).translate(y:-15,z:-15,x:@args[:position]+40)
 
-		axis += MGS.new.show.rotate(z:-60).rotate(x:90).translate(x:@args[:position]+27,y:-56,z:22)
+		axis += MGS.new.show.rotate(z:0).rotate(x:90).translate(x:@args[:position]+27,y:-56,z:22)
 #		axis += JHead.new.show.translate(x:@args[:position]+39.5-5,y:-51.5,z:-73)
 #		axis += cylinder(d:3,h:150).color("Red").translate(x:@args[:position]+40-0.5-5,y:-51.5,z:-69)	
 
