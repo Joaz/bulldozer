@@ -14,7 +14,25 @@ class MGS < CrystalScad::Assembly
 	def show
 		gear_distance = (@args[:big_gear]+@args[:small_gear])/2*@args[:gear_module]
 
-    part = cube([50,60,6]).translate(x:-25,y:-38,z:-13)
+    part = cube([50,64,2.5]).translate(x:-25,y:-38-4,z:-13)
+    part += cube([21,64,6]).translate(x:4,y:-38-4,z:-13)
+    part += cube([50,28,5]).translate(x:-25,y:-6,z:-13)
+    
+    # filament channel 
+    part += cube([8,40,16]).translate(x:4,y:-12.3,z:-13)
+    part += cube([8,13.6,16]).translate(x:4,y:-42,z:-13)
+
+    part -= cylinder(d:3.25,h:150).translate(x:-2,y:7.5,z:-90).rotate(x:-30,y:-90).rotate(z:-60)
+
+    # space for the switch
+    part -= cube([5,10,7]).translate(x:2,y:12,z:-7)    
+    
+  
+
+    # motor flangue
+    part -= cylinder(d:22,h:10).translate(z:-16)
+    # make more space for the motor gear
+    part -= cylinder(d:11,h:20).translate(z:-5)
 
 		res = big_gear.translate(x:gear_distance).translate(z:6).rotate(z:-60)		
     
@@ -30,15 +48,15 @@ class MGS < CrystalScad::Assembly
 		res += Nema17.new.show.rotate(z:0).translate(z:-60)	
 
 		hotend = JHead.new.show
-		hotend += cylinder(d:3,h:150).color("Red")
+	#	hotend += cylinder(d:3,h:150).color("Red")
 	
-		res += hotend.translate(x:-2,y:7.5,z:-85).rotate(x:-30,y:-90).rotate(z:-60)
+		res += hotend.translate(x:-2,y:7.5,z:-90).rotate(x:-30,y:-90).rotate(z:-60)
 		
 		
 		res += idler.rotate(z:90).translate(x:-5,y:-30,z:-11.5)
 
     filament_endstop = MicroswitchD3V.new
-    res += filament_endstop.rotate(x:-90,z:-90).translate(x:-13,y:40,z:2.5)
+    res += filament_endstop.rotate(x:-90,z:-90).translate(x:-13,y:40,z:3)
 
 
 
