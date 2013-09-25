@@ -9,7 +9,7 @@ require_all "assemblies"
 include CrystalScad
 
 @@printed_color="Bisque"
-@tslot_simple = false
+@tslot_simple = true
  
 
 
@@ -36,7 +36,7 @@ assembly=CrystalScadObject.new
 
 
 
-assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
+#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
 
 assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
@@ -70,7 +70,7 @@ assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15+265,z:
 
 assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
 
-assembly += XAxisAssembly.new.show.translate(z:88+0,y:240+50,x:-2.5)
+assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+50,x:-2.5)
 
 
 def save(file,output,start_text=nil)
