@@ -77,7 +77,8 @@ class XAxisMountingPart < CrystalScad::Assembly
 	end
 	
 	def output
-	  part(true)
+		res = part(true)
+		res += part(true).mirror(x:1).translate(x:125)
 	end
 end
 

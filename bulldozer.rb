@@ -36,9 +36,9 @@ assembly=CrystalScadObject.new
 
 
 
-assembly+= YPlateAssembly.new(length:469-60-4,rod_size:12,position:-20+230).show.translate(z:3.5,y:30,x:35)
+assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
 
-assembly+=tslot_rectangle(225+60+10,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
+assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
 
 
@@ -50,6 +50,8 @@ assembly+=tslot_rectangle(225+60+10,470, TSlot.new(size:30,configuration:2,simpl
 
 # FIXME: YBeltHolder and BedPlateBearingMount are both missing wood screws 
 assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
+
+assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+185,z:-8.5)
 
 
 
@@ -66,9 +68,9 @@ subassembly = YRodHolder.new.show
 assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15,z:2)
 assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15+265,z:2)
 
-#assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
+assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
 
-#assembly += XAxisAssembly.new.show.translate(z:88+0,y:240+50,x:-2.5)
+assembly += XAxisAssembly.new.show.translate(z:88+0,y:240+50,x:-2.5)
 
 
 def save(file,output,start_text=nil)

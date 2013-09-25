@@ -5,7 +5,8 @@ class YRodHolder < CrystalScad::Assembly
 	end
 
 	def output
-		part(false)
+		res = part(false)
+		res+= part(false).mirror(x:1).translate(y:27)
 	end
 
 	def part(show)
