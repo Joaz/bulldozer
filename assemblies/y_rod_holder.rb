@@ -18,7 +18,7 @@ class YRodHolder < CrystalScad::Assembly
 		bolt = Bolt.new(4,12)
 		washer = Washer.new(4.3)
 
-		res -= hull(cylinder(d:4.4,h:4),cylinder(d:4.4,h:4).translate(x:15)).translate(x:5,y:-6.5,z:-0.1)			
+		res -= hull(cylinder(d:4.4,h:10),cylinder(d:4.4,h:10).translate(x:15)).translate(x:5,y:-6.5,z:-0.1)			
 		res += bolt.show.rotate(x:180).translate(x:15,y:-6.5,z:7) if show
 		res += washer.show.rotate(x:180).translate(x:15,y:-6.5,z:7) if show
 
