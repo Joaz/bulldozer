@@ -20,7 +20,7 @@ class XCarriage < CrystalScad::Assembly
     res -= cylinder(d:5.5,h:60).translate(x:29,y:30,z:-0.1)    
 
     # belt holder sketch
-    res += cube([20,30,30+side_thickness]).translate(y:55,x:5)
+    #res += cube([20,30,30+side_thickness]).translate(y:55,x:5)
     
 
     bearings = [Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12)]

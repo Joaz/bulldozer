@@ -57,8 +57,9 @@ assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+18
 
 
 #subassembly = YRodHolder.new.show
+subassembly = ZBearingHolder.new.show
 
-subassembly = XCarriage.new.show
+#subassembly = XCarriage.new.show
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.show
@@ -66,10 +67,10 @@ subassembly = XCarriage.new.show
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
 
-assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15,z:2)
-assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50,x:15+265,z:2)
+assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15,z:2)
+assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15+265,z:2)
 
-#assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
+assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
 
 assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+50,x:-2.5)
 

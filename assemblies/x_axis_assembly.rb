@@ -6,11 +6,11 @@ class XAxisAssembly < CrystalScad::Assembly
   
   def show
     # z bearings
-    axis  = Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5,z:-50)
-    axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5,z:35)
+    axis  = ZBearingHolder.new(inner_diameter:12).show.rotate(x:0).translate(y:42,x:17.5,z:-46)
+   # axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5,z:35)
     
-    axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5+265,z:-50)
-    axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5+265,z:35)
+    #axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5+265,z:-50)
+   # axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5+265,z:35)
 
     axis += TSlot.new(size:30).show(300).rotate(y:90).color("Silver")
     axis += Rod.new(length:307).show.rotate(z:-90).translate(y:15,z:15,x:-3.5)
