@@ -57,7 +57,7 @@ assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+18
 
 
 #subassembly = YRodHolder.new.show
-subassembly = ZBearingHolder.new.show
+subassembly = ZBearingHolder.new.output
 
 #subassembly = XCarriage.new.show
 #subassembly = MGS.new.show

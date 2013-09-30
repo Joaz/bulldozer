@@ -9,9 +9,9 @@ class ZBearingHolder < CrystalScad::Assembly
 	end
 
 	def part(show=false)
-		res = cylinder(d:24,h:60)
+		res = cylinder(d:28.5,h:60)
 		
-		res += cube([30,24,50]).center_xy.translate(x:15)
+		res += cube([30,24,46]).center_xy.translate(x:15)
 		res += cube([30,30,16]).center_xy.translate(x:15,y:-27)
 
 	  res -= cylinder(d:21.5,h:70).translate(z:-0.1)        
