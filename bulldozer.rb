@@ -55,12 +55,12 @@ assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tsl
 
 #subassembly = YRodHolder.new.show
 #subassembly = ZBearingHolder.new.show
-subassembly = YBeltHolder.new.show
+#subassembly = YBeltHolder.new.show
 
 #subassembly = XCarriage.new.show
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
-#subassembly = ZMotorMount.new.show
+subassembly = ZMotorMount.new.output
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
@@ -68,9 +68,9 @@ subassembly = YBeltHolder.new.show
 assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15,z:2)
 assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15+265,z:2)
 
-assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
+assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
-assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+50,x:-2.5)
+assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
 
 def save(file,output,start_text=nil)
@@ -84,7 +84,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder]
+parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
