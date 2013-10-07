@@ -10,25 +10,25 @@ class YBeltHolder < CrystalScad::Assembly
 
 	
 	def belt_holder_base(with_hardware=false)
-	  base = cube([45,10,16]).translate(x:-5)
+	  base = cube([45,12,16]).translate(x:-5)
     
-    base += cube([30,10,5]).translate(z:16)
-    base -= cube([20.2,10.2,1.2]).translate(x:15-0.1,y:-0.1,z:16)
+    base += cube([30,12,6]).translate(z:16)
+    base -= cube([20.2,12.2,1.7]).translate(x:15-0.1,y:-0.1,z:16)
 		base = base.color(@@printed_color)		
 
 		# belt clamp bolt
-		bolt = Bolt.new(3,12,additional_length:5)
-	  base -= bolt.output.mirror(z:1).translate(y:5,x:25,z:21.5)
-		base += bolt.show.mirror(z:1).translate(y:5,x:25,z:21.5) if with_hardware == true
+		bolt = Bolt.new(4,12,additional_length:5)
+	  base -= bolt.output.mirror(z:1).translate(y:6,x:25,z:22)
+		base += bolt.show.mirror(z:1).translate(y:6,x:25,z:22) if with_hardware == true
 		# this bolt needs a washer    
 		washer = Washer.new(3.2)		
-		base += washer.show.translate(y:5,x:25,z:21.0) if with_hardware == true
+		base += washer.show.translate(y:6,x:25,z:21.0) if with_hardware == true
 
 		# nut trap for belt clamp bolt
-		nut = Nut.new(3)
-		nut_cut = hull(nut.output.translate(y:0,x:25,z:10),nut.output.translate(y:5,x:25,z:10))
+		nut = Nut.new(4)
+		nut_cut = hull(nut.output.translate(y:0,x:25,z:10),nut.output.translate(y:6.4,x:25,z:10))
 		base -= nut_cut
-		base += nut.show.translate(y:5,x:25,z:10) if with_hardware == true
+		base += nut.show.translate(y:6,x:25,z:10) if with_hardware == true
 
 		base
   end
@@ -38,7 +38,7 @@ class YBeltHolder < CrystalScad::Assembly
 		tensioner = belt_holder_base(with_hardware)	  
 		
 		# extend base for wood screws
-		base += cube([60,10,10]).translate(x:-12).color(@@printed_color)		
+		base += cube([60,12,10]).translate(x:-12).color(@@printed_color)		
 
 
 	  # tensioner bolts & nut traps	
@@ -68,7 +68,7 @@ class YBeltHolder < CrystalScad::Assembly
       base.mirror(z:1)
 	  else
 	    base = base.rotate(x:-90)
-	    base += tensioner.rotate(x:-90).translate(y:22)
+	    base += tensioner.rotate(x:-90).translate(y:23)
 	  end
 	  base
 	end

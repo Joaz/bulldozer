@@ -20,9 +20,9 @@ class ZBearingHolder < CrystalScad::Assembly
   
 		bolt = Bolt.new(4,25)
   
-		res -= cylinder(d:8,h:20).rotate(x:90).translate(x:20,y:24,z:35)
-		res -= bolt.output.rotate(x:90).translate(x:20,y:4,z:35)
-		res += bolt.show.rotate(x:90).translate(x:20,y:4,z:35) if show
+		res -= cylinder(d:8,h:20).rotate(x:90).translate(x:20,y:24,z:31)
+		res -= bolt.output.rotate(x:90).translate(x:20,y:4,z:31)
+		res += bolt.show.rotate(x:90).translate(x:20,y:4,z:31) if show
 
 		# lower bolt
 		bolt = Bolt.new(4,25)  
@@ -36,6 +36,12 @@ class ZBearingHolder < CrystalScad::Assembly
 		Lm_uu.new(inner_diameter:12)
 	
 		# TODO: Add x motor holder to that
+		
+		motor =  Nema17.new.show.rotate(x:90).translate(x:32,y:102,z:25)
+    motor +=  Pulley.new.show.rotate(x:90).translate(x:32,y:42.5,z:25)
+    motor += Belt.new(longest_side_length:270,top_side_length:250,position:20).show.rotate(z:-90,y:180).translate(x:32,y:30,z:25-7)
+ 
+ 		res += motor.translate(x:-9,y:-41,z:33) if show
 		
 		res
 	end	

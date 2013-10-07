@@ -29,9 +29,6 @@ def tslot_rectangle(x,y,tslot_type_x,tslot_type_y)
 end
 
 
-
-
-
 assembly=CrystalScadObject.new
 
 
@@ -49,15 +46,16 @@ assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tsl
 #assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
 
 # FIXME: YBeltHolder and BedPlateBearingMount are both missing wood screws 
-assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
+#assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
 
-assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+185,z:-8.5)
+#assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+185,z:-8.5)
 
 
 
 
 #subassembly = YRodHolder.new.show
-subassembly = ZBearingHolder.new.output
+#subassembly = ZBearingHolder.new.show
+subassembly = YBeltHolder.new.show
 
 #subassembly = XCarriage.new.show
 #subassembly = MGS.new.show
