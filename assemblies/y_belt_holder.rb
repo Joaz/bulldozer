@@ -12,23 +12,32 @@ class YBeltHolder < CrystalScad::Assembly
 	def belt_holder_base(with_hardware=false)
 	  base = cube([45,12,16]).translate(x:-5)
     
-    base += cube([30,12,6]).translate(z:16)
-    base -= cube([20.2,12.2,1.7]).translate(x:15-0.1,y:-0.1,z:16)
+		# belt clamp
+    base += cube([30,12,6]).translate(x:3,z:16)
+		# leave 0.6mm walls. those will crush once the belt tightening bolts are tighened
+    base -= cube([28.8,12.2,1.7]).translate(x:3.6,y:-0.1,z:16)
 		base = base.color(@@printed_color)		
 
+		# FIXME: use self tapping one with hexagonal head
 		# belt clamp bolt
-		bolt = Bolt.new(4,12,additional_length:5)
+		bolt = Bolt.new(4,16,additional_length:5)
 	  base -= bolt.output.mirror(z:1).translate(y:6,x:25,z:22)
 		base += bolt.show.mirror(z:1).translate(y:6,x:25,z:22) if with_hardware == true
+
+		bolt = Bolt.new(4,16,additional_length:5)
+	  base -= bolt.output.mirror(z:1).translate(y:6,x:10,z:22)
+		base += bolt.show.mirror(z:1).translate(y:6,x:10,z:22) if with_hardware == true
+
+
 		# this bolt needs a washer    
-		washer = Washer.new(3.2)		
-		base += washer.show.translate(y:6,x:25,z:21.0) if with_hardware == true
+		#washer = Washer.new(3.2)		
+		#base += washer.show.translate(y:6,x:25,z:21.0) if with_hardware == true
 
 		# nut trap for belt clamp bolt
-		nut = Nut.new(4)
-		nut_cut = hull(nut.output.translate(y:0,x:25,z:10),nut.output.translate(y:6.4,x:25,z:10))
-		base -= nut_cut
-		base += nut.show.translate(y:6,x:25,z:10) if with_hardware == true
+		#nut = Nut.new(4)
+		#nut_cut = hull(nut.output.translate(y:0,x:25,z:10),nut.output.translate(y:6.4,x:25,z:10))
+		#base -= nut_cut
+		#base += nut.show.translate(y:6,x:25,z:10) if with_hardware == true
 
 		base
   end
