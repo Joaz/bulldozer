@@ -14,8 +14,8 @@ class YBeltHolder < CrystalScad::Assembly
     
 		# belt clamp
     base += cube([30,12,6]).translate(x:3,z:16)
-		# leave 0.6mm walls. those will crush once the belt tightening bolts are tighened
-    base -= cube([28.8,12.2,1.7]).translate(x:3.6,y:-0.1,z:16)
+		# leave 0.8mm walls. those will crush once the belt tightening bolts are tighened
+    base -= cube([28.4,12.2,1.7]).translate(x:3.8,y:-0.1,z:16)
 		base = base.color(@@printed_color)		
 
 		# FIXME: use self tapping one with hexagonal head
@@ -47,7 +47,8 @@ class YBeltHolder < CrystalScad::Assembly
 		tensioner = belt_holder_base(with_hardware)	  
 		
 		# extend base for wood screws
-		base += cube([60,12,10]).translate(x:-12).color(@@printed_color)		
+		base += cube([10,12,10]).translate(x:-15).color(@@printed_color)		
+		base += cube([10,12,10]).translate(x:40).color(@@printed_color)		
 
 
 	  # tensioner bolts & nut traps	
