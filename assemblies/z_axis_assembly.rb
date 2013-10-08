@@ -18,22 +18,29 @@ class ZAxisAssembly < CrystalScad::Assembly
     #  assembly += tslot_top.show(@args[:right_pos]-@args[:left_pos]).rotate(y:90).translate(x:@args[:left_pos],y:@args[:position],z:@args[:height]-30).color("Silver")
   
       assembly += z_axis_drive
+
       assembly
   end
   
   def z_axis_drive
 		assembly = ZMotorMount.new.show.translate(x:@args[:left_pos],y:@args[:position]-3,z:-60)
-    #assembly += Nema17.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-25,z:-40)
+		assembly += ZAcmeBearingHolderLower.new.show.rotate(z:180).translate(x:@args[:left_pos]+30,y:@args[:position],z:42)
+
+		assembly += ZAcmeBearingHolderUpper.new.show.rotate(z:180).mirror(z:1).translate(x:@args[:left_pos]+30,y:@args[:position],z:423)
+    
+#assembly += Nema17.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-25,z:-40)
 #    assembly += Nema17.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-25,z:-40)
     
 		assembly += AcmeRod.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-27,z:32)
-    assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:32)
+  #  assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:32)
     assembly += Coupling.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-27,z:15)
-    assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:15)
-    
-		# endstop
-		assembly += MicroswitchD3V.new.show.translate(x:@args[:left_pos]-20,y:@args[:position]-15,z:65)
+   # assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:15)
 
+
+    assembly += Rod.new(length:405).show.rotate(x:90).translate(y:@args[:position]+2,x:15,z:2)
+    assembly += ZRodHolder.new.show.rotate(z:90).translate(y:@args[:position]+2,x:5,z:2)
+
+	
     assembly
   end
   

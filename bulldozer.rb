@@ -60,13 +60,16 @@ assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tsl
 #subassembly = XCarriage.new.show
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
-subassembly = ZMotorMount.new.output
+#subassembly = ZMotorMount.new.output
+#subassembly = ZAcmeBearingHolderLower.new.show
+#subassembly = ZAcmeBearingHolderUpper.new.show
+subassembly = ZRodHolder.new.output
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
 
-assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15,z:2)
-assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15+265,z:2)
+#assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15,z:2)
+#assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15+265,z:2)
 
 assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
@@ -84,7 +87,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount]
+parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end

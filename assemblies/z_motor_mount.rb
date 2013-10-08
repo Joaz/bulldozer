@@ -34,17 +34,6 @@ class ZMotorMount < CrystalScad::Assembly
 			end
 			i+=1
 		end
-		# bearing holder needs to be moved to a separate part to have a good 
-		# tool access to the motor mounting bolts
-
-#		res += cube([48,47,6]).translate(z:bearing_position)
-#		bearing = Bearing.new(:type => "625", :no_bom => true)
-	
-#		res -= bearing.output.translate(x:26,y:25,z:bearing_position+2)		
-
-		# fill out the wall facing the tslot between motor and bearing holder
-#		res += cube([48,@args[:thickness],bearing_position-motor_position]).translate(z:motor_position)	
-
 
 		# motor holder
 		motor = Nema17.new
