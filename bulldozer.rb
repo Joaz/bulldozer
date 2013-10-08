@@ -57,13 +57,13 @@ assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tsl
 #subassembly = ZBearingHolder.new.show
 #subassembly = YBeltHolder.new.show
 
-#subassembly = XCarriage.new.show
+subassembly = XCarriage.new.show
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.output
 #subassembly = ZAcmeBearingHolderLower.new.show
 #subassembly = ZAcmeBearingHolderUpper.new.show
-subassembly = ZRodHolder.new.output
+#subassembly = ZRodHolder.new.output
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
