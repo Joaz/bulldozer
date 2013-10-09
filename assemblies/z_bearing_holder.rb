@@ -10,6 +10,7 @@ class ZBearingHolder < CrystalScad::Assembly
 
 	def part(show=false)
 		res = cylinder(d:28.5,h:60)
+		
 		res -= cube([60,30,80]).center_y.translate(x:-15,y:-29)#.color("red")
 		
 		res += cube([30,28,46]).center_x.translate(x:15,y:-14)
@@ -39,11 +40,13 @@ class ZBearingHolder < CrystalScad::Assembly
 	
 		# TODO: Add x motor holder to that
 		
-		motor =  Nema17.new.show.rotate(x:90).translate(x:32,y:102,z:25)
-    motor +=  Pulley.new.show.rotate(x:90).translate(x:32,y:44.5,z:25)
-    motor += Belt.new(longest_side_length:248,top_side_length:246,position:20).show.rotate(z:-90,y:180).translate(x:32,y:33,z:25-7)
+		motor =  Nema17.new.show.rotate(x:90).translate(x:32,y:102,z:26)
+    motor +=  Pulley.new.show.rotate(x:-90).translate(x:32,y:38.5,z:26)
+    motor += Belt.new(longest_side_length:263,top_side_length:246,position:20).show.rotate(z:-90,y:180).translate(x:32,y:45,z:26-7)
  
- 		res += motor.translate(x:-9,y:-41,z:33) if show
+    motor += XBeltIdler.new.show.rotate(x:90,y:90).translate(x:295,y:58,z:37.5)
+ 	#	res += motor.translate(x:-9,y:-41,z:33) if show
+		res += motor.translate(x:-24,y:-61,z:60) if show
 		
 		res
 	end	

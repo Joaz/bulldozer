@@ -32,13 +32,13 @@ class ZAxisAssembly < CrystalScad::Assembly
 #    assembly += Nema17.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-25,z:-40)
     
 		assembly += AcmeRod.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-27,z:32)
-  #  assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:32)
+    assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:32)
     assembly += Coupling.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-27,z:15)
    # assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:15)
 
 
-    assembly += Rod.new(length:405).show.rotate(x:90).translate(y:@args[:position]+2,x:15,z:2)
-    assembly += ZRodHolder.new.show.rotate(z:90).translate(y:@args[:position]+2,x:5,z:2)
+    assembly += Rod.new(length:405).show.rotate(x:90).translate(y:@args[:position]+2+50,x:15,z:2)
+    assembly += ZRodHolder.new.show.rotate(z:90).translate(y:@args[:position]+2+50,x:5,z:2)
 
 	
     assembly

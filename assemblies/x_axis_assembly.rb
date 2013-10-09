@@ -18,7 +18,7 @@ class XAxisAssembly < CrystalScad::Assembly
 
     axis += XCarriage.new().show.rotate(y:90).translate(x:1+@args[:position],y:-30,z:30) #.rotate(z:-90).translate(y:-15,z:-15,x:-3.5)
 
-		axis += MGS.new.show.rotate(z:0).rotate(x:90).translate(x:@args[:position]+27,y:-60,z:23)
+#		axis += MGS.new.show.rotate(z:0).rotate(x:90).translate(x:@args[:position]+27,y:-60,z:23)
 #		axis += JHead.new.show.translate(x:@args[:position]+39.5-5,y:-51.5,z:-73)
 #		axis += cylinder(d:3,h:150).color("Red").translate(x:@args[:position]+40-0.5-5,y:-51.5,z:-69)	
 
