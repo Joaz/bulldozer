@@ -56,7 +56,7 @@ assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tsl
 #subassembly = YRodHolder.new.show
 #subassembly = ZBearingHolder.new.show
 #subassembly = YBeltHolder.new.show
-subassembly = XBeltIdler.new.show
+#subassembly = XBeltIdler.new.output
 
 #subassembly = XCarriage.new.show
 #subassembly = MGS.new.show
@@ -65,7 +65,7 @@ subassembly = XBeltIdler.new.show
 #subassembly = ZAcmeBearingHolderLower.new.show
 #subassembly = ZAcmeBearingHolderUpper.new.show
 #subassembly = ZRodHolder.new.output
-#subassembly = XAxisMountingPart.new.output
+subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
 
@@ -88,7 +88,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder]
+parts = [XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
@@ -99,6 +99,7 @@ parts.each do |part|
   if ARGV[0] == "build"
     puts "Building #{name}..."
     system("openscad -o output/#{name}.stl output/#{name}.scad")
+    system("admesh output/#{name}.stl -b output/#{name}.stl")
   end
 
 end

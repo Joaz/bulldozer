@@ -29,8 +29,15 @@ class XAxisMountingPart < CrystalScad::Assembly
 	end
   
   def nut_traps(height=18,output=false)
-    res = cube([22,46,height]).translate(x:8,y:21)
-    res -= cube([30,20,height+0.1]).translate(y:35)
+    res = cube([30,46,height]).translate(x:0,y:21)
+
+    # nut trap for idler
+    bolt = Bolt.new(4,20,no_bom:true)
+		nut = Nut.new(4)
+		res-= bolt.output.rotate(y:90).translate(x:-11,y:62,z:4)
+		res-= hull(nut.output.rotate(z:30).rotate(y:90),nut.output.rotate(z:30).rotate(y:90).translate(z:5)).translate(x:2.5,y:62,z:3.8)
+ 		
+    res-= cube([30,20,height+0.2]).translate(x:-0.1,y:35,z:-0.1)
     b = Bolt.new(4,40, no_bom:true) 
     
     res -= b.output.translate(x:15,y:25,z:-1) 
