@@ -9,7 +9,7 @@ require_all "assemblies"
 include CrystalScad
 
 @@printed_color="Bisque"
-@tslot_simple = true
+@tslot_simple = false
  
 
 
@@ -33,7 +33,7 @@ assembly=CrystalScadObject.new
 
 
 
-#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
+#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+100).show.translate(z:3.5,y:30,x:35)
 
 assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
@@ -54,10 +54,10 @@ assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tsl
 
 
 #subassembly = YRodHolder.new.show
-#subassembly = ZBearingHolder.new.show
+subassembly = ZBearingHolder.new.show
 #subassembly = YBeltHolder.new.output
 #subassembly = XBeltIdler.new.output
-subassembly = YBeltIdler.new.output
+#subassembly = YBeltIdler.new.output
 
 #subassembly = XCarriage.new.show
 #subassembly = MGS.new.show
@@ -65,7 +65,7 @@ subassembly = YBeltIdler.new.output
 #subassembly = ZMotorMount.new.output
 #subassembly = ZAcmeBearingHolderLower.new.show
 #subassembly = ZAcmeBearingHolderUpper.new.show
-#subassembly = ZRodHolder.new.output
+#subassembly = ZRodHolder.new.show #.output
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
@@ -73,7 +73,7 @@ subassembly = YBeltIdler.new.output
 #assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15,z:2)
 #assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15+265,z:2)
 
-assembly+= ZAxisAssembly.new(tslot_simple:true).show.translate(y:50)
+assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
 assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 

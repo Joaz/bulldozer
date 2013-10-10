@@ -14,7 +14,7 @@ class ZAxisAssembly < CrystalScad::Assembly
       tslot_top = TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@args[:tslot_simple])
   
       assembly = tslot_left.show(@args[:height]).translate(x:@args[:left_pos],y:@args[:position],z:-60).color("Silver")
-      assembly += tslot_right.show(@args[:height]).mirror(x:1).translate(x:@args[:right_pos],y:@args[:position],z:-60).color("Silver")
+     # assembly += tslot_right.show(@args[:height]).mirror(x:1).translate(x:@args[:right_pos],y:@args[:position],z:-60).color("Silver")
     #  assembly += tslot_top.show(@args[:right_pos]-@args[:left_pos]).rotate(y:90).translate(x:@args[:left_pos],y:@args[:position],z:@args[:height]-30).color("Silver")
   
       assembly += z_axis_drive
@@ -37,8 +37,8 @@ class ZAxisAssembly < CrystalScad::Assembly
    # assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:15)
 
 
-    assembly += Rod.new(length:405).show.rotate(x:90).translate(y:@args[:position]+2+50,x:15,z:2)
-    assembly += ZRodHolder.new.show.rotate(z:90).translate(y:@args[:position]+2+50,x:5,z:2)
+    assembly += Rod.new(length:405).show.rotate(x:90).translate(y:@args[:position]+2+50,x:15+3,z:2)
+    assembly += ZRodHolder.new.show.rotate(z:90).translate(y:@args[:position]+30,x:5,z:0)
 
 	
     assembly

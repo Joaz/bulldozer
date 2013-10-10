@@ -6,7 +6,7 @@ class XAxisAssembly < CrystalScad::Assembly
   
   def show
     # z bearings
-    axis  = ZBearingHolder.new(inner_diameter:12).show.rotate(x:0).translate(y:44,x:17.5,z:-46)
+    axis  = ZBearingHolder.new(inner_diameter:12).show.rotate(x:0).translate(y:44,x:17.5,z:-43)
    # axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5,z:35)
     
     #axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5+265,z:-50)

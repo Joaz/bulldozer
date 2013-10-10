@@ -9,29 +9,36 @@ class ZBearingHolder < CrystalScad::Assembly
 	end
 
 	def part(show=false)
-		res = cylinder(d:28.5,h:60)
+		res = cylinder(d:30,h:60).translate(y:50,x:3)
 		
-		res -= cube([60,30,80]).center_y.translate(x:-15,y:-29)#.color("red")
+		res -= cube([60,30,60]).center_y.translate(x:-15,y:-29)#.color("red")
 		
-		res += cube([30,28,46]).center_x.translate(x:15,y:-14)
-		res += cube([30,30,16]).center_xy.translate(x:15,y:-29)
+		res += cube([30,13,46]).center_x.translate(x:15,y:-14)
+
+		res += cube([30,78,20]).center_x.translate(x:15,y:-14)
+		res += cube([30,30,13]).center_xy.translate(x:15,y:-29)
 
 
-	  res -= cylinder(d:21.5,h:70).translate(z:-0.1)        
+	  res -= cylinder(d:21.5,h:70).translate(y:50,x:3,z:-0.1)        
 		# lm12uu/lm12luu will be glued inside		
 	#  res -= cylinder(d:13.5,h:40)        
   
-		bolt = Bolt.new(4,25)
+		bolt = Bolt.new(4,20)
   
-		res -= cylinder(d:8,h:20).rotate(x:90).translate(x:20,y:24,z:31)
-		res -= bolt.output.rotate(x:90).translate(x:20,y:4,z:31)
-		res += bolt.show.rotate(x:90).translate(x:20,y:4,z:31) if show
+		washer = Washer.new(4.3)
+		#res -= cylinder(d:8,h:20).rotate(x:90).translate(x:22,y:24,z:31)
+		res -= bolt.output.rotate(x:90).translate(x:22,y:0,z:28)
+		res += bolt.show.rotate(x:90).translate(x:22,y:0,z:28) if show
+		res += washer.show.rotate(x:90).translate(x:22,y:0,z:28) if show
 
 		# lower bolt
-		bolt = Bolt.new(4,25)  
+		bolt = Bolt.new(4,20)  
+		washer = Washer.new(4.3)
 #		res -= cylinder(d:8,h:20).rotate(x:90).translate(x:20,y:24,z:35)
-		res -= bolt.output.translate(x:15,y:-29,z:0)
-		res += bolt.show.translate(x:15,y:-29,z:0) if show
+		res -= bolt.output.translate(x:15,y:-29,z:-1)
+		res += bolt.show.translate(x:15,y:-29,z:-1) if show
+		res += washer.show.translate(x:15,y:-29,z:-1) if show
+
 
 		# inserted for BOM
 		# TODO: output them on show 
