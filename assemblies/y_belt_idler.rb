@@ -44,8 +44,8 @@ class YBeltIdler < CrystalScad::Assembly
 		bolts = [Bolt.new(4,25,additional_diameter:0.5),Bolt.new(4,25,additional_diameter:0.5)]
 
 
-		assembly -= bolts[0].output.rotate(x:90	).translate(x:7,y:8,z:10)	
-		assembly -= bolts[1].output.rotate(x:90	).translate(x:7,y:8,z:50)	
+		assembly -= long_slot(d:4.4,h:30,l:12).rotate(x:90,y:90	).translate(x:7,y:9,z:16)	
+		assembly -= long_slot(d:4.4,h:30,l:12).rotate(x:90,y:90	).translate(x:7,y:9,z:56)	
 		
 		assembly += bolts[0].show.rotate(x:90	).translate(x:7,y:8,z:10)	if output == false
 		assembly += bolts[1].show.rotate(x:90	).translate(x:7,y:8,z:50)	if output == false

@@ -1,5 +1,5 @@
 
-class BedPlateBearingMount
+class BedPlateBearingMount < CrystalScad::Assembly
     attr_accessor :holder_length, :rod_position_x, :rod_position_z
     
     def initialize
@@ -26,10 +26,14 @@ class BedPlateBearingMount
     end
     
     def show
-      output
+      part(true)
     end
     
     def output
+      part(false)
+    end
+    
+    def part(show)
      
 
       part = @base 
@@ -43,13 +47,15 @@ class BedPlateBearingMount
       part -= cylinder(d:@rod_diameter*1.2,h:@length+@side_thickness_y*2+0.2).rotate(x:-90).translate(x:@base.x/2,y:-0.1,z:@side_thickness_base+@diameter/2) 
       # side mount wall
       part += cube([@side_thickness_screw_wall, @holder_length, @plate_thickness+@holder_height]).translate(x:-@side_thickness_screw_wall)
-      part -= Bolt.new(3,20).output.rotate(y:90).translate(x:-@side_thickness_screw_wall,y:@holder_length/3,z:@holder_height+@plate_thickness/2)
-      part -= Bolt.new(3,20).output.rotate(y:90).translate(x:-@side_thickness_screw_wall,y:@holder_length/3*2,z:@holder_height+@plate_thickness/2)
+      part -= WoodScrew.new.output.rotate(y:90).translate(x:-@side_thickness_screw_wall-0.1,y:@holder_length/3,z:@holder_height+@plate_thickness/2)
+      part -= WoodScrew.new.output.rotate(y:90).translate(x:-@side_thickness_screw_wall-0.1,y:@holder_length/3*2,z:@holder_height+@plate_thickness/2)
+ 
+      part -= WoodScrew.new(length:30).output.rotate(y:0).translate(x:@holder_length-7.5,y:@holder_length/2,z:-0.1)
       
-      assembly = @bearing.show.rotate(x:90).translate(x:@base.x/2,y:@base.y-@side_thickness_y,z:@side_thickness_base+@diameter/2)
-      assembly+=part.color(@@printed_color)
+      part += @bearing.show.rotate(x:90).translate(x:@base.x/2,y:@base.y-@side_thickness_y,z:@side_thickness_base+@diameter/2) if show
+      part = part.color(@@printed_color)
       # return it with flat part that goes onto the plate = z:0
-      return assembly.translate(z:-@holder_height/2)
+      return part.translate(z:-@holder_height/2)
       
     end
     
