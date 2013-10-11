@@ -16,11 +16,12 @@ class YBeltHolder < CrystalScad::Assembly
     base += cube([30,12,6]).translate(x:3,z:16)
     # belt cut
     base -= cube([34,12.2,1.7]).translate(x:2,y:-0.1,z:16.5)
-    base -= cube([5.5,13,1]).translate(x:15,y:-0.1,z:16)
+    base -= cube([6.5,13,1]).translate(x:14.5,y:-0.1,z:16)
 
 		# now put a small wall down to hold the parts together.
 		# it will crush once the belt tightening bolts are tighened
-    base += cube([1.5,3,2.7]).translate(x:3,y:9,z:16.5)
+    # => that does not work
+#    base += cube([1.5,3,2.7]).translate(x:3,y:9,z:16.5)
 
 
 		base = base.color(@@printed_color)		
@@ -28,13 +29,13 @@ class YBeltHolder < CrystalScad::Assembly
 		# FIXME: use self tapping one with hexagonal head
 		# belt clamp bolt
 		bolt = Bolt.new(4,16,additional_length:5)
-	  base -= cylinder(d:4.0,h:20).mirror(z:1).translate(y:6,x:25,z:22)
+	  base -= cylinder(d:3.9,h:20).mirror(z:1).translate(y:6,x:25,z:22)
 	
 	#  base -= bolt.output.mirror(z:1).translate(y:6,x:25,z:22)
 		base += bolt.show.mirror(z:1).translate(y:6,x:25,z:22) if with_hardware == true
 
 		bolt = Bolt.new(4,16,additional_length:5)
-	  base -= cylinder(d:4.0,h:20).mirror(z:1).translate(y:6,x:10,z:22)
+	  base -= cylinder(d:3.9,h:20).mirror(z:1).translate(y:6,x:10,z:22)
 
 #	  base -= bolt.output.mirror(z:1).translate(y:6,x:10,z:22)
 		base += bolt.show.mirror(z:1).translate(y:6,x:10,z:22) if with_hardware == true   

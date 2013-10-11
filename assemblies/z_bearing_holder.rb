@@ -5,16 +5,28 @@ class ZBearingHolder < CrystalScad::Assembly
 	end
 	
 	def output
-		part
+		res = part(false).mirror(x:1)
+		res += part(false,false).mirror(x:1).translate(x:43)
 	end
 
-	def part(show=false)
+	def part(show=false, with_motor=true)
 		res = cylinder(d:30,h:60).translate(y:50,x:3)
 		
-		res -= cube([60,30,60]).center_y.translate(x:-15,y:-29)#.color("red")
+		res -= cube([60,30,60]).center_y.translate(x:-15,y:-29)
 		
-		res += cube([30,13,46]).center_x.translate(x:15,y:-14)
-
+    # base wall going to the motor
+		if with_motor
+		  res += cube([42,13,63.5]).center_x.translate(x:9,y:-14)
+      # motor mount
+      motor_mount = MotorMount.new
+      res += motor_mount.part(show).rotate(x:90).translate(x:9,y:-6,z:85)
+    
+      # connecting wall to the motor mount
+      res += cube([42,6,65]).translate(x:-12,y:-12)
+    else
+      res += cube([30,13,43]).center_x.translate(x:15,y:-14) 
+    end
+    
 		res += cube([30,78,20]).center_x.translate(x:15,y:-14)
 		res += cube([30,30,13]).center_xy.translate(x:15,y:-29)
 
@@ -44,11 +56,9 @@ class ZBearingHolder < CrystalScad::Assembly
 		# TODO: output them on show 
 		Lm_uu.new(inner_diameter:12)
 		Lm_uu.new(inner_diameter:12)
-	
-		# TODO: Add x motor holder to that
-		
-		motor =  Nema17.new.show.rotate(x:90).translate(x:32,y:102,z:26)
-    motor +=  Pulley.new.show.rotate(x:-90).translate(x:32,y:38.5,z:26)
+
+	#	motor =  Nema17.new.show.rotate(x:90).translate(x:32,y:102,z:26)
+  #  motor +=  Pulley.new.show.rotate(x:-90).translate(x:32,y:38.5,z:26)
     motor += Belt.new(longest_side_length:258,top_side_length:246,position:20).show.rotate(z:-90,y:180).translate(x:32,y:45,z:26-7)
  
     motor += XBeltIdler.new.show.rotate(x:90,y:90).translate(x:290,y:59,z:37.5)

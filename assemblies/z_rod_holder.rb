@@ -6,7 +6,7 @@ class ZRodHolder < CrystalScad::Assembly
 
 	def output
 		res = part(false)
-		res+= part(false).mirror(x:1).translate(x:-20)
+		res+= part(false).mirror(x:1).translate(y:-31)
 	end
 
 	def part(show)

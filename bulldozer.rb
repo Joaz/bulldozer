@@ -9,7 +9,7 @@ require_all "assemblies"
 include CrystalScad
 
 @@printed_color="Bisque"
-@tslot_simple = false
+@tslot_simple = true
  
 
 
@@ -33,15 +33,16 @@ assembly=CrystalScadObject.new
 
 
 
-#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+100).show.translate(z:3.5,y:30,x:35)
+#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+180).show.translate(z:3.5,y:30,x:35)
 
-assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
+#assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
 
 
+#assembly += YMotorMount.new.show.rotate(z:-180).rotate(y:-90).translate(x:160,y:413,z:-32)
 
 #assembly += Nema17.new.show.rotate(y:90).translate(x:95,y:460,z:-7-14)
-#assembly += Belt.new.show.translate(x:150,y:40,z:-14)
+#assembly += Belt.new.show.translate(x:150,y:10,z:-14)
 #assembly += YBeltHolder.new.show.translate(x:135,y:230,z:3)
 #assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
 
@@ -53,8 +54,10 @@ assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tsl
 
 
 
+#subassembly = MotorMount.new.show
+
 #subassembly = YRodHolder.new.show
-subassembly = ZBearingHolder.new.show
+subassembly = ZBearingHolder.new.output
 #subassembly = YBeltHolder.new.output
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output
@@ -65,10 +68,13 @@ subassembly = ZBearingHolder.new.show
 #subassembly = ZMotorMount.new.output
 #subassembly = ZAcmeBearingHolderLower.new.show
 #subassembly = ZAcmeBearingHolderUpper.new.show
-#subassembly = ZRodHolder.new.show #.output
+#subassembly = ZRodHolder.new.output
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
+#subassembly = BedPlateBearingMount.new.output
+#subassembly = YMotorMount.new.output
+
 
 #assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15,z:2)
 #assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15+265,z:2)
@@ -89,7 +95,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
+parts = [ZBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
