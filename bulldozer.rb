@@ -57,7 +57,7 @@ assembly=CrystalScadObject.new
 #subassembly = MotorMount.new.show
 
 #subassembly = YRodHolder.new.show
-subassembly = ZBearingHolder.new.output
+subassembly = ZBearingHolder.new.show
 #subassembly = YBeltHolder.new.output
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output

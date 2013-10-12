@@ -1,7 +1,7 @@
 class XAxisAssembly < CrystalScad::Assembly
   def initialize(args={})
     @args=args
-    @args[:position] ||= 15+200
+    @args[:position] ||= 15+0
   end
   
   def show

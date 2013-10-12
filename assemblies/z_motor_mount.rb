@@ -10,7 +10,9 @@ class ZMotorMount < CrystalScad::Assembly
 	end
 
 	def output
-		part(true).rotate(x:90,z:90)
+	  res =	part(true).rotate(x:90,z:90)
+		res+=	part(true).rotate(x:90,z:90).mirror(y:1).translate(y:-2)
+		res
 	end
 
 	def part(output=false)

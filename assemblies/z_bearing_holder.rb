@@ -13,18 +13,24 @@ class ZBearingHolder < CrystalScad::Assembly
 		res = cylinder(d:30,h:60).translate(y:50,x:3)
 		
 		res -= cube([60,30,60]).center_y.translate(x:-15,y:-29)
-		
+			
+		res += cube([60,13,43]).center_x.translate(x:15,y:-14) 
     # base wall going to the motor
 		if with_motor
-		  res += cube([42,13,63.5]).center_x.translate(x:9,y:-14)
+		  res += cube([42,13,63.5]).translate(x:-12,y:-14)
+      
       # motor mount
       motor_mount = MotorMount.new
       res += motor_mount.part(show).rotate(x:90).translate(x:9,y:-6,z:85)
     
       # connecting wall to the motor mount
       res += cube([42,6,65]).translate(x:-12,y:-12)
-    else
-      res += cube([30,13,43]).center_x.translate(x:15,y:-14) 
+
+			# x endstop
+			switch = MicroswitchD3V.new
+			res -= switch.show.rotate(x:180,y:-90).translate(x:14,y:9,z:35) 
+			res += switch.show.rotate(x:180,y:-90).translate(x:20,y:9,z:35) if show
+	
     end
     
 		res += cube([30,78,20]).center_x.translate(x:15,y:-14)
@@ -39,9 +45,9 @@ class ZBearingHolder < CrystalScad::Assembly
   
 		washer = Washer.new(4.3)
 		#res -= cylinder(d:8,h:20).rotate(x:90).translate(x:22,y:24,z:31)
-		res -= bolt.output.rotate(x:90).translate(x:22,y:0,z:28)
-		res += bolt.show.rotate(x:90).translate(x:22,y:0,z:28) if show
-		res += washer.show.rotate(x:90).translate(x:22,y:0,z:28) if show
+		res -= long_slot(d:4.4,h:20,l:10).rotate(x:90).translate(x:30,y:0,z:28)
+		res += bolt.show.rotate(x:90).translate(x:34,y:0,z:28) if show
+		res += washer.show.rotate(x:90).translate(x:34,y:0,z:28) if show
 
 		# lower bolt
 		bolt = Bolt.new(4,20)  
