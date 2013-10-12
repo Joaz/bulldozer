@@ -15,7 +15,7 @@ class XCarriage < CrystalScad::Assembly
   
   def output
     res = part_left
-    res += part_right(false).translate(x:39,y:20)
+    res += part_right(false).mirror(x:1).translate(x:105,y:-30)
 
 		res
   end
