@@ -5,11 +5,14 @@ class XCarriage < CrystalScad::Assembly
   end
   
   def show
-    part(true)
+    res = part_left
+    res += part_right(true).mirror(z:1).translate(z:67)
+    res
   end
   
   def output
-    part(false)
+    #res = part_left(false)
+    res += part_right(false)
   end
   
 	def base
@@ -27,26 +30,29 @@ class XCarriage < CrystalScad::Assembly
 		res
 	end
 	
-  def part(show)
+	def part_left
+	  base.color(@@printed_color)
+	end
+	
+  def part_right(show)
 
 		
-		res = base.color(@@printed_color)
-		res += base.mirror(z:1).translate(z:67)
+		res = base
 			
 
-    # belt holder sketch
-    #res += cube([20,30,30+@side_thickness]).translate(y:55,x:5)
+    # this wall will hit the x endstop
+    res += cube([7,30,30+@side_thickness]).translate(y:55,x:15.5)
     
 
 
     bearings = [Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12)]
 
-    if show
-		  res += bearings[0].show.translate(x:15,y:45,z:15+@side_thickness) 
-		  res += bearings[1].show.translate(x:45,y:15,z:@side_thickness)
-	    res += bearings[1].show.translate(x:45,y:15,z:30+@side_thickness)
-		end
-    
+   # if show
+	#	  res += bearings[0].show.translate(x:15,y:45,z:15+@side_thickness) 
+	#	  res += bearings[1].show.translate(x:45,y:15,z:@side_thickness)
+#	    res += bearings[1].show.translate(x:45,y:15,z:30+@side_thickness)
+#		end
+    res   
   end
   
 end

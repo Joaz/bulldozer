@@ -45,9 +45,13 @@ class MicroswitchD3V < CrystalScad::Assembly
 		button = hull(cylinder(d:2.8,h:4.2), cylinder(d:2.8,h:4.2).translate(y:4)).color("Red")
 		res += button.rotate(x:-90).translate(x:2.8+20.2,y:2.8,z:height+1.2)
 
+    # FIXME: bolt being replaced by self tapping screws
 		bolt = [Bolt.new(3,@args[:bolt_length]),Bolt.new(3,@args[:bolt_length])]
-		res -= bolt[0].output.rotate(x:-90).translate(x:2.8,z:2.8+10.3)
-		res -= bolt[1].output.rotate(x:-90).translate(x:2.8+22,z:2.8)
+#		res -= bolt[0].output.rotate(x:-90).translate(x:2.8,z:2.8+10.3)
+#		res -= bolt[1].output.rotate(x:-90).translate(x:2.8+22,z:2.8)
+    
+		res -= cylinder(d:2.9,h:@args[:bolt_length]).rotate(x:-90).translate(x:2.8,z:2.8+10.3)
+		res -= cylinder(d:2.9,h:@args[:bolt_length]).rotate(x:-90).translate(x:2.8+22,z:2.8)
 
 		if output == false	
 			res += bolt[0].show.rotate(x:-90).translate(x:2.8,z:2.8+10.3)
