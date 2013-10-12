@@ -6,7 +6,7 @@ class ZBearingHolder < CrystalScad::Assembly
 	
 	def output
 		res = part(false)
-		res += part(false,false).mirror(x:1).translate(x:62)
+		res += part(false,false).mirror(x:1).translate(x:77,y:-15)
 	end
 
 	def part(show=false, with_motor=true)
