@@ -62,7 +62,7 @@ class ZBearingHolder < CrystalScad::Assembly
 
 	#	motor =  Nema17.new.show.rotate(x:90).translate(x:32,y:102,z:26)
   #  motor +=  Pulley.new.show.rotate(x:-90).translate(x:32,y:38.5,z:26)
-    motor += Belt.new(longest_side_length:258,top_side_length:246,position:20).show.rotate(z:-90,y:180).translate(x:32,y:45,z:19-3.5)
+    motor += Belt.new(longest_side_length:258,top_side_length:257,position:30).show.rotate(z:-90,y:180).translate(x:32,y:45,z:19-3.5)
  
     motor += XBeltIdler.new.show.rotate(x:90,y:90).translate(x:290,y:59,z:34)
  	#	res += motor.translate(x:-9,y:-41,z:33) if show

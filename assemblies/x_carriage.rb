@@ -41,10 +41,40 @@ class XCarriage < CrystalScad::Assembly
 			
 
     # this wall will hit the x endstop
-    res += cube([7,30,30+@side_thickness]).translate(y:55,x:15.5)
+    res += cube([7,30,30+@side_thickness]).translate(y:57,x:15.5)
     
+    # wall for belt clamp
+    res += cube([18,30,15+@side_thickness]).translate(y:57,x:-2,z:15)
+	
+		# extend bearing wall to the top
+		res += cube([2,25,30+@side_thickness]).translate(x:-2,y:32)
 
+		# support wall
+		res += cube([20,2,15]).translate(x:-2,y:85)
 
+		# belt cutout
+		res -= cube([1,6.5,60]).translate(x:-2.5,y:58).color("red")
+
+	  clamp = cube([5,25,18]).translate(x:-8,y:48.5,z:15).color("yellow")
+  		
+		# FIXME no BOM entry for bolts
+			  
+		clamp_holes = cylinder(d:3.9,h:22).rotate(y:90).translate(x:-12,y:55,z:19)
+	  clamp_holes += cylinder(d:3.9,h:22).rotate(y:90).translate(x:-12,y:55,z:29)
+
+	  clamp_holes += cylinder(d:3.9,h:22).rotate(y:90).translate(x:-12,y:68,z:19)
+	  clamp_holes += cylinder(d:3.9,h:22).rotate(y:90).translate(x:-12,y:68,z:29)
+		
+		res -= clamp_holes
+		clamp -= clamp_holes
+		
+		if show
+			res += clamp 
+		else
+			res += clamp.translate(z:-15)		
+		end		
+		
+	
     bearings = [Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12)]
 
    # if show
