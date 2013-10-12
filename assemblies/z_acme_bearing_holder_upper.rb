@@ -5,14 +5,15 @@ class ZAcmeBearingHolderUpper < CrystalScad::Assembly
 	end
 	
 	def output
-		part
+		res = part
+		res += part.mirror(x:1).translate(x:-1)
 	end
 
 	def part(show=false)
 		res = cube([30,5,30]).color(@@printed_color)	
 
-		res += cube([48,47,6]).color(@@printed_color)	
-		bearing = Bearing.new(:type => "61800", :margin_diameter => 0.2, :outer_rim_cut=>5, :no_bom => true)
+		res += cube([40,40,6]).color(@@printed_color)	
+		bearing = Bearing.new(:type => "61800", :margin_diameter => 0.2, :outer_rim_cut=>8, :no_bom => true)
 	
 		res -= bearing.output.translate(x:26,y:27,z:2)			
 		#res += bearing.show.translate(x:26,y:27,z:2) if show	
@@ -24,7 +25,7 @@ class ZAcmeBearingHolderUpper < CrystalScad::Assembly
 		res += bolt.show.rotate(x:90).translate(x:15,y:6,z:20) if show
 		res += washer.show.rotate(x:90).translate(x:15,y:6,z:20) if show
 
-		
+		res
 	end	
 
 end

@@ -57,17 +57,18 @@ assembly=CrystalScadObject.new
 #subassembly = MotorMount.new.show
 
 #subassembly = YRodHolder.new.show
-#subassembly = ZBearingHolder.new.show
+#subassembly = ZBearingHolder.new.output
 #subassembly = YBeltHolder.new.output
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output
 
-subassembly = XCarriage.new.output
+#subassembly = XCarriage.new.output
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.output
-#subassembly = ZAcmeBearingHolderLower.new.show
-#subassembly = ZAcmeBearingHolderUpper.new.show
+#subassembly = ZAcmeBearingHolderLower.new.output
+
+subassembly = ZAcmeBearingHolderUpper.new.output
 #subassembly = ZRodHolder.new.output
 #subassembly = XAxisMountingPart.new.output
 #subassembly = XAxisAcmeNutHolder.new.output
@@ -95,7 +96,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [XCarriage,ZBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
+parts = [ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
