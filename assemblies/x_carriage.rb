@@ -7,16 +7,24 @@ class XCarriage < CrystalScad::Assembly
   def show
     res = part_left
     res += part_right(true).mirror(z:1).translate(z:67)
-    res
+		res = res.color(@@printed_color)
+		bolt = Bolt.new(4,70)
+		res += bolt.show.translate(x:70,y:10,z:-0.1)
+    
   end
   
   def output
-    #res = part_left(false)
-    res += part_right(false)
+    res = part_left
+    res += part_right(false).translate(x:39,y:20)
+
+		res
   end
   
 	def base
     res = cube([30,28,30+@side_thickness]).translate(x:30)
+
+    res += cube([45,18,30+@side_thickness]).translate(x:30)
+
     res += cube([28,30-5,30+@side_thickness]).translate(y:30+2)
     res += hull(cube([30,5,@side_thickness]).translate(x:0,y:30),cube([5,30,@side_thickness]).translate(x:30,y:0))
     res -= cube([30,30,60]).translate(x:28,y:28,z:-0.1)
@@ -27,11 +35,21 @@ class XCarriage < CrystalScad::Assembly
 
     res -= cylinder(d:21.5,h:40).translate(x:45,y:15,z:@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:45,y:15,z:-0.1)  
+
+		# extruder mount
+    res -= cylinder(d:3.4,h:40).rotate(x:90).translate(x:65,y:20,z:@side_thickness+15)
+		nut = Nut.new(3)    
+		res -= nut.output.rotate(x:90).translate(x:65,y:18.1,z:@side_thickness+15)
+
+		
+		# hole for m4x70
+		res -= cylinder(d:4.3,h:40).translate(x:70,y:10,z:-0.1)  
+		
 		res
 	end
 	
 	def part_left
-	  base.color(@@printed_color)
+	  base
 	end
 	
   def part_right(show)
@@ -54,7 +72,8 @@ class XCarriage < CrystalScad::Assembly
 
 		# belt cutout
 		res -= cube([1,6.5,60]).translate(x:-2.5,y:58).color("red")
-
+	
+		# belt clamp
 	  clamp = cube([5,25,18]).translate(x:-8,y:48.5,z:15).color("yellow")
   		
 		# FIXME no BOM entry for bolts
@@ -74,6 +93,7 @@ class XCarriage < CrystalScad::Assembly
 			res += clamp.translate(z:-15)		
 		end		
 		
+
 	
     bearings = [Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12)]
 
