@@ -30,7 +30,8 @@ class ZBearingHolder < CrystalScad::Assembly
 			switch = MicroswitchD3V.new(bolt_length:23.1)
 			res -= switch.show.rotate(x:180,y:-90).translate(x:13,y:9,z:35-3.5) 
 			res += switch.show.rotate(x:180,y:-90).translate(x:13,y:9,z:35-3.5) if show
-	
+	  else
+	    res -= cube([18,15,50]).center_x.translate(x:-9,y:-15,z:-0.1)
     end
     
 		res += cube([30,78,20]).center_x.translate(x:15,y:-14)
