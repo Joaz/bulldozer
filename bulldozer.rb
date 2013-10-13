@@ -62,7 +62,7 @@ assembly=CrystalScadObject.new
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output
 
-subassembly = XCarriage.new.output
+#subassembly = XCarriage.new.output
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.output
@@ -71,7 +71,7 @@ subassembly = XCarriage.new.output
 #subassembly = ZAcmeBearingHolderUpper.new.output
 #subassembly = ZRodHolder.new.output
 #subassembly = XAxisMountingPart.new.output
-#subassembly = XAxisAcmeNutHolder.new.output
+subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
 #subassembly = BedPlateBearingMount.new.output
 #subassembly = YMotorMount.new.output

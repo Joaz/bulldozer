@@ -63,8 +63,8 @@ class XAxisAcmeNutHolder < CrystalScad::Assembly
   end
   
   def output
-    res = main_part(true)
-    res += clamp(true).translate(y:-50)
+    res = main_part(true).mirror(x:1)
+    res += clamp(true).translate(x:1)
   end
   
   def show
