@@ -24,7 +24,7 @@ class ZAxisAssembly < CrystalScad::Assembly
   
   def z_axis_drive
 		assembly = ZMotorMount.new.show.translate(x:@args[:left_pos],y:@args[:position]-3,z:-60)
-		assembly = ZMotorMount.new.show.mirror(x:1).translate(x:@args[:right_pos],y:@args[:position]-3,z:-60)
+		assembly += ZMotorMount.new.show.mirror(x:1).translate(x:@args[:right_pos],y:@args[:position]-3,z:-60)
 
 		assembly += ZAcmeBearingHolderLower.new.show.rotate(z:180).translate(x:@args[:left_pos]+30,y:@args[:position],z:42)
 		assembly += ZAcmeBearingHolderLower.new.show(false).mirror(x:1).rotate(z:180).translate(x:@args[:right_pos]-30,y:@args[:position],z:42)
