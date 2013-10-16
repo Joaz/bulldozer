@@ -21,6 +21,7 @@ class Bearing < CrystalScad::Assembly
              "624" => {inner_diameter:4,outer_diameter:13,thickness:5, inner_rim:6.3, outer_rim:11.0, flange_diameter:15, flange_width:1},
              "625" => {inner_diameter:5,outer_diameter:16,thickness:5, inner_rim:7.5, outer_rim:13.5},
            "61800" => {inner_diameter:10,outer_diameter:19,thickness:5, inner_rim:12, outer_rim:16.3},
+           "63800" => {inner_diameter:10,outer_diameter:19,thickness:7, inner_rim:12, outer_rim:16.3},
     
     }
     @size = chart[@args[:type]]
