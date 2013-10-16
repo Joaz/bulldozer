@@ -1,7 +1,7 @@
 class ZAcmeBearingHolderLower < CrystalScad::Assembly
 	
-	def show
-		part(true)
+	def show(with_endstop_holder=true)
+		part(true,with_endstop_holder)
 	end
 	
 	def output

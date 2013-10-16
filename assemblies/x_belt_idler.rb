@@ -40,6 +40,7 @@ class XBeltIdler < CrystalScad::Assembly
 		assembly += cube([18,30,16]).translate(x:3,y:9,z:2)
     
     assembly -= long_slot(d:4.5,h:21,l:15).rotate(x:90,z:90).translate(x:2,z:10.01,y:14)
+    assembly = assembly.color(@@printed_color)
 	
 	#	assembly = assembly.color(@@printed_color)
 	#	

@@ -23,6 +23,8 @@ class WoodScrew < CrystalScad::Assembly
 	def part(show)
 	  if show == false
 	    margin = 0.5
+	  else
+	    margin = 0
 	  end
 	  res = cylinder(d:@args[:diameter]+margin,h:@args[:length])
     res+= cylinder(d1:@args[:head_diameter]+margin,d2:@args[:diameter]+margin,h:@args[:head_height])

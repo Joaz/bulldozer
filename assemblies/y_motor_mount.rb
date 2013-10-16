@@ -21,7 +21,7 @@ class YMotorMount < CrystalScad::Assembly
   end
 
   def slot_mount(show)
-  	mount = cube([30,50,6])
+  	mount = cube([30,50,6]).color(@@printed_color)
   	#.translate(x:-20,y:-25) 
     
     

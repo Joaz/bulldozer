@@ -9,7 +9,7 @@ require_all "assemblies"
 include CrystalScad
 
 @@printed_color="Bisque"
-@tslot_simple = true
+@tslot_simple = false
  
 
 
@@ -33,24 +33,28 @@ assembly=CrystalScadObject.new
 
 
 
-#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+180).show.translate(z:3.5,y:30,x:35)
+assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+130).show.translate(z:3.5,y:30,x:35)
 
-#assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
+assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
 
 
-#assembly += YMotorMount.new.show.rotate(z:-180).rotate(y:-90).translate(x:160,y:413,z:-32)
+# TODO: move this stuff to the YPlateAssembly
+assembly += YMotorMount.new.show.rotate(z:-180).rotate(y:-90).translate(x:160,y:413,z:-32)
 
-#assembly += Nema17.new.show.rotate(y:90).translate(x:95,y:460,z:-7-14)
-#assembly += Belt.new.show.translate(x:150,y:10,z:-14)
-#assembly += YBeltHolder.new.show.translate(x:135,y:230,z:3)
-#assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
+assembly += Belt.new.show.translate(x:150,y:12,z:-14)
+assembly += YBeltHolder.new.show.translate(x:135,y:230,z:3)
+assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
 
-# FIXME: YBeltHolder and BedPlateBearingMount are both missing wood screws 
-#assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
+assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
+assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+185,z:-8.5)
+assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(y:30,x:55,z:-8.5)
+assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y:30,x:55+185,z:-8.5)
 
-#assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+185,z:-8.5)
 
+assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
+
+assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
 
 
@@ -71,18 +75,11 @@ assembly=CrystalScadObject.new
 #subassembly = ZAcmeBearingHolderUpper.new.output
 #subassembly = ZRodHolder.new.output
 #subassembly = XAxisMountingPart.new.output
-subassembly = XAxisAcmeNutHolder.new.output
+#subassembly = XAxisAcmeNutHolder.new.output
 #subassembly = JHead.new.show
 #subassembly = BedPlateBearingMount.new.output
 #subassembly = YMotorMount.new.output
 
-
-#assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15,z:2)
-#assembly += Rod.new(length:405).show.rotate(x:90).translate(y:283+50-1,x:15+265,z:2)
-
-assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
-
-assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
 
 def save(file,output,start_text=nil)

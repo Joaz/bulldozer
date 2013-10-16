@@ -31,6 +31,7 @@ class MotorMount < CrystalScad::Assembly
 			end
 		end
     
+    res = res.color(@@printed_color)
     
     res += motor_model if show
    

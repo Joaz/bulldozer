@@ -1,7 +1,7 @@
 class ZBearingHolder < CrystalScad::Assembly
 	
-	def show
-		part(true)
+	def show(with_motor=true)
+		part(true, with_motor)
 	end
 	
 	def output
@@ -15,27 +15,29 @@ class ZBearingHolder < CrystalScad::Assembly
 		res -= cube([60,30,60]).center_y.translate(x:-15,y:-29)
 			
 		res += cube([60,13,43]).center_x.translate(x:15,y:-14) 
+		res = res.color(@@printed_color)
+    
     # base wall going to the motor
 		if with_motor
-		  res += cube([42,13,60]).translate(x:-12,y:-14)
+		  res += cube([42,13,60]).translate(x:-12,y:-14).color(@@printed_color)
       
       # motor mount
       motor_mount = MotorMount.new
       res += motor_mount.part(show).rotate(x:90).translate(x:9,y:-6,z:85-3.5)
     
       # connecting wall to the motor mount
-      res += cube([42,6,65]).translate(x:-12,y:-12)
+      res += cube([42,6,65]).translate(x:-12,y:-12).color(@@printed_color)
 
 			# x endstop
 			switch = MicroswitchD3V.new(bolt_length:23.1)
 			res -= switch.show.rotate(x:180,y:-90).translate(x:13,y:9,z:35-3.5) 
 			res += switch.show.rotate(x:180,y:-90).translate(x:13,y:9,z:35-3.5) if show
 	  else
-	    res -= cube([18,15,50]).center_x.translate(x:-9,y:-15,z:-0.1)
+	    res -= cube([18,15,50]).center_x.translate(x:-9,y:-15,z:-0.1).color(@@printed_color)
     end
     
-		res += cube([30,78,20]).center_x.translate(x:15,y:-14)
-		res += cube([30,30,13]).center_xy.translate(x:15,y:-29)
+		res += cube([30,78,20]).center_x.translate(x:15,y:-14).color(@@printed_color)
+		res += cube([30,30,13]).center_xy.translate(x:15,y:-29).color(@@printed_color)
 
     # lm12(l)uu cut 
 	  res -= cylinder(d:21.5,h:70).translate(y:50,x:3,z:2)        
@@ -61,13 +63,10 @@ class ZBearingHolder < CrystalScad::Assembly
 		Lm_uu.new(inner_diameter:12)
 		Lm_uu.new(inner_diameter:12)
 
-	#	motor =  Nema17.new.show.rotate(x:90).translate(x:32,y:102,z:26)
-  #  motor +=  Pulley.new.show.rotate(x:-90).translate(x:32,y:38.5,z:26)
-    motor += Belt.new(longest_side_length:258,top_side_length:257,position:30).show.rotate(z:-90,y:180).translate(x:32,y:45,z:19-3.5)
- 
-    motor += XBeltIdler.new.show.rotate(x:90,y:90).translate(x:290,y:59,z:34)
- 	#	res += motor.translate(x:-9,y:-41,z:33) if show
-		res += motor.translate(x:-24,y:-61,z:60) if show
+    motor = Belt.new(longest_side_length:258,top_side_length:257,position:30).show.rotate(z:-90,y:180).translate(x:32,y:45,z:19-3.5) if with_motor 
+    motor += XBeltIdler.new.show.rotate(x:90,y:90).translate(x:290,y:59,z:34) if with_motor
+
+		res += motor.translate(x:-24,y:-61,z:60) if show && with_motor
 		
 		res
 	end	
