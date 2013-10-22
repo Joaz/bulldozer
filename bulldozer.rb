@@ -52,7 +52,7 @@ assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(y:30,x:55,z:-
 assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y:30,x:55+185,z:-8.5)
 
 
-#assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
+assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
 #assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
@@ -61,7 +61,7 @@ assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y
 #subassembly = MotorMount.new.show
 
 #subassembly = YRodHolder.new.show
-subassembly = ZLinearBearingHolder.new.output
+#subassembly = ZLinearBearingHolder.new.output
 #subassembly = YBeltHolder.new.output
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output
