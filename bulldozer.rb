@@ -61,7 +61,7 @@ assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y
 #subassembly = MotorMount.new.show
 
 #subassembly = YRodHolder.new.show
-#subassembly = ZBearingHolder.new.output
+subassembly = ZLinearBearingHolder.new.output
 #subassembly = YBeltHolder.new.output
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output
@@ -80,7 +80,7 @@ assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y
 #subassembly = BedPlateBearingMount.new.output
 #subassembly = YMotorMount.new.output
 
-subassembly = Foot.new.output
+#subassembly = Foot.new.output
 
 
 def save(file,output,start_text=nil)
@@ -94,7 +94,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler, Foot]
+parts = [ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler, Foot]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end

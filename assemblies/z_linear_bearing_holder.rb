@@ -1,4 +1,4 @@
-class ZBearingHolder < CrystalScad::Assembly
+class ZLinearBearingHolder < CrystalScad::Assembly
 	
 	def show(with_motor=true)
 		part(true, with_motor)
