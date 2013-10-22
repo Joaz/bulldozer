@@ -33,7 +33,7 @@ assembly=CrystalScadObject.new
 
 
 
-assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+130).show.translate(z:3.5,y:30,x:35)
+assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+220).show.translate(z:3.5,y:30,x:35)
 
 assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
@@ -52,9 +52,9 @@ assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(y:30,x:55,z:-
 assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y:30,x:55+185,z:-8.5)
 
 
-assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
+#assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
-assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
+#assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
 
 
@@ -80,6 +80,7 @@ assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 #subassembly = BedPlateBearingMount.new.output
 #subassembly = YMotorMount.new.output
 
+subassembly = Foot.new.output
 
 
 def save(file,output,start_text=nil)
@@ -93,7 +94,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
 
-parts = [ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
+parts = [ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler, Foot]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
