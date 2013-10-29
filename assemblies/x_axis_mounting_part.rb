@@ -65,10 +65,7 @@ class XAxisMountingPart < CrystalScad::Assembly
   end
   
   def tslot_insert_wall
-    wall = cube([15.8,2,20]).translate(x:7.1,y:2.4)
-    wall += cube([8.6,4.6,20]).translate(x:10.7,y:2.4+1.6)  
-    wall += cube([7.4,2.5,20]).translate(x:11.3,y:-0.1)  
-
+    TSlotInsert.new.output
   end
   
   def tslot_insert

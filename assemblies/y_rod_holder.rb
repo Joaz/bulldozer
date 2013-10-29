@@ -13,6 +13,8 @@ class YRodHolder < CrystalScad::Assembly
 		res = cube([50,17+6,6]).center_xy.translate(y:-5) 
 		res += cylinder(d:17,h:20).translate(x:-8.5)
     res -= cylinder(d:12.6,h:20).translate(x:-8.5,z:2.5)
+    tslot_mount = TSlotInsert.new(height:6).output
+    res += tslot_mount.rotate(z:-90).translate(x:-33.5,y:8)
 		res = res.color(@@printed_color)
 
 		bolt = Bolt.new(4,12)
@@ -22,6 +24,7 @@ class YRodHolder < CrystalScad::Assembly
 		res += bolt.show.rotate(x:180).translate(x:15,y:-6.5,z:7) if show
 		res += washer.show.rotate(x:180).translate(x:15,y:-6.5,z:7) if show
 
+    
 		res
 	end
 	

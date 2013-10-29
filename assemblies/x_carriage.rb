@@ -30,10 +30,10 @@ class XCarriage < CrystalScad::Assembly
     res -= cube([30,30,60]).translate(x:28,y:28,z:-0.1)
     res -= cylinder(d:5.5,h:60).translate(x:29,y:30,z:-0.1)    
       
-    res -= cylinder(d:21.5,h:40).translate(x:15,y:45,z:15+@side_thickness)        
+    res -= cylinder(d:21.2,h:40).translate(x:15,y:45,z:15+@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:15,y:45,z:-0.1)  
 
-    res -= cylinder(d:21.5,h:40).translate(x:45,y:15,z:@side_thickness)        
+    res -= cylinder(d:21.2,h:40).translate(x:45,y:15,z:@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:45,y:15,z:-0.1)  
 
 		# extruder mount
