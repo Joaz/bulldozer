@@ -33,28 +33,28 @@ assembly=CrystalScadObject.new
 
 
 
-assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+220).show.translate(z:3.5,y:30,x:35)
+#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+220).show.translate(z:3.5,y:30,x:35)
 
-assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
+#assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
 
 
 # TODO: move this stuff to the YPlateAssembly
-assembly += YMotorMount.new.show.rotate(z:-180).rotate(y:-90).translate(x:160,y:413,z:-32)
+#assembly += YMotorMount.new.show.rotate(z:-180).rotate(y:-90).translate(x:160,y:413,z:-32)
 
-assembly += Belt.new.show.translate(x:150,y:12,z:-14)
-assembly += YBeltHolder.new.show.translate(x:135,y:230,z:3)
-assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
+#assembly += Belt.new.show.translate(x:150,y:12,z:-14)
+#assembly += YBeltHolder.new.show.translate(x:135,y:230,z:3)
+#assembly += YBeltIdler.new.show.rotate(y:90).translate(x:123,y:40,z:-8)
 
-assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
-assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+185,z:-8.5)
-assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(y:30,x:55,z:-8.5)
-assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y:30,x:55+185,z:-8.5)
+#assembly += YRodHolder.new.show.rotate(x:90).translate(y:440,x:55,z:-8.5)
+#assembly += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(y:440,x:55+185,z:-8.5)
+#assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(y:30,x:55,z:-8.5)
+#assembly += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(y:30,x:55+185,z:-8.5)
 
 
 assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
-#assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
+assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
 
 
@@ -66,7 +66,7 @@ assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output
 
-#subassembly = XCarriage.new.output
+subassembly = XCarriage.new.output
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.output
@@ -92,7 +92,7 @@ end
 
 save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
-save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly
+save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly rescue nil
 
 parts = [ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler, Foot]
 unless Dir.exists?("output")

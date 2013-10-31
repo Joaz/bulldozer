@@ -1,2 +1,2 @@
 ./bulldozer.rb > bulldozer.scad
-while inotifywait -r -e close_write .; do ./bulldozer.rb; done
+while inotifywait -r --exclude *.scad -e close_write .; do ./bulldozer.rb; done

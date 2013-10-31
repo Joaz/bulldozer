@@ -2,38 +2,48 @@ class XCarriage < CrystalScad::Assembly
   def initialize(args={})
 		@side_thickness=3.5    
 		super
+    # initialize 2 long bolts
+ 		@bolts =[Bolt.new(4,70),Bolt.new(4,30)]
+ 		@nuts =[Nut.new(4),Nut.new(4)]
+
   end
   
   def show
-    res = part_left
+    res = part_left(true)
     res += part_right(true).mirror(z:1).translate(z:67)
 		res = res.color(@@printed_color)
-		bolt = Bolt.new(4,70)
-		res += bolt.show.translate(x:70,y:10,z:-0.1)
+		res += @bolts[0].show.translate(x:70,y:10,z:-0.1)
+		res += @bolts[1].show.translate(x:-5,y:40,z:20-0.1)  
+
+		res += @nuts[0].show.translate(x:70,y:10,z:67)
+		res += @nuts[1].show.translate(x:-5,y:40,z:47)  
+
     
   end
   
   def output
-    res = part_left
+    res = part_left(false)
     res += part_right(false).mirror(x:1).translate(x:105,y:-30)
 
 		res
   end
   
-	def base
+	def base(show)
     res = cube([30,28,30+@side_thickness]).translate(x:30)
 
     res += cube([45,18,30+@side_thickness]).translate(x:30)
 
     res += cube([28,30-5,30+@side_thickness]).translate(y:30+2)
+ 
+ 
     res += hull(cube([30,5,@side_thickness]).translate(x:0,y:30),cube([5,30,@side_thickness]).translate(x:30,y:0))
     res -= cube([30,30,60]).translate(x:28,y:28,z:-0.1)
     res -= cylinder(d:5.5,h:60).translate(x:29,y:30,z:-0.1)    
       
-    res -= cylinder(d:21.2,h:40).translate(x:15,y:45,z:15+@side_thickness)        
+    res -= cylinder(d:21.15,h:40).translate(x:15,y:45,z:1.5+@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:15,y:45,z:-0.1)  
 
-    res -= cylinder(d:21.2,h:40).translate(x:45,y:15,z:@side_thickness)        
+    res -= cylinder(d:21.15,h:40).translate(x:45,y:15,z:1.5+@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:45,y:15,z:-0.1)  
 
 		# extruder mount
@@ -41,21 +51,28 @@ class XCarriage < CrystalScad::Assembly
 		nut = Nut.new(3)    
 		res -= nut.output.rotate(x:90).translate(x:65,y:18.1,z:@side_thickness+15)
 
+    # for top screw mount
+    top_bolt_mount = cube([12,15,10+@side_thickness]).translate(x:-12,y:32,z:20)
+    # support wall
+    top_bolt_mount += cube([0.8,15,30+@side_thickness]).translate(x:-12,y:32) unless show 
+
+    res += top_bolt_mount
 		
-		# hole for m4x70
-		res -= cylinder(d:4.3,h:40).translate(x:70,y:10,z:-0.1)  
+		# bolts to securely join the both halves together
+		res -= @bolts[0].output.translate(x:70,y:10,z:-0.1)  
+		res -= @bolts[1].output.translate(x:-5,y:40,z:20-0.1)  
 		
 		res
 	end
 	
-	def part_left
-	  base
+	def part_left(show)
+	  base(show)
 	end
 	
   def part_right(show)
 
 		
-		res = base
+		res = base(show)
 			
 
     # this wall will hit the x endstop
@@ -65,7 +82,7 @@ class XCarriage < CrystalScad::Assembly
     res += cube([18,30,15+@side_thickness]).translate(y:57,x:-2,z:15)
 	
 		# extend bearing wall to the top
-		res += cube([2,25,30+@side_thickness]).translate(x:-2,y:32)
+	  res += cube([2,10,30+@side_thickness]).translate(x:-2,y:32+15)
 
 		# support wall
 		res += cube([20,2,15]).translate(x:-2,y:85)
@@ -94,8 +111,8 @@ class XCarriage < CrystalScad::Assembly
 		end		
 		
 
-	
-    bearings = [Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12)]
+	  # FIXME: Use to LM12LUU 
+    bearings = [Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12)]
 
    # if show
 	#	  res += bearings[0].show.translate(x:15,y:45,z:15+@side_thickness) 
