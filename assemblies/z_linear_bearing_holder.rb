@@ -10,7 +10,7 @@ class ZLinearBearingHolder < CrystalScad::Assembly
 	end
 
 	def part(show=false, with_motor=true)
-		res = cylinder(d:30,h:62).translate(y:50,x:3)
+		res = cylinder(d:30,h:60).translate(y:50,x:3)
 		
 		res -= cube([60,30,60]).center_y.translate(x:-15,y:-29)
 			
@@ -37,10 +37,16 @@ class ZLinearBearingHolder < CrystalScad::Assembly
     end
     
 		res += cube([30,78,20]).center_x.translate(x:15,y:-14).color(@@printed_color)
+    # lower mount
 		res += cube([30,30,13]).center_xy.translate(x:15,y:-29).color(@@printed_color)
 
+    # lower mounting wall to slide it against the x-ends into the correct position
+ 		res += cube([8,8,20]).center_xy.translate(x:0,y:-29).color(@@printed_color)
+
+
+
     # lm12(l)uu cut 
-	  res -= cylinder(d:21.5,h:70).translate(y:50,x:3,z:2)        
+	  res -= cylinder(d:21.25,h:70).translate(y:50,x:3,z:2)        
 	  res -= cylinder(d:18,h:70).translate(y:50,x:3,z:-1.5)        
 		# the top lm12uu/lm12luu will be glued inside
 		
@@ -59,7 +65,8 @@ class ZLinearBearingHolder < CrystalScad::Assembly
 
 
 		# inserted for BOM
-		# TODO: output them on show 
+		# TODO: output them on show
+		# FIXME: change to LM8LUU 
 		Lm_uu.new(inner_diameter:12)
 		Lm_uu.new(inner_diameter:12)
 
