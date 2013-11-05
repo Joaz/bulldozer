@@ -12,7 +12,7 @@ class YRodHolder < CrystalScad::Assembly
 	def part(show)
 		res = cube([50,17+6,6]).center_xy.translate(y:-5) 
 		res += cylinder(d:17,h:20).translate(x:-8.5)
-    res -= cylinder(d:12.6,h:20).translate(x:-8.5,z:2.5)
+    res -= cylinder(d:12.3,h:20).translate(x:-8.5,z:2.5)
     tslot_mount = TSlotInsert.new(height:6).output
     res += tslot_mount.rotate(z:-90).translate(x:-33.5,y:8)
 		res = res.color(@@printed_color)

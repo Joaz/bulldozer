@@ -33,9 +33,9 @@ assembly=CrystalScadObject.new
 
 
 
-#assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+220).show.translate(z:3.5,y:30,x:35)
+assembly+= YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
 
-#assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
+assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
 
 
@@ -54,8 +54,10 @@ assembly=CrystalScadObject.new
 
 assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
-assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
+#assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
+
+assembly +=BulldozerAxis.new.show
 
 
 #subassembly = MotorMount.new.show
@@ -66,7 +68,7 @@ assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 #subassembly = XBeltIdler.new.output
 #subassembly = YBeltIdler.new.output
 
-subassembly = XCarriage.new.output
+#subassembly = XCarriage.new.output
 #subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.output
@@ -81,6 +83,7 @@ subassembly = XCarriage.new.output
 #subassembly = YMotorMount.new.output
 
 #subassembly = Foot.new.output
+subassembly = BulldozerAxis.new.output
 
 
 def save(file,output,start_text=nil)
