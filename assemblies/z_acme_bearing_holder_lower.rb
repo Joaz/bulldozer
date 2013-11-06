@@ -16,6 +16,8 @@ class ZAcmeBearingHolderLower < CrystalScad::Assembly
 
   def tslot_mount(show, additional_wall_length=0)
     res = cube([30+additional_wall_length,5,30]).color(@@printed_color)	
+    res += cube([8,5,5]).translate(x:11,y:-5).color(@@printed_color)	
+
 		res -= long_slot(d:4.4,h:10,l:14).rotate(y:90,z:90).translate(x:15,y:-3,z:25)
 		bolt = Bolt.new(4,12)
 		washer = Washer.new(4.3)		
