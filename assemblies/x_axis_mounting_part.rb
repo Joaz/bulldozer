@@ -61,7 +61,7 @@ class XAxisMountingPart < CrystalScad::Assembly
     res = cube([30,30,6]).translate(x:-15,y:-15)
     res = cube([30,15,20]).translate(x:-15,y:0)
     res += cylinder(d:30,h:20)
-    res -= cylinder(d:12.7,h:20).translate(z:2.5)
+    res -= cylinder(d:12.3,h:20).translate(z:2.5)
   end
   
   def tslot_insert_wall
