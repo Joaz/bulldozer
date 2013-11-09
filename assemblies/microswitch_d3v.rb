@@ -3,6 +3,8 @@ class MicroswitchD3V < CrystalScad::Assembly
 	def initialize(args={})
 		super
 		@args[:bolt_length] ||= 20
+		@args[:mirror_bolts] ||= 0
+		
 	end
 
 	def description
@@ -53,9 +55,16 @@ class MicroswitchD3V < CrystalScad::Assembly
 		res -= cylinder(d:2.9,h:@args[:bolt_length]).rotate(x:-90).translate(x:2.8,z:2.8+10.3)
 		res -= cylinder(d:2.9,h:@args[:bolt_length]).rotate(x:-90).translate(x:2.8+22,z:2.8)
 
-		if output == false	
-			res += bolt[0].show.rotate(x:-90).translate(x:2.8,z:2.8+10.3)
-			res += bolt[1].show.rotate(x:-90).translate(x:2.8+22,z:2.8)
+		if output == false
+		  bolt_output = bolt[0].show.mirror(z:@args[:mirror_bolts]).rotate(x:-90).translate(x:2.8,z:2.8+10.3)
+			bolt_output += bolt[1].show.mirror(z:@args[:mirror_bolts]).rotate(x:-90).translate(x:2.8+22,z:2.8)
+		  if @args[:mirror_bolts] == 1
+		    res += bolt_output.translate(y:10)
+		  else
+		    res += bolt_output
+		  end
+		  
+		  
 		end
 
 		
