@@ -6,6 +6,8 @@ class XCarriage < CrystalScad::Assembly
  		@bolts =[Bolt.new(4,70),Bolt.new(4,30)]
  		@nuts =[Nut.new(4),Nut.new(4)]
 
+    @lm12uu_cut = 21.2
+
   end
   
   def show
@@ -40,10 +42,10 @@ class XCarriage < CrystalScad::Assembly
     res -= cube([30,30,60]).translate(x:28,y:28,z:-0.1)
     res -= cylinder(d:5.5,h:60).translate(x:29,y:30,z:-0.1)    
       
-    res -= cylinder(d:21.15,h:40).translate(x:15,y:45,z:1.5+@side_thickness)        
+    res -= cylinder(d:@lm12uu_cut,h:40).translate(x:15,y:45,z:1.5+@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:15,y:45,z:-0.1)  
 
-    res -= cylinder(d:21.15,h:40).translate(x:45,y:15,z:1.5+@side_thickness)        
+    res -= cylinder(d:@lm12uu_cut,h:40).translate(x:45,y:15,z:1.5+@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:45,y:15,z:-0.1)  
 
 		# extruder mount
