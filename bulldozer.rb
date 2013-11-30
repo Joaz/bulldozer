@@ -33,7 +33,7 @@ assembly=CrystalScadObject.new
 
 
 
-assembly+=YPlateAssembly.new(length:405,rod_size:12,position:-20+222).show.translate(z:3.5,y:30,x:35)
+#assembly+=YPlateAssembly.new(length:405,rod_size:12,position:-20+222).show.translate(z:3.5,y:30,x:35)
 
 assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
@@ -56,6 +56,8 @@ assembly += YEndstopHolder.new.show.translate(y:438,z:-5)
 #assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 
 #assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
+
+assembly +=RumbaMount.new.show.translate(x:45,y:300,z:-75)
 
 
 #assembly +=BulldozerAxis.new.show
@@ -83,7 +85,8 @@ assembly += YEndstopHolder.new.show.translate(y:438,z:-5)
 #subassembly = BedPlateBearingMount.new.output
 #subassembly = YMotorMount.new.output
 
-subassembly = YEndstopHolder.new
+#subassembly = YEndstopHolder.new
+subassembly = RumbaMount.new
 
 #subassembly = Foot.new.output
 #subassembly = BulldozerAxis.new.output
@@ -101,7 +104,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly rescue nil
 
-parts = [ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler, Foot]
+parts = [RumbaMount,ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler, Foot]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end

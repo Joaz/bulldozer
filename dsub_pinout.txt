@@ -1,0 +1,31 @@
+15 pin hotend connector
+
+motor a+
+motor a-
+motor b+
+motor b-
+heater gnd
+heater gnd
+heater gnd
+fan gnd
+12V
+12V
+12V
+gnd
+endstop
+gnd
+thermistor
+
+
+25 pin x-end connector, add:
+gnd
+x-endstop
+gnd
+gnd
+gnd
+gnd
+motor a+
+motor a-
+motor b+
+motor b-
+
