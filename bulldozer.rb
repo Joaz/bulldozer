@@ -4,9 +4,9 @@ require "rubygems"
 require "crystalscad"
 require "require_all"
 
-require_all "assemblies"
-
 include CrystalScad
+require_all "lib/**/*.rb"
+
 
 @@printed_color="Bisque"
 @tslot_simple = false
@@ -86,6 +86,7 @@ assembly +=RumbaMount.new.show.translate(x:45,y:300,z:-75)
 #subassembly = YMotorMount.new.output
 
 #subassembly = YEndstopHolder.new
+
 subassembly = RumbaMount.new
 
 #subassembly = Foot.new.output
