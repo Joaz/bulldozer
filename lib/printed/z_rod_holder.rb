@@ -14,7 +14,7 @@ class ZRodHolder < CrystalScad::Assembly
 		res += cube([60,5,5]).center_x.rotate(x:45).translate(y:0,z:2.5)	
 		res += cylinder(d:19,h:20).translate(x:22,y:-13)
 	  
-	  res -= cylinder(d:12.6,h:20).translate(x:22,y:-13,z:2.5)
+	  res -= cylinder(d:12.6,h:20).translate(x:22,y:-13,z:1.5)
 
 		res += cube([60,5,40]).center_x 
 		res = res.color(@@printed_color)
