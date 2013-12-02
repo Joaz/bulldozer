@@ -29,12 +29,12 @@ class ZAxisAssembly < CrystalScad::Assembly
 		assembly += ZAcmeBearingHolderLower.new.show.rotate(z:180).translate(x:@args[:left_pos]+30,y:@args[:position],z:42)
 		assembly += ZAcmeBearingHolderLower.new.show(false).mirror(x:1).rotate(z:180).translate(x:@args[:right_pos]-30,y:@args[:position],z:42)
 
-		assembly += ZAcmeBearingHolderUpper.new.show.rotate(z:180).mirror(z:1).translate(x:@args[:left_pos]+30,y:@args[:position],z:423)
-		assembly += ZAcmeBearingHolderUpper.new.show.mirror(x:1).rotate(z:180).mirror(z:1).translate(x:@args[:right_pos]-30,y:@args[:position],z:423)
+		assembly += ZAcmeBearingHolderUpper.new.show.rotate(z:180).mirror(z:1).translate(x:@args[:left_pos]+30,y:@args[:position],z:410)
+		assembly += ZAcmeBearingHolderUpper.new.show.mirror(x:1).rotate(z:180).mirror(z:1).translate(x:@args[:right_pos]-30,y:@args[:position],z:410)
     
     
-		assembly += AcmeRod.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-27,z:32)
-    assembly += AcmeRod.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:32)
+		assembly += AcmeRod.new(top_bearing_offset:-16).show.translate(x:@args[:left_pos]+4,y:@args[:position]-27,z:32)
+    assembly += AcmeRod.new(top_bearing_offset:-16).show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:32)
     assembly += Coupling.new.show.translate(x:@args[:left_pos]+4,y:@args[:position]-27,z:15)
     assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:@args[:position]-27,z:15)
 

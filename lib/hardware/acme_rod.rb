@@ -4,6 +4,8 @@ class AcmeRod
 		@args[:length] ||= 370
 		@args[:diameter] ||= 10.0
 		@args[:pitch] ||= 2.0
+		@args[:top_bearing_offset] ||= 0
+		
 		# these shouldn't be default... 
 		@args[:bottom_length] = 20
 		@args[:bottom_diameter] = 5
@@ -36,7 +38,7 @@ class AcmeRod
 	  b_bottom = Bearing.new(:type => "625")
 	  b_top = Bearing.new(:type => "63800")
 	  bearings = b_bottom.show.translate(z:@args[:bottom_length]-3-b_bottom.size[:thickness])
-	  bearings += b_top.show.translate(z:@args[:total_length]-@args[:top_length]-b_top.height)
+	  bearings += b_top.show.translate(z:@args[:total_length]-@args[:top_length]-b_top.height + @args[:top_bearing_offset])
 	  bearings
 	end
 
