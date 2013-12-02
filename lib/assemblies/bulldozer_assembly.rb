@@ -15,6 +15,8 @@ class BulldozerAssembly < CrystalScad::Assembly
 		res += Rod.new(length:380).show.rotate(z:-90).translate(x:-330,y:45,z:380)
 		res += Rod.new(length:380).show.rotate(z:-90).translate(x:-330,y:-130,z:15)
 
+		res += BulldozerFrameAssembly.new.show
+
 		res	
 	end
 
