@@ -91,8 +91,9 @@ assembly +=BulldozerAssembly.new.show
 
 #subassembly = Foot.new.output
 #subassembly = BulldozerAxis.new.output
-subassembly = BulldozerFrameAssembly.new.output
+#subassembly = BulldozerFrameAssembly.new.output
 
+subassembly = PSU_sp320_12.new.show
 
 
 def save(file,output,start_text=nil)
