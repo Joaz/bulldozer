@@ -13,29 +13,14 @@ require_all "lib/**/*.rb"
  
 
 
-# FIXME: update the mounting of the tslot
-# FIXME: move this into an Assembly
-def tslot_rectangle(x,y,tslot_type_x,tslot_type_y)
-	size = tslot_type_x.args[:size]
-	# x 
-	r = tslot_type_x.show(x-size*2).rotate(x:-90,z:-90).translate(x:size,y:size)
-	r += tslot_type_x.show(x-size*2).rotate(x:-90,z:-90).translate(x:size,y:y)   
- 
-  # y
-	r += tslot_type_y.show(y).rotate(x:-90)
-	r += tslot_type_y.show(y).rotate(x:-90).mirror(x:1).translate(x:x)
-  
-  return r.color("Silver")
-end
-
 
 assembly=CrystalScadObject.new
 
+assembly += BulldozerFrameAssembly.new.show
+assembly += BulldozerAssembly.new.show
 
+#assembly+=YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
 
-assembly+=YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
-
-assembly+=tslot_rectangle(295,470, TSlot.new(size:30,configuration:2,simple:@tslot_simple), TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@tslot_simple))    
 
 
 
@@ -60,7 +45,6 @@ assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
 #assembly +=RumbaMount.new.show.translate(x:45,y:300,z:-75)
 
 
-assembly +=BulldozerAssembly.new.show
 
 
 #subassembly = MotorMount.new.show
@@ -91,9 +75,9 @@ assembly +=BulldozerAssembly.new.show
 
 #subassembly = Foot.new.output
 #subassembly = BulldozerAxis.new.output
-#subassembly = BulldozerFrameAssembly.new.output
+subassembly = BulldozerFrameAssembly.new.output
 
-subassembly = PSU_sp320_12.new.show
+#subassembly = PSU_sp320_12.new.show
 
 
 def save(file,output,start_text=nil)
