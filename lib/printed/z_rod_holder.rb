@@ -6,16 +6,40 @@ class ZRodHolder < CrystalScad::Assembly
 
 	def output
 		res = part(false)
-		res+= part(false).mirror(x:1).translate(y:-31)
+	
+		res+= part(false).mirror(x:1).translate(y:-12,x:25)
 	end
+	
+  def tslot_mount(show, additional_wall_length=0)
+    res = cube([30+additional_wall_length,5,30]).color(@@printed_color)	
+    res += cube([8,5,5]).translate(x:11,y:-5).color(@@printed_color)	
+
+		res -= long_slot(d:4.4,h:10,l:14).rotate(y:90,z:90).translate(x:15,y:-3,z:25)
+		bolt = Bolt.new(4,12)
+		washer = Washer.new(4.3)		
+		res += bolt.show.rotate(x:90).translate(x:15,y:6,z:20) if show
+		res += washer.show.rotate(x:90).translate(x:15,y:6,z:20) if show
+    res
+  end
 
 	def part(show)
+    res = tslot_mount(show,5) 
+   # res += tslot_mount(show).rotate(z:-90).translate(x:30) 
+    res += tslot_mount(show).rotate(z:-90).translate(x:30,y:-30) 
+     
+		res += cube([30,35,30]).translate(x:30,y:-30).color(@@printed_color)	
+
+	  
+	  res -= cylinder(d:12.5,h:30).translate(x:30+18,y:-8,z:1.5)
+
+
+		res
+	end	
+
+	def part_(show)
 		res = cube([60,25,6]).center_x.translate(x:0,y:-25) 
 		res += cube([60,5,5]).center_x.rotate(x:45).translate(y:0,z:2.5)	
-		res += cylinder(d:19,h:20).translate(x:22,y:-13)
-	  
-	  res -= cylinder(d:12.6,h:20).translate(x:22,y:-13,z:1.5)
-
+	
 		res += cube([60,5,40]).center_x 
 		res = res.color(@@printed_color)
 
