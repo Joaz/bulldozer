@@ -113,8 +113,8 @@ class XCarriage < CrystalScad::Assembly
 		end		
 		
 
-	  # FIXME: Use to LM12LUU 
-    bearings = [Lm_uu.new(inner_diameter:12),Lm_uu.new(inner_diameter:12)]
+
+    bearings = [Lm_luu.new(inner_diameter:12),Lm_luu.new(inner_diameter:12)]
 
    # if show
 	#	  res += bearings[0].show.translate(x:15,y:45,z:15+@side_thickness) 

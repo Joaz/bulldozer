@@ -38,20 +38,24 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		
 		@frame_z = z
 
+
 		# lower base tslot
 		res += tslot_rectangle(@tslot_x,@tslot_y, @tslot_double,@tslot_double).translate(@main_position) 
 		res += rubber_dampener.translate(@main_position) 
 	
 		# upper tslot
-		#res += @tslot_double.show(@frame_x-60).rotate(y:90).translate(x:30,y:370,z:@frame_z+30)
+		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:240,y:30,z:@frame_z+30)
 	
 		
 		res += container.show.translate(x:20,y:20,z:33)
 
 		res += tslot_sides
 
+		res += YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(@main_position).translate(z:3.5,y:30,x:35)
+		
+		res += BulldozerAssembly.new.show.translate(@main_position)
 
-
+		
 		#spool = Spool300mm.new
 		#res += spool.rotate(x:90).translate(x:-200,y:435,z:220)
 		res
