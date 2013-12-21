@@ -17,7 +17,7 @@ require_all "lib/**/*.rb"
 assembly=CrystalScadObject.new
 
 assembly += BulldozerFrameAssembly.new.show
-assembly += BulldozerAssembly.new.show
+#assembly += BulldozerAssembly.new.show
 
 #assembly+=YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(z:3.5,y:30,x:35)
 
@@ -38,7 +38,7 @@ assembly += BulldozerAssembly.new.show
 
 #assembly += YEndstopHolder.new.show.translate(y:438,z:-5)
 
-assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50)
+
 
 #assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 

@@ -4,18 +4,18 @@ class ZAxisAssembly < CrystalScad::Assembly
     @args[:position] ||= 280
     @args[:left_pos] = -30  # left of y t-slot
     @args[:right_pos] = 325 # right of y-tslot
-    @args[:height] = 513 # total height from bottom
+    @args[:height] = 483 # total height from bottom
     @args[:tslot_simple] ||= false
   end
  
   def show
       tslot_left = TSlotMachining.new(size:30,configuration:2,holes:"front",bolt_size:5,bolt_length:30,simple:@args[:tslot_simple])
       tslot_right = TSlotMachining.new(size:30,configuration:2,holes:"front",bolt_size:5,bolt_length:30,simple:@args[:tslot_simple])
-#      tslot_top = TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@args[:tslot_simple])
+      tslot_top = TSlotMachining.new(size:30,configuration:2,holes:"front,back",bolt_size:8,bolt_length:30,simple:@args[:tslot_simple])
   
-      assembly = tslot_left.show(@args[:height]).translate(x:@args[:left_pos],y:@args[:position],z:-60).color("Silver")
-      assembly += tslot_right.show(@args[:height]).mirror(x:1).translate(x:@args[:right_pos],y:@args[:position],z:-60).color("Silver")
-#      assembly += tslot_top.show(@args[:right_pos]-@args[:left_pos]).rotate(y:90).translate(x:@args[:left_pos],y:@args[:position],z:@args[:height]-30).color("Silver")
+      assembly = tslot_left.show(@args[:height]).translate(x:@args[:left_pos],y:@args[:position],z:-60)
+      assembly += tslot_right.show(@args[:height]).mirror(x:1).translate(x:@args[:right_pos],y:@args[:position],z:-60)
+      assembly += tslot_top.show(@args[:right_pos]-@args[:left_pos]).rotate(y:90).translate(x:@args[:left_pos],y:@args[:position],z:@args[:height]-30)
   
       assembly += z_axis_drive
 
@@ -44,15 +44,15 @@ class ZAxisAssembly < CrystalScad::Assembly
     assembly += Rod.new(length:405).show.rotate(x:90).translate(y:@args[:position]+2+50,x:rod_position_left,z:2)
     assembly += Rod.new(length:405).show.rotate(x:90).translate(y:@args[:position]+2+50,x:rod_position_right,z:2)
     
-	# FIXME: those needs to be re-worked
+
 	# bottom
     assembly += ZRodHolder.new.show.translate(y:@args[:position]+60,x:rod_position_left-48,z:0)
     assembly += ZRodHolder.new.show.mirror(x:1).translate(y:@args[:position]+60,x:rod_position_right+48,z:0)
     # top
-    assembly += ZRodHolder.new.show.mirror(z:1).translate(y:@args[:position]+60,x:rod_position_left-48,z:@args[:height]-90)
-    assembly += ZRodHolder.new.show.mirror(z:1).mirror(x:1).translate(y:@args[:position]+60,x:rod_position_right+48,z:@args[:height]-90)
+    assembly += ZRodHolder.new.show.mirror(z:1).translate(y:@args[:position]+60,x:rod_position_left-48,z:@args[:height]-60)
+    assembly += ZRodHolder.new.show.mirror(z:1).mirror(x:1).translate(y:@args[:position]+60,x:rod_position_right+48,z:@args[:height]-60)
 
-	
+
     assembly
   end
   
