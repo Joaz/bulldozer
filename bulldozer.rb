@@ -38,7 +38,6 @@ assembly += BulldozerFrameAssembly.new.show
 
 
 
-#assembly += XAxisAssembly.new.show.translate(z:100+0,y:240+48,x:-2.5)
 
 #assembly +=RumbaMount.new.show.translate(x:45,y:300,z:-75)
 
@@ -75,7 +74,7 @@ assembly += BulldozerFrameAssembly.new.show
 #subassembly = BulldozerAxis.new.output
 #subassembly = BulldozerFrameAssembly.new.output
 
-subassembly = RubberDampener.new.show
+subassembly = BulldozerArmBearingSupport.new.show
 
 
 #subassembly = PSU_sp320_12.new.show
