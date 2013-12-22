@@ -18,6 +18,7 @@ class XAxisAssembly < CrystalScad::Assembly
     axis += Rod.new(length:307).show.rotate(z:-90).translate(y:-15,z:-15,x:-3.5)
 
     axis += XCarriage.new().show.rotate(y:90).translate(x:1+@args[:position],y:-30,z:30) 
+		axis += MGS_Old.new.show.rotate(z:180).translate(x:1+@args[:position]+74.5,y:-51,z:-15.25) 
    
 		axis += XAxisMountingPart.new.show.translate(x:-6,y:-30,z:30)
 		axis += XAxisAcmeNutHolder.new.show.translate(x:-6,y:-30,z:30)
