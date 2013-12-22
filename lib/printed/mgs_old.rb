@@ -5,8 +5,9 @@ class MGS_Old < CrystalScad::Printed
 		res += import("import/mgs_prusa_i3_groovemount.stl").rotate(y:180).translate(z:-16.4)
 
 
-		res.color("white")
-				
+		res = res.color("white")
+		res += JHead.new.show	.translate(x:32,y:5,z:-83)		
+
 	end
 
 end

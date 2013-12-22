@@ -3,7 +3,7 @@ class BulldozerAssembly < CrystalScad::Assembly
 	def initialize(args={})
 		super
 		@height = 370
-		@position = args[:position] || 280
+		@position = args[:position] || 0
 	end
 
   def show

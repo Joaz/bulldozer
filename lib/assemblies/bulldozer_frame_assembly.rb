@@ -8,7 +8,6 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		
 		@frame_x = 640			
 		@frame_y = 470+2*30			
-		#@frame_z = 230
 
 		@main_position = {x:280,y:30,z:370}
 	
@@ -52,7 +51,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += tslot_sides
 
 		res += YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(@main_position).translate(z:3.5,y:30,x:35)
-		res += XAxisAssembly.new(position:20).show.translate(@main_position).translate(z:100+0,y:240+48,x:-2.5).translate(z:130)
+		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+0,y:240+48,x:-2.5).translate(z:30)
 
 		res += BulldozerAssembly.new.show.translate(@main_position)
 
