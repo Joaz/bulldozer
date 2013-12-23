@@ -29,7 +29,7 @@ class XAxisAssembly < CrystalScad::Assembly
 		axis += XAxisAcmeNutHolder.new.show.mirror(x:1).translate(x:306,y:-30,z:30)
 
 
-
+    axis.translate(y:-42)
    end
 end
 

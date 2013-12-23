@@ -3,22 +3,36 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 	def initialize
 	  # tslot variable being the basic printer dimensions
 		@tslot_x = 295	
-		@tslot_y = 470	
+		@tslot_y = 495
 		@tslot_z = 453 
 		
 		@frame_x = 640			
-		@frame_y = 470+2*30			
+		@frame_y = @tslot_y+60		
 
 		@main_position = {x:280,y:30,z:370}
+	  @z_tslot_position = 355 
+	  @y_plate_inner_length = @tslot_y - 65
 	
+	  @bulldozer_position = 0
+	  @y_plate_position = 0
 		@tslot_single = TSlot.new(size:30,configuration:1,simple:@tslot_simple)
 		@tslot_double = TSlot.new(size:30,configuration:2,simple:@tslot_simple)
 
 	end
 	
 	def show
-		assembly = part
-		assembly+= ZAxisAssembly.new(tslot_simple:false).show.translate(y:50).translate(@main_position)
+		res = part
+		res+= ZAxisAssembly.new(tslot_simple:false,position:@z_tslot_position).show.translate(@main_position)
+	
+		res += YPlateAssembly.new(length:@y_plate_inner_length,rod_size:12,position:-20+@y_plate_position).show.translate(@main_position).translate(z:3.5,y:30,x:35)
+		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+0,y:@z_tslot_position,x:-2.5).translate(z:30)
+
+		res += BulldozerAssembly.new(position:@bulldozer_position).show.translate(@main_position)
+
+		
+		spool = Spool300mm.new
+		res += spool.rotate(y:90).translate(x:33,y:250,z:600)
+		res
 	end
 
 	def output
@@ -33,7 +47,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += printer_stage_rect.translate(z:z+=container.z+60+15)
 	
 
-		res += main_rect.translate(z:z+=540)
+		res += main_rect.translate(z:z+=540+10)
 		
 		@frame_z = z
 
@@ -43,21 +57,13 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += rubber_dampener.translate(@main_position) 
 	
 		# upper tslot
-		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:240,y:30,z:@frame_z+30)
+		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:260,y:30,z:@frame_z+30)
 	
 		
 		res += container.show.translate(x:20,y:20,z:33)
 
 		res += tslot_sides
 
-		res += YPlateAssembly.new(length:405,rod_size:12,position:-20+0).show.translate(@main_position).translate(z:3.5,y:30,x:35)
-		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+0,y:240+48,x:-2.5).translate(z:30)
-
-		res += BulldozerAssembly.new.show.translate(@main_position)
-
-		
-		spool = Spool300mm.new
-		res += spool.rotate(y:90).translate(x:33,y:250,z:600)
 		res
 	end
 	
@@ -79,7 +85,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 	def rubber_dampener
 		res = CrystalScadObject.new
-		[[0,0],[265,0],[0,440],[265,440]].each do |x,y|
+		[[0,0],[265,0],[0,@tslot_y-30],[265,@tslot_y-30]].each do |x,y|
 			r= RubberDampener.new
 			res += r.show.translate(x:15+x,y:15+y,z:-85)
 		end
