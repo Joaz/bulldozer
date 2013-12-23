@@ -31,7 +31,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 		
 		spool = Spool300mm.new
-		res += spool.rotate(y:90).translate(x:33,y:250,z:600)
+		res += spool.rotate(y:90).translate(x:33,y:250,z:700)
 		res
 	end
 
