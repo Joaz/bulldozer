@@ -6,10 +6,10 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		@tslot_y = 495
 		@tslot_z = 453 
 		
-		@frame_x = 640			
+		@frame_x = 600			
 		@frame_y = @tslot_y+60		
 
-		@main_position = {x:280,y:30,z:370}
+		@main_position = {x:240,y:30,z:370}
 	  @z_tslot_position = 355 
 	  @y_plate_inner_length = @tslot_y - 65
 	
@@ -57,7 +57,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += rubber_dampener.translate(@main_position) 
 	
 		# upper tslot
-		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:260,y:30,z:@frame_z+30)
+		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:220,y:30,z:@frame_z+30)
 	
 		
 		res += container.show.translate(x:20,y:20,z:33)
