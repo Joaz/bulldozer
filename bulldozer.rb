@@ -71,7 +71,7 @@ assembly += BulldozerFrameAssembly.new.show
 #subassembly = RumbaMount.new
 
 #subassembly = Foot.new.output
-subassembly = BulldozerMotor.new.output
+subassembly = BulldozerMotor.new.show
 #subassembly = BulldozerFrameAssembly.new.output
 
 #subassembly = BulldozerArmBearingSupport.new.show
