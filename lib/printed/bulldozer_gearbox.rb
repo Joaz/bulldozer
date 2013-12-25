@@ -9,7 +9,7 @@ class BulldozerGearbox < CrystalScad::Printed
 
 		motor_size_x=42
 		bottom = cube([size_x=70+15,motor_size_y=44+16,bottom_z=17]).translate(x:-motor_size_x/2.0,y:-22).color(@@printed_color)
-		top = cube([size_x,motor_size_y,top_z=10]).center_y.translate(x:-motor_size_x/2,z:bottom_z).color(@@printed_color)
+		top = cube([size_x,motor_size_y,top_z=10]).translate(x:-motor_size_x/2,y:-22,z:bottom_z).color(@@printed_color)
 		
 		bolts = create_bolts("top",bottom,motor,height:27,bolt_height:30)[0..1]
 		
@@ -72,7 +72,7 @@ class BulldozerGearbox < CrystalScad::Printed
 		top-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
 
 		if show
-			bottom#+top+parts
+			bottom+top+parts
 		else
 			bottom + top.rotate(x:180).translate(y:motor_size_y+1,z:bottom_z+top_z)
 		end		
