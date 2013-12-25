@@ -1,5 +1,4 @@
-
-class BulldozerMotor < CrystalScad::Assembly
+class BulldozerGearbox < CrystalScad::Printed
 
   def part(show)
     motor = Nema17.new(motor_flange_output_height:20)   
@@ -39,9 +38,10 @@ class BulldozerMotor < CrystalScad::Assembly
 			parts += item.show.translate(z:12+offset[i]) if show
 		end		
 		
+	  # bolts on the other side
+
 		bpos1 = {x:20,y:motor_size/2-5}
 		bpos2 = {x:20,y:-motor_size/2+5}
-	  # bolts on the other side
 		bolt = Bolt.new(3,30)	
 		nut = Nut.new(3)
 		bottom -= bolt.output.translate(bpos1) 
@@ -57,6 +57,9 @@ class BulldozerMotor < CrystalScad::Assembly
 		top -= bolt.output.translate(bpos2) 
 		top -= nut.output.translate(bpos2).translate(z:bottom_z+top_z-nut.height+0.05)		
 		top += nut.show.translate(bpos2).translate(z:bottom_z+top_z-nut.height+0.05) if show		
+
+		# rod holders
+		
 
 		if show
 			bottom+top+parts

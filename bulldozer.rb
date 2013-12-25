@@ -18,8 +18,6 @@ assembly=CrystalScadObject.new
 
 assembly += BulldozerFrameAssembly.new.show
 
-#
-
 
 
 # TODO: move this stuff to the YPlateAssembly
@@ -71,7 +69,7 @@ assembly += BulldozerFrameAssembly.new.show
 #subassembly = RumbaMount.new
 
 #subassembly = Foot.new.output
-subassembly = BulldozerMotor.new.output
+subassembly = BulldozerGearbox.new.output
 #subassembly = BulldozerFrameAssembly.new.output
 
 #subassembly = BulldozerArmBearingSupport.new.show
