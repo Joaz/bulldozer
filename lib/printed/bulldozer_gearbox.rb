@@ -7,8 +7,9 @@ class BulldozerGearbox < CrystalScad::Printed
     g2 = Gear.new(module:0.5,teeth:80,bore:5,height:4,hub_dia:20,hub_height:4,output_margin_height:1.5)
     
 
-		bottom = cube([size_x=70,motor_size=44,bottom_z=17]).center_y.translate(x:-motor_size/2.0).color(@@printed_color)
-		top = cube([size_x,motor_size,top_z=10]).center_y.translate(x:-motor_size/2,z:bottom_z).color(@@printed_color)
+		motor_size_x=42
+		bottom = cube([size_x=70+15,motor_size_y=44+16,bottom_z=17]).translate(x:-motor_size_x/2.0,y:-22).color(@@printed_color)
+		top = cube([size_x,motor_size_y,top_z=10]).center_y.translate(x:-motor_size_x/2,z:bottom_z).color(@@printed_color)
 		
 		bolts = create_bolts("top",bottom,motor,height:27,bolt_height:30)[0..1]
 		
@@ -40,31 +41,40 @@ class BulldozerGearbox < CrystalScad::Printed
 		
 	  # bolts on the other side
 
-		bpos1 = {x:20,y:motor_size/2-5}
-		bpos2 = {x:20,y:-motor_size/2+5}
+		bpos1 = {x:15,y:motor_size_y/2-0}
+		bpos2 = {x:30,y:-motor_size_y/2+20}
+		total_height = bottom_z+top_z
 		bolt = Bolt.new(3,30)	
 		nut = Nut.new(3)
+		nut_height = total_height-nut.height+0.05
 		bottom -= bolt.output.translate(bpos1) 
 		bottom += bolt.show.translate(bpos1) if show
 		top -= bolt.output.translate(bpos1) 		
-		top -= nut.output.translate(bpos1).translate(z:bottom_z+top_z-nut.height+0.05)		
-		top += nut.show.translate(bpos1).translate(z:bottom_z+top_z-nut.height+0.05) if show		
+		top -= nut.output.translate(bpos1).translate(z:nut_height)		
+		top += nut.show.translate(bpos1).translate(z:nut_height) if show		
 
 		bolt = Bolt.new(3,30)	
 		nut = Nut.new(3)
 		bottom -= bolt.output.translate(bpos2) 
 		bottom += bolt.show.translate(bpos2)	 if show
 		top -= bolt.output.translate(bpos2) 
-		top -= nut.output.translate(bpos2).translate(z:bottom_z+top_z-nut.height+0.05)		
-		top += nut.show.translate(bpos2).translate(z:bottom_z+top_z-nut.height+0.05) if show		
+		top -= nut.output.translate(bpos2).translate(z:nut_height)		
+		top += nut.show.translate(bpos2).translate(z:nut_height) if show		
 
 		# rod holders
+		rod_distance_x = 30 # from center
+		rod_distance_y = 30
+
+		bottom-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:2.5) 		
+		top-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:2.5) 		
 		
+		bottom-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
+		top-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
 
 		if show
-			bottom+top+parts
+			bottom#+top+parts
 		else
-			bottom + top.rotate(x:180).translate(y:motor_size+1,z:bottom_z+top_z)
+			bottom + top.rotate(x:180).translate(y:motor_size_y+1,z:bottom_z+top_z)
 		end		
 
   end
