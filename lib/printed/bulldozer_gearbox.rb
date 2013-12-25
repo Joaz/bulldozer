@@ -74,7 +74,7 @@ class BulldozerGearbox < CrystalScad::Printed
 		if show
 			bottom+top+parts
 		else
-			bottom + top.rotate(x:180).translate(y:motor_size_y+1,z:bottom_z+top_z)
+			bottom + top.rotate(x:180).translate(y:motor_size_y+18,z:bottom_z+top_z)
 		end		
 
   end
