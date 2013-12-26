@@ -20,6 +20,12 @@ class BulldozerGearbox < CrystalScad::Printed
 		bottom -= motor.output.translate(z:-motor.args[:length]-1)
     bottom += motor.show.translate(z:-motor.args[:length]) if show
     
+		mount = TSlotMount.new(peg:false)
+		bottom+=mount.part(show).rotate(y:-90).translate(x:-size_x/2+22,y:-22)
+		mount = TSlotMount.new(peg:false)
+		bottom+=mount.part(show).rotate(y:-90).mirror(x:1).translate(x:size_x/2+22,y:-22)
+
+
     bottom += g1.show.mirror(z:1).translate(z:17) if show
 		bottom = bottom.translate(x:-g1.distance_to(g2))
 		top = top.translate(x:-g1.distance_to(g2))
@@ -51,6 +57,8 @@ class BulldozerGearbox < CrystalScad::Printed
 		bottom += bolt.show.translate(bpos1) if show
 		top -= bolt.output.translate(bpos1) 		
 		top -= nut.output.translate(bpos1).translate(z:nut_height)		
+		# support
+		top += cylinder(d:8,h:0.3).translate(bpos1).translate(z:nut_height-0.3) if !show
 		top += nut.show.translate(bpos1).translate(z:nut_height) if show		
 
 		bolt = Bolt.new(3,30)	
@@ -59,6 +67,8 @@ class BulldozerGearbox < CrystalScad::Printed
 		bottom += bolt.show.translate(bpos2)	 if show
 		top -= bolt.output.translate(bpos2) 
 		top -= nut.output.translate(bpos2).translate(z:nut_height)		
+		# support
+		top += cylinder(d:8,h:0.3).translate(bpos2).translate(z:nut_height-0.3) if !show
 		top += nut.show.translate(bpos2).translate(z:nut_height) if show		
 
 		# rod holders
@@ -70,6 +80,7 @@ class BulldozerGearbox < CrystalScad::Printed
 		
 		bottom-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
 		top-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
+
 
 		if show
 			bottom+top+parts

@@ -3,7 +3,8 @@ class TSlotMount < CrystalScad::Assembly
 
 	def initialize(args={})
 		@additional_wall_length=args[:additional_wall_length] || 0
-		@peg = args[:peg] || true
+		@peg = args[:peg] 
+		@peg = true if @peg == nil
 		@peg_style = args[:peg_style] || 0
 	end
 
