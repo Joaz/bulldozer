@@ -17,9 +17,6 @@ class BulldozerAssembly < CrystalScad::Assembly
 		tslot_pusher = TSlot.new(size:30, configuration:2)
 		res += tslot.show(223).rotate(x:90).rotate(y:90).translate(x:-30-@position,y:120,z:30)
 
-		tslot_rod_support = TSlot.new(size:30, configuration:1)
-		res += tslot_rod_support.show(150).translate(x:-370,y:-110,z:-115)
-
 		rod_x = -358
 		# these are verified
 		res += Rod.new(length:405).show.rotate(z:-90).translate(x:rod_x,y:-15,z:@height+rod_height=18)
@@ -31,7 +28,7 @@ class BulldozerAssembly < CrystalScad::Assembly
 
 	
 		res += BulldozerArmBearingSupport.new.show.rotate(y:-90).translate(x:-@position+30,y:-117,z:-13)
-		
+
 		res	
 	end
 

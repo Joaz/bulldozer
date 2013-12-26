@@ -27,8 +27,9 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += YPlateAssembly.new(length:@y_plate_inner_length,rod_size:12,position:-20+@y_plate_position).show.translate(@main_position).translate(z:3.5,y:30,x:35)
 		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+0,y:@z_tslot_position,x:-2.5).translate(z:30)
 
-		res += BulldozerAssembly.new(position:@bulldozer_position).show.translate(@main_position)
-
+		res += BulldozerAssembly.new(position:5+@bulldozer_position).show.translate(@main_position)
+		res += BulldozerRodHolder.new.show(:right).translate(@main_position).translate(x:330,y:-7,z:-85)
+		res += BulldozerRodHolder.new.show(:left).translate(@main_position).translate(x:-35,y:-7,z:-85)
 		
 		spool = Spool300mm.new
 		#res += spool.rotate(y:90).translate(x:33,y:250,z:700)
