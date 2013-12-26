@@ -30,8 +30,8 @@ class ZLinearBearingHolder < CrystalScad::Assembly
 
 			# x endstop
 			switch = MicroswitchD3V.new(bolt_length:23.1)
-			res -= switch.show.rotate(x:180,y:-90).translate(x:13,y:9,z:35-3.5) 
-			res += switch.show.rotate(x:180,y:-90).translate(x:13,y:9,z:35-3.5) if show
+			res -= switch.show.rotate(x:180,y:-90).translate(x:12,y:9,z:35-3.5) 
+			res += switch.show.rotate(x:180,y:-90).translate(x:12,y:9,z:35-3.5) if show
 	  else
 	    res -= cube([18,15,50]).center_x.translate(x:-9,y:-15,z:-0.1).color(@@printed_color)
     end
@@ -41,14 +41,13 @@ class ZLinearBearingHolder < CrystalScad::Assembly
 		res += cube([30,30,13]).center_xy.translate(x:15,y:-29).color(@@printed_color)
 
     # lower mounting wall to slide it against the x-ends into the correct position
- 		res += cube([8,8,20]).center_xy.translate(x:0,y:-29).color(@@printed_color)
+ 		res += cube([8,8,20]).center_xy.translate(x:0.5,y:-29).color(@@printed_color)
 
 
 
     # lm12(l)uu cut 
 	  res -= cylinder(d:21.25,h:70).translate(y:50,x:3,z:2)        
 	  res -= cylinder(d:18,h:70).translate(y:50,x:3,z:-1.5)        
-		# the top lm12uu/lm12luu will be glued inside
 		
 		bolt = Bolt.new(4,20)
 		washer = Washer.new(4.3)
@@ -66,9 +65,8 @@ class ZLinearBearingHolder < CrystalScad::Assembly
 
 		# inserted for BOM
 		# TODO: output them on show
-		# FIXME: change to LM8LUU 
-		Lm_uu.new(inner_diameter:12)
-		Lm_uu.new(inner_diameter:12)
+		Lm_luu.new(inner_diameter:12).output
+		Lm_luu.new(inner_diameter:12).output
 
     motor = Belt.new(longest_side_length:258,top_side_length:257,position:30).show.rotate(z:-90,y:180).translate(x:32,y:45,z:19-3.5) if with_motor 
     motor += XBeltIdler.new.show.rotate(x:90,y:90).translate(x:290,y:59,z:34) if with_motor

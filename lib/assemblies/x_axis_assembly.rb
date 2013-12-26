@@ -6,8 +6,8 @@ class XAxisAssembly < CrystalScad::Assembly
   
   def show
     # z bearings
-    axis  = ZLinearBearingHolder.new(inner_diameter:12).show.translate(y:44,x:17.5,z:-43)
-    axis += ZLinearBearingHolder.new(inner_diameter:12).show(false).mirror(x:1).translate(x:283.5,y:44,z:-43)
+    axis  = ZLinearBearingHolder.new(inner_diameter:12).show.translate(x:17.5,y:44,z:-43)
+    axis += ZLinearBearingHolder.new(inner_diameter:12).show(false).mirror(x:1).translate(x:282.5,y:44,z:-43)
    # axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5,z:35)
     
     #axis += Lm_uu.new(inner_diameter:12).rotate(x:0).translate(y:43,x:17.5+265,z:-50)
@@ -25,7 +25,6 @@ class XAxisAssembly < CrystalScad::Assembly
 
 		# left side
 		axis += XAxisMountingPart.new.show.mirror(x:1).translate(x:306,y:-30,z:30)
-		# FIXME: uh, this one is not right		
 		axis += XAxisAcmeNutHolder.new.show.mirror(x:1).translate(x:306,y:-30,z:30)
 
 
