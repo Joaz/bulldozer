@@ -23,7 +23,7 @@ class Bearing < CrystalScad::Assembly
              "625" => {inner_diameter:5,outer_diameter:16,thickness:5, inner_rim:7.5, outer_rim:13.5},
            "61800" => {inner_diameter:10,outer_diameter:19,thickness:5, inner_rim:12, outer_rim:16.3},
            "63800" => {inner_diameter:10,outer_diameter:19,thickness:7, inner_rim:12, outer_rim:16.3},
-    
+    			 "mr105" => {inner_diameter:5,outer_diameter:10,thickness:4}
     }
     @size = chart[@args[:type].to_s]
 		@height = @size[:thickness]
