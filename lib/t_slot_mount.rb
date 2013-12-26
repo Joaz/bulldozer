@@ -9,6 +9,8 @@ class TSlotMount < CrystalScad::Assembly
 		@thickness = args[:thickness] || 5
 		@bolt_length = args[:bolt_length] || 12
 		@bolt_size = args[:bolt_size] || 4
+		@bolt_position = args[:bolt_position] || 20
+
 		@slot_length = args[:slot_length] || 14
 	end
 
@@ -19,9 +21,9 @@ class TSlotMount < CrystalScad::Assembly
 		end
 		res -= long_slot(d:1.1*@bolt_size,h:@thickness+0.2,l:@slot_length).rotate(y:90,z:90).translate(x:15,y:-0.1,z:8+@slot_length)
 		bolt = Bolt.new(@bolt_size,@bolt_length)
-		washer = Washer.new(4.3) # FIXME		
-		res += bolt.show.rotate(x:90).translate(x:15,y:@thickness+1,z:20) if show
-		res += washer.show.rotate(x:90).translate(x:15,y:@thickness+1,z:20) if show
+		washer = Washer.new(@bolt_size)
+		res += bolt.show.rotate(x:90).translate(x:15,y:@thickness+1,z:@bolt_position) if show
+		res += washer.show.rotate(x:90).translate(x:15,y:@thickness+1,z:@bolt_position) if show
     res
   end
 

@@ -72,7 +72,7 @@ assembly += BulldozerFrameAssembly.new.show
 #subassembly = BulldozerGearbox.new.output
 #subassembly = BulldozerFrameAssembly.new.output
 
-subassembly = BulldozerArmBearingSupport.new.show
+subassembly = BulldozerArmBearingSupport.new.output
 
 #subassembly = MGS_Old.new.show
 #subassembly = PSU_sp320_12.new.show
