@@ -57,7 +57,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += rubber_dampener.translate(@main_position) 
 	
 		# upper tslot
-		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:220,y:30,z:@frame_z+30)
+		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:220-7,y:30,z:@frame_z+30)
 	
 		
 		res += container.show.translate(x:20,y:20,z:33)

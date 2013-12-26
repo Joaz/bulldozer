@@ -27,7 +27,8 @@ class BulldozerAssembly < CrystalScad::Assembly
 		res += Rod.new(length:380).show.rotate(z:-90).translate(x:rod_x+25,y:-104,z:15)
 
 		
-		res += BulldozerGearbox.new.show.rotate(y:90).rotate(x:-90).translate(x:rod_x+11,y:15,z:height+48)
+		res += BulldozerGearbox.new.show.rotate(y:90).rotate(x:-90).translate(x:rod_x+3,y:15,z:height+48)
+		res += BulldozerIdler.new.show.rotate(y:90).rotate(x:-90).mirror(x:1).translate(x:60,y:15,z:height+48)
 		res += AcmeNut.new.show.rotate(y:90).translate(x:-@position-10,y:15,z:height+48)
 
 		res += Lm_luu.new(inner_diameter:12).show.rotate(y:90).translate(x:-@position-28,y:-15,z:height+rod_height)
