@@ -7,6 +7,7 @@ class BulldozerIdler < CrystalScad::Printed
 
 		motor_size_x=42
 		bottom = cube([size_x=70+15,motor_size_y=44+16,bottom_z=25]).translate(x:-motor_size_x/2.0,y:-22).color(@@printed_color)
+		
 #		top = cube([size_x,motor_size_y,top_z=9.5]).translate(x:-motor_size_x/2,y:-22,z:bottom_z).color(@@printed_color)
 		
 		mount = TSlotMount.new(peg:false)
@@ -26,10 +27,10 @@ class BulldozerIdler < CrystalScad::Printed
 		rod_distance_y = 30
 		total_height = bottom_z
 		
-		bottom-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:2.5) 		
+		bottom-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:10) 		
 #		top-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:2.5) 		
 		
-		bottom-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
+		bottom-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:10) 		
 #		top-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
 
 

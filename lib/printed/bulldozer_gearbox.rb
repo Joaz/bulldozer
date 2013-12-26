@@ -75,11 +75,11 @@ class BulldozerGearbox < CrystalScad::Printed
 		rod_distance_x = 30 # from center
 		rod_distance_y = 30
 
-		bottom-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:2.5) 		
-		top-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:2.5) 		
+		bottom-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:10) 		
+		top-= cylinder(d:12.4,h:total_height).translate(x:rod_distance_x,y:rod_distance_y,z:10) 		
 		
-		bottom-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
-		top-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:2.5) 		
+		bottom-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:10) 		
+		top-= cylinder(d:12.4,h:total_height).translate(x:-rod_distance_x,y:rod_distance_y,z:10) 		
 
 
 		if show

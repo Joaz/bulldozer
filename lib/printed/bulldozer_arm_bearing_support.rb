@@ -23,7 +23,7 @@ class BulldozerArmBearingSupport < CrystalScad::Printed
 		res = part(true,true)
 		res += part(true,false).mirror(z:1).translate(z:60)
 		
-		res += Rod.new(length:380).show.rotate(x:90).translate(x:0,y:0,z:-25)
+		res += Rod.new(length:405).show.rotate(x:90).translate(x:0,y:0,z:-25)
 
 	end
 
