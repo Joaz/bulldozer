@@ -33,7 +33,7 @@ class BulldozerAssembly < CrystalScad::Assembly
 		res += BulldozerAcmeNutHolder.new.show.rotate(y:-90).translate(x:-@position+30,y:15,z:height+48)
 
 	
-		res += BulldozerArmBearingSupport.new.show.rotate(x:-90).translate(x:-@position-30,y:-117,z:30)
+		res += BulldozerArmBearingSupport.new.show.rotate(y:-90).translate(x:-@position-30,y:-140,z:30)
 		
 		res	
 	end

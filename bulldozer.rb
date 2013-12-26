@@ -69,14 +69,14 @@ assembly += BulldozerFrameAssembly.new.show
 #subassembly = RumbaMount.new
 
 #subassembly = Foot.new.output
-subassembly = BulldozerGearbox.new.output
+#subassembly = BulldozerGearbox.new.output
 #subassembly = BulldozerFrameAssembly.new.output
 
-#subassembly = BulldozerArmBearingSupport.new.show
+subassembly = BulldozerArmBearingSupport.new.show
 
 #subassembly = MGS_Old.new.show
 #subassembly = PSU_sp320_12.new.show
-
+#subassembly = TSlotMount.new.show
 
 def save(file,output,start_text=nil)
   file = File.open(file,"w")
