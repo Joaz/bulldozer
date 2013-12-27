@@ -51,7 +51,7 @@ assembly += BulldozerFrameAssembly.new.show
 #subassembly = YBeltIdler.new.output
 
 #subassembly = XCarriage.new.output
-#subassembly = MGS.new.show
+subassembly = MGS.new.show
 #subassembly = MicroswitchD3V.new.show
 #subassembly = ZMotorMount.new.output
 #subassembly = ZAcmeBearingHolderLower.new.output
@@ -72,7 +72,7 @@ assembly += BulldozerFrameAssembly.new.show
 #subassembly = BulldozerGearbox.new.output
 #subassembly = BulldozerFrameAssembly.new.output
 
-subassembly = BulldozerArmBearingSupport.new.output
+#subassembly = BulldozerArmBearingSupport.new.output
 
 #subassembly = MGS_Old.new.show
 #subassembly = PSU_sp320_12.new.show

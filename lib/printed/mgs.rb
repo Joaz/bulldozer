@@ -16,41 +16,61 @@ class MGS < CrystalScad::Assembly
 		gear_distance = g1.distance_to(g2)
 
  		motor = Nema17.new(motor_flange_output_height:20)   
-
-		bottom = cube([main_x=42,main_y=42,bottom_z=5]).translate(x:-main_x/2.0,y:-main_y/2.0).color(@@printed_color)
+  
+    motor_size = 42
+		bottom = cube([main_x=70,main_y=42,bottom_z=9]).translate(x:-motor_size/2.0,y:-main_y/2.0).color(@@printed_color)
 	
 		total_height = bottom_z
 
 		bottom -= motor.output.translate(z:-motor.args[:length])
+		
 		bottom += motor.show.translate(z:-motor.args[:length]) if show
 		
-		bolts = create_bolts("top",bottom,motor,height:total_height,bolt_height:20) # TODO: fix bolt_height when we have the top
 		bearing_bottom = Bearing.new(type:"625")
 		
-		bottom += g1.show.mirror(z:0).translate(z:9) if show
+		bottom += g1.show.mirror(z:1).translate(z:9+10) if show
 		
 		# stuff on the second gear position
 		if show
 			shaft = cylinder(d:5,h:40).color("Gainsboro")
-		  shaft += bearing_bottom.show
-			shaft += g2.show.translate(z:9)
-			shaft += drive_gear.translate(z:18)			
-			shaft += Washer.new(5).show.translate(z:17)
-#		res += Bearing.new(type:"625").show.translate(z:15)
+			shaft += Washer.new(5).show.translate(z:8)
+			shaft += Washer.new(5).show.translate(z:9)
+			shaft += Washer.new(5).show.translate(z:10)
+			shaft += Washer.new(5).show.translate(z:11)
+			
+		  shaft += bearing_bottom.show.translate(z:3)
+			shaft += g2.show.translate(z:9+3)
+			shaft += drive_gear.translate(z:17+3)			
+			shaft += Washer.new(5).show.translate(z:33)
+			shaft += Washer.new(5).show.translate(z:34)
+  		shaft += Bearing.new(type:"625").show.translate(z:35)
 		
 			bottom += shaft.translate(x:gear_distance,z:1)
 
 		end
 
-		bottom -= bolts
+		left_bolts = create_bolts("top",bottom,motor,height:total_height,bolt_height:20)[0..1] # TODO: fix bolt_height when we have the top
+		right_bolts = create_bolts("top",bottom,motor,height:bottom_z-3+0.01,bolt_height:10)[2..3] # TODO: fix bolt_height when we have the top
+ 
+        
+		bottom -= left_bolts
+		bottom -= right_bolts
+		
 #		top -= bolts
-		bottom += bolts if show
+		bottom += left_bolts if show
+		bottom += right_bolts if show
 
 
 
 		hotend = JHead.new.show
-		bottom += hotend.rotate(x:-90).translate(x:20,y:-55,z:27)
+		distance_roll = DistanceRoll.new(height:16)
+		distance_roll2 = DistanceRoll.new
+	
+		bottom += hotend.rotate(y:-90).translate(x:hotend_x=96,y:hotend_y=4,z:hotend_z=26.5+3)
+    bottom += distance_roll.show.rotate(y:-90).translate(x:hotend_x-48,y:hotend_y,z:hotend_z)
+    bottom += cylinder(d:2.9,h:100).color("red").rotate(y:-90).translate(x:hotend_x-48,y:hotend_y,z:hotend_z)
 
+    bottom += distance_roll2.show.rotate(y:-90).translate(x:18,y:hotend_y,z:hotend_z)
 
 	end		
 	
