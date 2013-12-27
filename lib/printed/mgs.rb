@@ -20,6 +20,8 @@ class MGS < CrystalScad::Assembly
     motor_size = 42
 		bottom = cube([main_x=70,main_y=42,bottom_z=9]).translate(x:-motor_size/2.0,y:-main_y/2.0).color(@@printed_color)
 	
+		middle_right = cube([middle_right_x=23.8,main_y,middle_z=27]).translate(x:motor_size/2.0+8,y:-main_y/2,z:bottom_z).color("orange")
+
 		total_height = bottom_z
 
 		bottom -= motor.output.translate(z:-motor.args[:length])
@@ -70,7 +72,13 @@ class MGS < CrystalScad::Assembly
     bottom += distance_roll.show.rotate(y:-90).translate(x:hotend_x-48,y:hotend_y,z:hotend_z)
     bottom += cylinder(d:2.9,h:100).color("red").rotate(y:-90).translate(x:hotend_x-48,y:hotend_y,z:hotend_z)
 
-    bottom += distance_roll2.show.rotate(y:-90).translate(x:18,y:hotend_y,z:hotend_z)
+    bottom += distance_roll2.show.rotate(y:-90).translate(x:18-8,y:hotend_y,z:hotend_z)
+
+
+		idler = Bearing.new(type:608).show
+		bottom += idler.translate(x:gear_distance,y:16.5,z:26)
+
+		#bottom += middle_right
 
 	end		
 	
