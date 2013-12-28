@@ -50,6 +50,8 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
 		end
 
+			res += Door.new(x:@frame_x/2-2,y:@container_z-1,rotation:140).show.translate(x:-0,y:-10,z:30+0.5)
+	
 
 		# FIXME: we need a new place for electronics
 		
@@ -69,7 +71,8 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 		res = main_rect.translate(z:z=0)
 		# slot where the printer stands on	
-		res += printer_stage_rect.translate(z:z+=container.z+60+15)
+		@container_z = container.z+15
+		res += printer_stage_rect.translate(z:z+=@container_z+60)
 	
 
 		res += main_rect.translate(z:z+=540+10)

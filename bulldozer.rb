@@ -77,6 +77,7 @@ subassembly = MGS.new.show
 #subassembly = MGS_Old.new.show
 #subassembly = PSU_sp320_12.new.show
 #subassembly = TSlotMount.new.show
+subassembly = Door.new.show
 
 def save(file,output,start_text=nil)
   file = File.open(file,"w")
