@@ -18,6 +18,8 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		@tslot_single = TSlot.new(size:30,configuration:1,simple:@tslot_simple)
 		@tslot_double = TSlot.new(size:30,configuration:2,simple:@tslot_simple)
 
+		@show_side_plates = true
+
 	end
 	
 	def show
@@ -34,18 +36,19 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 		# bottom sheet		
 		res += AluminiumCompositeSheet.new(x:@frame_x,y:@frame_y).show.translate(z:30)
-		
-		# top sheet
-		res += AluminiumCompositeSheet.new(bolt_size:8,x:@frame_x+60,y:@frame_y).show.translate(x:-30,z:@frame_z+30)
+		if @show_side_plates
+			# top sheet
+			res += AluminiumCompositeSheet.new(bolt_size:8,x:@frame_x+60,y:@frame_y).show.translate(x:-30,z:@frame_z+30)
 
-		# back wall 
-		# FIXME: this needs to be either split or cut more to have a cutout for the power and network connector
-		res += AluminiumCompositeSheet.new(x:@frame_x+60,y:@frame_z+30).show.mirror(z:1).rotate(x:90).translate(x:-30,y:@frame_y)
+			# back wall 
+			# FIXME: this needs to be either split or cut more to have a cutout for the power and network connector
+			res += AluminiumCompositeSheet.new(x:@frame_x+60,y:@frame_z+30).show.mirror(z:1).rotate(x:90).translate(x:-30,y:@frame_y)
 		
-		# left wall
-		res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).mirror(x:1).translate(y:30)
-		# right wall
-		res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
+			# left wall
+			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).mirror(x:1).translate(y:30)
+			# right wall
+			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
+		end
 
 
 		# FIXME: we need a new place for electronics
@@ -62,6 +65,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 	def part
 		container = Container.new
+		container2 = Container.new
 
 		res = main_rect.translate(z:z=0)
 		# slot where the printer stands on	
@@ -81,7 +85,10 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:220-7,y:30,z:@frame_z+30)
 	
 		
+		# left container: part container
+		# right container: waste container
 		res += container.show.translate(x:20,y:20,z:33)
+		res += container2.show.translate(x:20+280,y:20,z:33)
 
 		res += tslot_sides
 
