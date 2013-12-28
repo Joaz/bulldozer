@@ -30,7 +30,27 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += BulldozerAssembly.new(position:5+@bulldozer_position).show.translate(@main_position)
 		res += BulldozerRodHolder.new.show(:right).translate(@main_position).translate(x:330,y:-7,z:-85)
 		res += BulldozerRodHolder.new.show(:left).translate(@main_position).translate(x:-35,y:-7,z:-85)
+
+
+		# bottom sheet		
+		res += AluminiumCompositeSheet.new(x:@frame_x,y:@frame_y).show.translate(z:30)
 		
+		# top sheet
+		res += AluminiumCompositeSheet.new(bolt_size:8,x:@frame_x+60,y:@frame_y).show.translate(x:-30,z:@frame_z+30)
+
+		# back wall 
+		# FIXME: this needs to be either split or cut more to have a cutout for the power and network connector
+		res += AluminiumCompositeSheet.new(x:@frame_x+60,y:@frame_z+30).show.mirror(z:1).rotate(x:90).translate(x:-30,y:@frame_y)
+		
+		# left wall
+		res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).mirror(x:1).translate(y:30)
+		# right wall
+		res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
+
+
+		# FIXME: we need a new place for electronics
+		
+		# FIXME: where to put spool and how will spool mounting look like?
 		spool = Spool300mm.new
 		#res += spool.rotate(y:90).translate(x:33,y:250,z:700)
 		res
