@@ -25,11 +25,11 @@ class Nema17 < CrystalScad::Assembly
 		"Nema 17 stepper, length=#{@args[:length]} with holding torque of #{@args[:holding_torque]} g*cm"
 	end
 
-	def bolt_holes_top
+	def threads_top
 		holes = []
 		[-1,1].each do |i|	
 			[-1,1].each do |f|	
-				holes << BoltHole.new(x:i*@motor_mounting_hole_distance/2,y:f*@motor_mounting_hole_distance/2,size:3,depth:2.5)
+				holes << ScrewThread.new(x:i*@motor_mounting_hole_distance/2,y:f*@motor_mounting_hole_distance/2,size:3,depth:2.5)
 			end		
 		end
 		holes

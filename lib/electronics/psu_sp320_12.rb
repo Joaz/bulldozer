@@ -1,17 +1,3 @@
-module CrystalScad
-  class ScrewThread < Cylinder
-    def initialize(args)
-      args[:d] = args[:size]
-      super
-    end
-    
-  end
-  
-  def thread(args)
-    ScrewThread.new(args)
-  end
-  
-end
 
 class PSU_sp320_12 < CrystalScad::Assembly
 
