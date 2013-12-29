@@ -5,11 +5,10 @@ class Door < CrystalScad::Assembly
 		@rotation = args[:rotation] || 0
 		@max_rotation = 140	
 
-#		@x = args[:x] || 300
-#		@y = args[:y] || 200
 
-#		@z1 = args[:z1] || 30
-#		@z2 = args[:z2] || @y-70
+		@z_offset = args[:z_offset] || 0 
+
+
 		@sheet = args[:sheet]
 		raise "door needs a :sheet in the arguments" if @sheet == nil
 	
@@ -19,8 +18,8 @@ class Door < CrystalScad::Assembly
 
 		@h1,@h2 = Hinge.new,Hinge.new
 
-		@z1 = 0
-		@z2 = @y-@h1.y
+		@z1 = 0+@z_offset
+		@z2 = @y-@h1.y-@z_offset 
 		
 
 	end

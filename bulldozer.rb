@@ -79,6 +79,9 @@ subassembly = MGS.new.show
 #subassembly = TSlotMount.new.show
 subassembly = Door.new(sheet:DoorSheet.new).show
 
+#FIXME: a way is needed to save drawings/specifications of hardware that gets modified in other classes, for example Door adds holes for hinges to the sheet, or aluminium profiles that needs drilling
+
+
 def save(file,output,start_text=nil)
   file = File.open(file,"w")
   file.puts start_text unless start_text == nil
