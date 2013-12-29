@@ -3,6 +3,8 @@ class Hinge < CrystalScad::Assembly
 	# http://www.norelem.de/App/WebObjects/XSeMIPSNORELEMDE.woa/cms/page/locale.deDE/pid.7.11.1034.214/agid.5118.12982.5278/ecm.ag/Scharniere%07aus-Kunststoff.html
 	#27852-301818
 	
+	attr_accessor :y
+
 	def initialize(args={})
 		@x = 29.5
 		@y = 48.0
@@ -18,6 +20,13 @@ class Hinge < CrystalScad::Assembly
 		@d3 = 14 # shaft outer dia		
 	end
 	
+	# 2d output for sheets
+	def output
+		res = circle(d:@d1).translate(x:@a3-@a1,y:(@b1-@b2)/2)
+		res += circle(d:@d1).translate(x:@a3-@a1,y:(@b1-@b2)/2+@b2)			
+		res.translate(x:4)
+	end
+
 	def show
 		part_left+part_right
 	end

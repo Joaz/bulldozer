@@ -50,7 +50,13 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
 		end
 
-			res += Door.new(x:@frame_x/2-2,y:@container_z-1,rotation:140).show.translate(x:-0,y:-10,z:30+0.5)
+			# bottom doors
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:0).show.translate(x:-0,y:-10,z:30+0.5)
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:0).show.mirror(x:1).translate(x:@frame_x,y:-10,z:30+0.5)
+
+			# upper doors
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@frame_z-@container_z-60-1),rotation:0).show.translate(x:-0,y:-10,z:@container_z+60+0.5)
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@frame_z-@container_z-60-1),rotation:0).show.mirror(x:1).translate(x:@frame_x,y:-10,z:@container_z+60+0.5)
 	
 
 		# FIXME: we need a new place for electronics
