@@ -1,8 +1,8 @@
 class BulldozerRodHolder < CrystalScad::Printed
 
 	def initialize
-		@height = 120
-		@rod_position = 102
+		@height = 110
+		@rod_position = 92
 	end	
 
 	def part(show)

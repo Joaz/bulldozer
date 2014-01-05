@@ -1,14 +1,23 @@
 class RubberDampener < CrystalScad::Assembly
-	#	http://www.rc-force.de/Gummipuffer-Typ-B-M8-R-25-H-15
+	attr_accessor :diameter,:height,:bolt_size,:bolt_length
 
-	# could use a 30mm one, but let's leave a bit of space to assemble it in the dual tslot
+	def initialize(args={})
+		@diameter = args[:diameter] || 15
+		@height = args[:height] || 8
+		@bolt_size = args[:bolt_diameter] || 4
+		@bolt_length = args[:bolt_length] || 8
+		super
+	end
+
 	def show
-		dia = 25
-		height= 15
-		res = cylinder(d:dia,h:height).color("black")
-		res+= cylinder(d:8,h:20).translate(z:height).color("Silver")
-		res-= cylinder(d:8,h:3).color("Silver")
+		res = cylinder(d:@diameter,h:@height ).color("black")
+	#	res+= cylinder(d:@bolt_diameter,h:@bolt_length).translate(z:@height ).color("Silver")
+		res+=threads		
 		res
+	end
+
+	def threads_top
+		ScrewThread.new(x:0,y:0,z:@height,size:@bolt_size,depth:@bolt_length)  
 	end
 
 end

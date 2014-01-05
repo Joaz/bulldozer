@@ -9,7 +9,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		@frame_x = 600			
 		@frame_y = @tslot_y+60		
 
-		@main_position = {x:240,y:30,z:370}
+		@main_position = {x:240,y:30,z:360}
 	  @z_tslot_position = 355 
 	  @y_plate_inner_length = @tslot_y - 65
 	
@@ -19,7 +19,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		@tslot_double = TSlot.new(size:30,configuration:2,simple:@tslot_simple)
 
 		@show_side_plates = false
-
+		@door_rotation = 135
 	end
 	
 	def show
@@ -30,8 +30,8 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+0,y:@z_tslot_position,x:-2.5).translate(z:30)
 
 		res += BulldozerAssembly.new(position:5+@bulldozer_position).show.translate(@main_position)
-		res += BulldozerRodHolder.new.show(:right).translate(@main_position).translate(x:330,y:-7,z:-85)
-		res += BulldozerRodHolder.new.show(:left).translate(@main_position).translate(x:-35,y:-7,z:-85)
+		res += BulldozerRodHolder.new.show(:right).translate(@main_position).translate(x:330,y:-7,z:-75)
+		res += BulldozerRodHolder.new.show(:left).translate(@main_position).translate(x:-35,y:-7,z:-75)
 
 
 		# bottom sheet		
@@ -51,12 +51,12 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		end
 
 			# bottom doors
-			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:0,z_offset:10).show.translate(x:-0,y:-10,z:30+0.5)
-			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:0,z_offset:10).show.mirror(x:1).translate(x:@frame_x,y:-10,z:30+0.5)
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:@door_rotation,z_offset:10).show.translate(x:-0,y:-10,z:30+0.5)
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:@door_rotation,z_offset:10).show.mirror(x:1).translate(x:@frame_x,y:-10,z:30+0.5)
 
 			# upper doors
-			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@frame_z-@container_z-60-1),rotation:0,z_offset:10).show.translate(x:-0,y:-10,z:@container_z+60+0.5)
-			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@frame_z-@container_z-60-1),rotation:0,z_offset:10).show.mirror(x:1).translate(x:@frame_x,y:-10,z:@container_z+60+0.5)
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@frame_z-@container_z-60-1),rotation:@door_rotation,z_offset:10).show.translate(x:-0,y:-10,z:@container_z+60+0.5)
+			res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@frame_z-@container_z-60-1),rotation:@door_rotation,z_offset:10).show.mirror(x:1).translate(x:@frame_x,y:-10,z:@container_z+60+0.5)
 	
 
 		# FIXME: we need a new place for electronics
@@ -91,7 +91,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += rubber_dampener.translate(@main_position) 
 	
 		# upper tslot
-		res += @tslot_double.show(@frame_y-60).rotate(y:90,z:90).translate(x:220-7,y:30,z:@frame_z+30)
+		res += @tslot_single.show(@frame_y-60).rotate(y:90,z:90).translate(x:220-13,y:30,z:@frame_z+30)
 	
 		
 		# left container: part container
@@ -122,9 +122,12 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 	def rubber_dampener
 		res = CrystalScadObject.new
-		[[0,0],[265,0],[0,@tslot_y-30],[265,@tslot_y-30]].each do |x,y|
+		[[0,0],[265,0],[0,@tslot_y-30+14],[265,@tslot_y-30+14]].each do |x,y|
 			r= RubberDampener.new
-			res += r.show.translate(x:15+x,y:15+y,z:-85)
+			t = TSlotNut.new
+			assembly += r.show
+			assembly += t.show.mirror(z:1).translate(r.threads_top.position_on(t.threads_top)).translate(z:18)
+			res += assembly.translate(x:15+x,y:8+y,z:-71)		
 		end
 		res	
 	end
