@@ -48,6 +48,7 @@ class XCarriage < CrystalScad::Assembly
     res -= cylinder(d:@lm12uu_cut,h:40).translate(x:45,y:15,z:1.5+@side_thickness)        
     res -= cylinder(d:14,h:40).translate(x:45,y:15,z:-0.1)  
 
+		# FIXME: this needs to go down by 7mm
 		# extruder mount
     res -= cylinder(d:3.4,h:40).rotate(x:90).translate(x:65,y:20,z:@side_thickness+15)
 		nut = Nut.new(3)    

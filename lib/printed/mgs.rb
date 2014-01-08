@@ -18,9 +18,17 @@ class MGS < CrystalScad::Assembly
  		motor = Nema17.new(motor_flange_output_height:20)   
   
     motor_size = 42
-		bottom = cube([main_x=70,main_y=42,bottom_z=9]).translate(x:-motor_size/2.0,y:-main_y/2.0).color(@@printed_color)
-	
-		middle_right = cube([middle_right_x=23.8,main_y,middle_z=27]).translate(x:motor_size/2.0+8,y:-main_y/2,z:bottom_z).color("orange")
+		bottom = cube([main_x=70,main_y=42,bottom_z=9]).color(@@printed_color)
+		bottom = bottom.translate(x:-motor_size/2.0,y:-main_y/2.0)
+
+		top = cube([top_x=50,top_y=32,top_z=9]).color(@@printed_color)
+		top = top.translate(x:-motor_size/2.0+(main_x-top_x),y:-main_y/2.0,z:top_z_offset=36)
+
+		back_wall = cube(x:top_x,y:back_wall_y=10,z:top_z_offset+bottom_z)
+		back_wall = back_wall.translate(x:-1,y:-main_y/2-back_wall_y)
+
+		hotend_mount = cube([hotend_mount_x=6+5,hotend_mount_y=main_y,hotend_mount_z=35]).color("orange")
+		hotend_mount = hotend_mount.translate(x:motor_size/2.0+25.8,y:-main_y/2,z:bottom_z)
 
 		total_height = bottom_z
 
@@ -28,8 +36,11 @@ class MGS < CrystalScad::Assembly
 		
 		bottom += motor.show.translate(z:-motor.args[:length]) if show
 		
-		bearing_bottom = Bearing.new(type:"625")
-		
+		bearing_bottom = Bearing.new(type:"625",outer_rim_cut:5)
+		bearing_top = Bearing.new(type:"625",outer_rim_cut:5)
+		bottom -= bearing_bottom.output.translate(x:gear_distance,z:4+0.1)
+		top -= bearing_top.output.translate(x:gear_distance,z:36-0.1)
+
 		bottom += g1.show.mirror(z:1).translate(z:9+10) if show
 		
 		# stuff on the second gear position
@@ -45,10 +56,10 @@ class MGS < CrystalScad::Assembly
 			shaft += drive_gear.translate(z:17+3)			
 			shaft += Washer.new(5).show.translate(z:33)
 			shaft += Washer.new(5).show.translate(z:34)
-  		shaft += Bearing.new(type:"625").show.translate(z:35)
-		
+  		shaft += bearing_top.show.translate(z:35)
 			bottom += shaft.translate(x:gear_distance,z:1)
-
+			
+	
 		end
 
 		left_bolts = create_bolts("top",bottom,motor,height:total_height,bolt_height:20)[0..1] # TODO: fix bolt_height when we have the top
@@ -78,7 +89,19 @@ class MGS < CrystalScad::Assembly
 		idler = Bearing.new(type:608).show
 		bottom += idler.translate(x:gear_distance,y:16.5,z:26)
 
-		#bottom += middle_right
+		bottom += hotend_mount
+		bottom += top
+		bottom += back_wall
+
+		# sketch of mounting bolts
+		bolt1 = Bolt.new(3,30)		
+		bolt2 = Bolt.new(3,30)		
+		
+		mounting_bolts = bolt1.show.rotate(x:90)
+		mounting_bolts += bolt2.show.rotate(x:90).translate(z:30)		
+	
+		bottom += mounting_bolts.translate(x:42,y:-20,z:22)
+
 
 	end		
 	
