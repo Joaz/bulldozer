@@ -79,7 +79,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		
 		# FIXME: where to put spool and how will spool mounting look like?
 		spool = Spool300mm.new
-		#res += spool.rotate(y:90).translate(x:33,y:250,z:700)
+		res += spool.rotate(y:90).translate(x:33,y:350,z:700)
 		res
 	end
 

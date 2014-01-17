@@ -16,6 +16,12 @@ class ZAxisAssembly < CrystalScad::Assembly
       assembly = tslot_left.length(@args[:height]).show.translate(x:@args[:left_pos],y:@args[:position],z:-60)
       assembly += tslot_right.length(@args[:height]).show.mirror(x:1).translate(x:@args[:right_pos],y:@args[:position],z:-60)
       assembly += tslot_top.show.rotate(y:90).translate(x:@args[:left_pos],y:@args[:position],z:@args[:height]-30)
+
+
+      # for BOM output, 
+      # FIXME: put them in the right places and add the require Bolts
+      4.times{TSlotNut.new(bolt_size:8)}
+      
   
       assembly += z_axis_drive
 
