@@ -12,10 +12,10 @@ class BulldozerAssembly < CrystalScad::Assembly
   
   def output
 		tslot = TSlot.new(size:30, configuration:2)
-    res = tslot.show(@height).rotate(z:90).translate(x:30-@position,z:30)
+    res = tslot.length(@height).show.rotate(z:90).translate(x:30-@position,z:30)
 
 		tslot_pusher = TSlot.new(size:30, configuration:2)
-		res += tslot.show(223).rotate(x:90).rotate(y:90).translate(x:-30-@position,y:120,z:30)
+		res += tslot.length(223).thread().show.rotate(x:90).rotate(y:90).translate(x:-30-@position,y:120,z:30)
 
 		rod_x = -358
 		# these are verified

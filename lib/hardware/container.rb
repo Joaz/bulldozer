@@ -1,8 +1,6 @@
 class Container < CrystalScad::Assembly
 	# rough sketch of "Multi-Bo@x M" EAN 4001515272018
-	
-	attr_accessor :x,:y,:z
-	
+243
 	def initialize()
 		super()
 		@x,@y,@z = [270,350,210]
