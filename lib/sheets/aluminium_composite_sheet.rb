@@ -7,7 +7,9 @@ class AluminiumCompositeSheet < CrystalScad::Assembly
 		@bolt_size = args[:bolt_size] || 4		
 		@bolt_length = args[:bolt_length] || 12
 		@bolt_margin = args[:bolt_margin] || 0.3		
-		@bolt_position = args[:bolt_position] || 15		
+		@bolt_position = args[:bolt_position] || 15	
+		@with_nut = args[:with_nut]
+		@with_nut = true if @with_nut == nil	
 		super	
 	
 	end
@@ -35,11 +37,17 @@ class AluminiumCompositeSheet < CrystalScad::Assembly
 		return res if @bolt_size == 0
 		
 		bolt_positions.each do |i,f|
-			bolt = Bolt.new(@bolt_size,@bolt_length)
-			washer = Washer.new(@bolt_size)
-			res -= bolt.output.mirror(z:1).translate(x:i,y:f,z:@z+1)
-			res += bolt.show.mirror(z:1).translate(x:i,y:f,z:@z+1)
-			res += washer.show.translate(x:i,y:f,z:@z)
+			bolt = Bolt.new(@bolt_size,@bolt_length,type:"7380")
+			#washer = Washer.new(@bolt_size)
+			res -= bolt.output.mirror(z:1).translate(x:i,y:f,z:@z)
+			res += bolt.show.mirror(z:1).translate(x:i,y:f,z:@z)
+			#res += washer.show.translate(x:i,y:f,z:@z)
+			if @with_nut
+			  # the orientation works for most of the plates. lets just ignore the other ones
+			  nut = TSlotNut.new(bolt_size:@bolt_size)
+			  res += nut.show.translate(nut.threads_top.position_on(bolt)).rotate(z:90).translate(x:i,y:f,z:0)
+      end
+      
 		end	
 		res		
 	end

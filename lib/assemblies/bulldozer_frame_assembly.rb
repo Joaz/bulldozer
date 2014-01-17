@@ -18,7 +18,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		@tslot_single = TSlot.new(size:30,configuration:1,simple:@tslot_simple)
 		@tslot_double = TSlot.new(size:30,configuration:2,simple:@tslot_simple)
 
-		@show_side_plates = false
+		@show_side_plates = true
 		@door_rotation = 135
 	end
 	
@@ -38,7 +38,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += AluminiumCompositeSheet.new(x:@frame_x,y:@frame_y).show.translate(z:30)
 		if @show_side_plates
 			# top sheet
-			res += AluminiumCompositeSheet.new(bolt_size:8,x:@frame_x+60,y:@frame_y).show.translate(x:-30,z:@frame_z+30)
+			res += AluminiumCompositeSheet.new(bolt_size:8,with_nut:false,x:@frame_x+60,y:@frame_y).show.translate(x:-30,z:@frame_z+30)
 
 			# back wall 
 			# FIXME: this needs to be either split or cut more to have a cutout for the power and network connector
