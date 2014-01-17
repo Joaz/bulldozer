@@ -17,7 +17,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 	  @y_plate_position = 0
 
 
-		@show_side_plates = true
+		@show_side_plates = false
 		@door_rotation = 135
 	end
 	
@@ -34,7 +34,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res+= ZAxisAssembly.new(tslot_simple:false,position:@z_tslot_position).show.translate(@main_position)
 	
 		res += YPlateAssembly.new(length:@y_plate_inner_length,rod_size:12,position:-20+@y_plate_position).show.translate(@main_position).translate(z:3.5,y:30,x:35)
-		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+0,y:@z_tslot_position,x:-2.5).translate(z:30)
+		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+40,y:@z_tslot_position,x:-2.5).translate(z:30)
 
 		res += BulldozerAssembly.new(position:5+@bulldozer_position).show.translate(@main_position)
 		res += BulldozerRodHolder.new.show(:right).translate(@main_position).translate(x:330,y:-7,z:-75)
@@ -53,7 +53,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 		
 			# left wall
-			#res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).mirror(x:1).translate(y:30)
+			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).mirror(x:1).translate(y:30)
 			# right wall
 			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
 		end   
@@ -77,9 +77,8 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 		# FIXME: we need a new place for electronics
 		
-		# FIXME: where to put spool and how will spool mounting look like?
-		spool = Spool300mm.new
-		res += spool.rotate(y:90).translate(x:33,y:350,z:700)
+		spool_holder = SpoolHolder.new(rotation:63-0)
+		res += spool_holder.translate(x:190,y:@frame_y-30,z:@frame_z-7)
 		res
 	end
 
