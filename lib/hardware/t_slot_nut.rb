@@ -3,8 +3,8 @@ class TSlotNut < CrystalScad::Assembly
   # this is a tslot nut for 8mm nut profile
 
   def initialize(args={})
-    super
     @bolt_size = args[:bolt_size] || 4
+    super
   end
   
   def description
