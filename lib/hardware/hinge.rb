@@ -2,8 +2,6 @@ class Hinge < CrystalScad::Assembly
 
 	# http://www.norelem.de/App/WebObjects/XSeMIPSNORELEMDE.woa/cms/page/locale.deDE/pid.7.11.1034.214/agid.5118.12982.5278/ecm.ag/Scharniere%07aus-Kunststoff.html
 	#27852-301818
-	
-	attr_accessor :y
 
 	def initialize(args={})
 		@x = 29.5

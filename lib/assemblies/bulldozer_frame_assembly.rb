@@ -62,8 +62,9 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
     @container_back_wall_position = 170
 		res += AluminiumCompositeSheet.new(bolt_size:8,bolt_margin:1,x:@frame_x-1,y:@container_z-3-2,with_nut:false).show.rotate(x:90).translate(x:0.5,y:@frame_y-@container_back_wall_position,z:30+3)
     
-    res += tslot_single.length(@container_back_wall_position).thread.show.rotate(x:90).translate(x:0,y:@frame_y,z:30+3)
-    res += tslot_single.length(@container_back_wall_position).thread.show.rotate(x:90).translate(x:@frame_x-30,y:@frame_y,z:30+3)
+    res += tslot_single.length(@container_back_wall_position).thread.hole(side:"y").show.rotate(x:90).translate(x:0,y:@frame_y,z:30+3)
+    res += tslot_single.length(@container_back_wall_position).thread.hole(side:"y").show.rotate(x:90).translate(x:@frame_x-30,y:@frame_y,z:30+3)
+		# FIXME: this one needs TSlot-Nut and M8 hardware		
     
 
 		# bottom doors
