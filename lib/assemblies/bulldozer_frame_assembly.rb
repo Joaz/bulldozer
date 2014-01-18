@@ -120,6 +120,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res
 	end
 	
+	# ugly code ahead
 	def printer_rect
 		x,y=@tslot_x,@tslot_y
 		size = 30
@@ -130,7 +131,8 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		# y
 		res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90)
 		res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90).mirror(x:1).translate(x:x)
-		
+
+		res += printer_bolts		
 		res		
 	end
 	
@@ -145,19 +147,60 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += tslot_single.length(y).holes(side:"y").show.rotate(x:-90)
 		res += tslot_single.length(y).holes(side:"y").show.rotate(x:-90).mirror(x:1).translate(x:x)
 		
+		res += frame_bolts
+
 		res.translate(z:30)	
 	end
 
 	def printer_stage_rect
 		x,y = @frame_x,@frame_y
 		size=30
-		r = tslot_double.length(x-size*2).threads.show.rotate(x:-90,z:-90).rotate(x:90).translate(x:size,y:0)
-		r += tslot_double.length(x-size*2).threads.show.rotate(x:-90,z:-90).rotate(x:90).translate(x:size,y:y-size*2)   
+		res = tslot_double.length(x-size*2).threads.show.rotate(x:-90,z:-90).rotate(x:90).translate(x:size,y:0)
+		res += tslot_double.length(x-size*2).threads.show.rotate(x:-90,z:-90).rotate(x:90).translate(x:size,y:y-size*2)   
 
 		# y
-		r += tslot_single.length(y).holes(side:"y").show.rotate(x:-90)
-		r += tslot_single.length(y).holes(side:"y").show.rotate(x:-90).mirror(x:1).translate(x:x)
-		
+		res += tslot_single.length(y).holes(side:"y").show.rotate(x:-90)
+		res += tslot_single.length(y).holes(side:"y").show.rotate(x:-90).mirror(x:1).translate(x:x)		
+	
+		res += frame_bolts
+	end
+	
+	# even more ugly code ahead
+	def frame_bolts
+		# right side	
+		b =Bolt.new(8,80,washer:true)
+		res += b.show.rotate(y:90).translate(x:-30,y:15,z:-15)
+		b =Bolt.new(8,80,washer:true)
+		res += b.show.rotate(y:90).translate(x:-30,y:@frame_y-15,z:-15)
+		# left side	
+		b =Bolt.new(8,80,washer:true)
+		res += b.show.rotate(y:-90).translate(x:@frame_x+30,y:15,z:-15)
+		b =Bolt.new(8,80,washer:true)
+		res += b.show.rotate(y:-90).translate(x:@frame_x+30,y:@frame_y-15,z:-15)
+	end
+
+	def printer_bolts
+		# right side	
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:90).translate(x:0,y:15,z:-15)
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:90).translate(x:0,y:15,z:-15-30)
+
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:90).translate(x:0,y:@tslot_y-15,z:-15)
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:90).translate(x:0,y:@tslot_y-15,z:-15-30)
+		# left side	
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:15,z:-15)
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:15,z:-15-30)
+
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:@tslot_y-15,z:-15)
+		b =Bolt.new(8,50,washer:true)
+		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:@tslot_y-15,z:-15-30)
+
 	end
 
 	def rubber_dampener
