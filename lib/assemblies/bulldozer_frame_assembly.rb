@@ -62,10 +62,30 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
     @container_back_wall_position = 170
 		res += AluminiumCompositeSheet.new(bolt_size:8,bolt_margin:1,x:@frame_x-1,y:@container_z-3-2,with_nut:false).show.rotate(x:90).translate(x:0.5,y:@frame_y-@container_back_wall_position,z:30+3)
     
-    res += tslot_single.length(@container_back_wall_position).thread.hole(side:"y").show.rotate(x:90).translate(x:0,y:@frame_y,z:30+3)
-    res += tslot_single.length(@container_back_wall_position).thread.hole(side:"y").show.rotate(x:90).translate(x:@frame_x-30,y:@frame_y,z:30+3)
-		# FIXME: this one needs TSlot-Nut and M8 hardware		
-    
+		# right side
+    res += tslot_single.length(@container_back_wall_position).thread.hole(side:"y").show.rotate(x:90).translate(pos = {x:@frame_x-30,y:@frame_y,z:30+3})
+		
+		npos = pos.dup
+		npos[:y]-=15
+		npos[:z]+=15
+		b = Bolt.new(8,40,washer:true)
+		t = TSlotNut.new(bolt_size:8)
+		res += b.show.rotate(y:90).translate(npos)
+		res += t.show.translate(t.threads_top.position_on(b)).rotate(y:-90).translate(npos).translate(x:30)
+
+		# left side
+    res += tslot_single.length(@container_back_wall_position).thread.hole(side:"y").show.rotate(x:90).translate(pos={y:@frame_y,z:30+3})
+
+		npos = pos.dup
+		npos[:x]+=30
+		npos[:y]-=15
+		npos[:z]+=15
+		b = Bolt.new(8,40,washer:true)
+		t = TSlotNut.new(bolt_size:8)
+		res += b.show.rotate(y:-90).translate(npos)
+		res += t.show.translate(t.threads_top.position_on(b)).rotate(y:90).translate(npos).translate(x:-30)
+
+	
 
 		# bottom doors
 		res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:@door_rotation,z_offset:10).show.translate(x:-0,y:-10,z:30+0.5)
