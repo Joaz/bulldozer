@@ -8,13 +8,17 @@ class ZAxisAssembly < CrystalScad::Assembly
     @args[:tslot_simple] ||= false
   end
  
+	def tslot
+		TSlot.new(size:30,configuration:2,simple:@args[:tslot_simple])	
+	end
+	
   def show
-      tslot_left = TSlot.new(size:30,configuration:2,simple:@args[:tslot_simple]).hole(side:"y",position:"front").thread(position:"back")
-      tslot_right = TSlot.new(size:30,configuration:2,simple:@args[:tslot_simple]).hole(side:"y",position:"front").thread(position:"back")
-      tslot_top = TSlot.new(size:30,configuration:2,simple:@args[:tslot_simple]).length(@args[:right_pos]-@args[:left_pos]).hole(side:"y",position:"front").hole(side:"y",position:"back")
+      tslot_left = tslot.length(@args[:height]).hole(side:"y",position:"front").thread(position:"back")
+      tslot_right = tslot.length(@args[:height]).hole(side:"y",position:"front").thread(position:"back")
+      tslot_top = tslot.length(@args[:right_pos]-@args[:left_pos]).holes(side:"y")
   
-      assembly = tslot_left.length(@args[:height]).show.translate(x:@args[:left_pos],z:-60)
-      assembly += tslot_right.length(@args[:height]).show.mirror(x:1).translate(x:@args[:right_pos],z:-60)
+      assembly = tslot_left.show.translate(x:@args[:left_pos],z:-60)
+      assembly += tslot_right.show.mirror(x:1).translate(x:@args[:right_pos],z:-60)
       assembly += tslot_top.show.rotate(y:90).translate(x:@args[:left_pos],z:@args[:height]-30)
 
 
