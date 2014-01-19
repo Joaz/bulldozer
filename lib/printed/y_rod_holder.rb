@@ -1,33 +1,39 @@
 class YRodHolder < CrystalScad::Assembly
-
-	def show
-		part(true)
+	
+	def initialize
+		@height = 12
 	end
-
-	def output
-		res = part(false)
-		res+= part(false).mirror(x:1).translate(y:27)
-	end
-
+	
 	def part(show)
-		res = cube([50,17+6,6]).center_xy.translate(y:-5) 
-		res += cylinder(d:17,h:20).translate(x:-8.5)
-    res -= cylinder(d:12.3,h:20).translate(x:-8.5,z:2.5)
-    tslot_mount = TSlotInsert.new(height:6).output
-    res += tslot_mount.rotate(z:-90).translate(x:-33.5,y:8)
-		res = res.color(@@printed_color)
+		res = half(show)
+		res += half(show).mirror(z:1).translate(z:12*2)
+		
+  	res = res.color(@@printed_color)  
+		b = Bolt.new(4,30,washer:true)
+		n = TSlotNut.new		
+		if show
+			res += b.show.mirror(z:1).translate(x:25,y:15,z:@height*2) 		
+			res += n.show.translate(n.threads_top.position_on(b)).translate(x:25,y:15)		
+		end
+	
+		b = Bolt.new(4,30,washer:true)
+		n = TSlotNut.new		
+		if show
+			res += b.show.mirror(z:1).translate(x:-30,y:15,z:@height*2) 		
+			res += n.show.translate(n.threads_top.position_on(b)).rotate(z:90).translate(x:-30,y:15)		
+		end
 
-		bolt = Bolt.new(4,12)
-		washer = Washer.new(4.3)
-
-		res -= hull(cylinder(d:4.4,h:10),cylinder(d:4.4,h:10).translate(x:15)).translate(x:5,y:-6.5,z:-0.1)			
-		res += bolt.show.rotate(x:180).translate(x:15,y:-6.5,z:7) if show
-		res += washer.show.rotate(x:180).translate(x:15,y:-6.5,z:7) if show
-
-    
 		res
 	end
 	
+
+	def half(show)
+		res = cube([90,30,@height]).center_x
+  	res -= cylinder(d:12.2,h:30.2).rotate(x:-90).translate(y:5,z:12)
+		res -= long_slot(d:4.4,h:@height+0.2,l:16).translate(x:17,y:15,z:-0.1) 		
+		res -= long_slot(d:4.4,h:@height+0.2,l:15).rotate(z:90).translate(x:-30,y:7.5,z:-0.1) 		
+
+	end
 
 end
 

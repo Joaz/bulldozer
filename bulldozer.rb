@@ -32,7 +32,7 @@ assembly = BulldozerFrameAssembly.new.show
 
 
 
-subassembly = YAxisAssembly.new.show
+#subassembly = YAxisAssembly.new.show
 #FIXME: a way is needed to save drawings/specifications of hardware that gets modified in other classes, for example Door adds holes for hinges to the sheet, or aluminium profiles that needs drilling
 
 
@@ -68,7 +68,7 @@ parts.each do |part|
   end
 
 end
-assemblies = [XAxisAssembly,YAxisAssembly,ZAxisAssembly,YMotorMount,TSlotMount]
+assemblies = [XAxisAssembly,YAxisAssembly,ZAxisAssembly,YMotorMount,TSlotMount,YRodHolder]
 assemblies.each do |part|
 	name = part.to_s.underscore
 	part.new.show.save("output/assemblies/#{name}.scad","$fn=64;")

@@ -1,39 +1,42 @@
 class YAxisAssembly < CrystalScad::Assembly
   def initialize(args={})
     @args = args
-    @args[:length] ||= 430
+
     @args[:rod_size] ||= 12    
-    @args[:position] ||= 150 
+    @args[:position] ||= 240 
     @args[:bed_size_x] ||= 225
     @args[:bed_size_y] ||= 225       
     @args[:bed_size_z] ||= 12
 		@args[:tslot_x] ||= 295
 		@args[:tslot_y] ||= 495
 		@tslot_x,@tslot_y = @args[:tslot_x],@args[:tslot_y]
+		@bed_position_x = 34
+		@bed_position_z = 30
+    @args[:length] ||= @tslot_y-10
   end
   
   def show
-		fixed = printer_rect
-  	#fixed += Rod.new(length:@args[:length]).show.translate(y:2,x:holder_left.rod_position_x,z:holder_left.rod_position_z)   
-    #fixed += Rod.new(length:@args[:length]).show.translate(y:2,x:@args[:bed_size_x]-holder_left.rod_position_x,z:holder_left.rod_position_z)      
+		res = printer_rect
+  	res += Rod.new(length:@args[:length]).show.translate(y:5,x:rod_position_left=45,z:12)   
+  	res += Rod.new(length:@args[:length]).show.translate(y:5,x:rod_position_right=250,z:12)   
     
 
-		fixed += YMotorMount.new.show.rotate(z:-90).rotate(y:90).translate(x:@args[:bed_size_x]/2+21,y:@args[:length]+14)
+		res += YMotorMount.new.show.rotate(z:-90).rotate(y:90).translate(x:@args[:bed_size_x]/2+21,y:@tslot_y-60+9)
 
-		fixed += Belt.new.show.translate(x:115,y:12,z:-14)
-		fixed += YBeltIdler.new.show.rotate(y:90).translate(x:88,y:40,z:-8)
+		res += Belt.new.show.translate(x:140,y:44,z:4)
+		res += YBeltIdler.new.show.rotate(y:90).translate(x:88,y:40,z:-8)
 
-		#fixed += YRodHolder.new.show.rotate(x:90).translate(x:20,y:440,z:-12)
-		#fixed += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(x:20+185,y:440,z:-12)
-		#fixed += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(x:20,y:30,z:-12)
-		#fixed += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(x:20+185,y:30,z:-12)
+		res += YRodHolder.new.show.translate(x:rod_position_left)
+		res += YRodHolder.new.show.mirror(y:1).translate(x:rod_position_left,y:@tslot_y)
+
+		res += YRodHolder.new.show.translate(x:rod_position_right)
+		res += YRodHolder.new.show.mirror(y:1).translate(x:rod_position_right,y:@tslot_y)
 
 		#fixed += YEndstopHolder.new.show.translate(y:438,z:-5)
 
     
 
-		assembly = fixed + moving_table.translate(y:@args[:position])
-    
+		res + moving_table.translate(x:@bed_position_x,y:@args[:position],z:@bed_position_z)
   end
 
 	def moving_table
@@ -47,7 +50,7 @@ class YAxisAssembly < CrystalScad::Assembly
     moving_table += bed_plate.show.translate(z:-1)
     moving_table += CarbonFibrePlate.new.show.translate(x:12,y:12,z:20)
 		
-		moving_table += YBeltHolder.new.show.translate(x:100,y:-50,z:3)
+		moving_table += YBeltHolder.new.show.translate(x:90,y:80,z:3)
 
 	end
 
