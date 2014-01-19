@@ -14,11 +14,31 @@ class YAxisAssembly < CrystalScad::Assembly
   
   def show
 		fixed = printer_rect
+  	#fixed += Rod.new(length:@args[:length]).show.translate(y:2,x:holder_left.rod_position_x,z:holder_left.rod_position_z)   
+    #fixed += Rod.new(length:@args[:length]).show.translate(y:2,x:@args[:bed_size_x]-holder_left.rod_position_x,z:holder_left.rod_position_z)      
+    
+
+		fixed += YMotorMount.new.show.rotate(z:-90).rotate(y:90).translate(x:@args[:bed_size_x]/2+21,y:@args[:length]+14)
+
+		fixed += Belt.new.show.translate(x:115,y:12,z:-14)
+		fixed += YBeltIdler.new.show.rotate(y:90).translate(x:88,y:40,z:-8)
+
+		#fixed += YRodHolder.new.show.rotate(x:90).translate(x:20,y:440,z:-12)
+		#fixed += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(x:20+185,y:440,z:-12)
+		#fixed += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(x:20,y:30,z:-12)
+		#fixed += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(x:20+185,y:30,z:-12)
+
+		#fixed += YEndstopHolder.new.show.translate(y:438,z:-5)
+
+    
+
+		assembly = fixed + moving_table.translate(y:@args[:position])
+    
+  end
+
+	def moving_table
     bed_plate=BedPlate.new(x:@args[:bed_size_x],y:@args[:bed_size_y],z:@args[:bed_size_z])
     holder_left=BedPlateBearingMount.new
-    fixed += Rod.new(length:@args[:length]).show.translate(y:2,x:holder_left.rod_position_x,z:holder_left.rod_position_z)   
-    fixed += Rod.new(length:@args[:length]).show.translate(y:2,x:@args[:bed_size_x]-holder_left.rod_position_x,z:holder_left.rod_position_z)      
-    
     moving_table = holder_left.output.translate(x:0,z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/2)          
     # holders on the right side
     moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/5)          
@@ -26,25 +46,10 @@ class YAxisAssembly < CrystalScad::Assembly
    
     moving_table += bed_plate.show.translate(z:-1)
     moving_table += CarbonFibrePlate.new.show.translate(x:12,y:12,z:20)
+		
+		moving_table += YBeltHolder.new.show.translate(x:100,y:-50,z:3)
 
-		fixed += YMotorMount.new.show.rotate(z:-180).rotate(y:-90).translate(x:125,y:413,z:-32)
-
-		fixed += Belt.new.show.translate(x:115,y:12,z:-14)
-		moving_table += YBeltHolder.new.show.translate(x:100,y:@args[:position]-50,z:3)
-		fixed += YBeltIdler.new.show.rotate(y:90).translate(x:88,y:40,z:-8)
-
-		fixed += YRodHolder.new.show.rotate(x:90).translate(x:20,y:440,z:-12)
-		fixed += YRodHolder.new.show.rotate(x:90).mirror(x:1).translate(x:20+185,y:440,z:-12)
-		fixed += YRodHolder.new.show.rotate(x:90).mirror(y:1).translate(x:20,y:30,z:-12)
-		fixed += YRodHolder.new.show.rotate(x:90).mirror(y:1).mirror(x:1).translate(x:20+185,y:30,z:-12)
-
-		fixed += YEndstopHolder.new.show.translate(y:438,z:-5)
-
-    
-
-		assembly = fixed + moving_table.translate(y:@args[:position])
-    
-  end
+	end
 
 	def tslot_double
 	  TSlot.new(size:30,configuration:2,simple:@tslot_simple)

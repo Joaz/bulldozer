@@ -20,10 +20,11 @@ class TSlotMount < CrystalScad::Assembly
 			res += peg.translate(x:11,y:-5).color(@@printed_color) 	
 		end
 		res -= long_slot(d:1.1*@bolt_size,h:@thickness+0.2,l:@slot_length).rotate(y:90,z:90).translate(x:15,y:-0.1,z:8+@slot_length)
-		bolt = Bolt.new(@bolt_size,@bolt_length)
-		washer = Washer.new(@bolt_size)
-		res += bolt.show.rotate(x:90).translate(x:15,y:@thickness+1,z:@bolt_position) if show
-		res += washer.show.rotate(x:90).translate(x:15,y:@thickness+1,z:@bolt_position) if show
+		bolt = Bolt.new(@bolt_size,@bolt_length,washer:true)
+		res += bolt.show.rotate(x:90).translate(x:15,y:@thickness,z:@bolt_position) if show
+		nut = TSlotNut.new(bolt_size:@bolt_size)
+		res += nut.show.mirror(z:1).rotate(x:90).translate(nut.threads_top.position_on(bolt)).rotate(y:90).translate(x:15,y:-0,z:@bolt_position) if show
+
     res
   end
 
