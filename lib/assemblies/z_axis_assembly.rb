@@ -15,8 +15,8 @@ class ZAxisAssembly < CrystalScad::Assembly
 	end
 	
   def show
-      tslot_left = tslot.length(@args[:height]).hole(side:"y",position:"front").thread(position:"back")
-      tslot_right = tslot.length(@args[:height]).hole(side:"y",position:"front").thread(position:"back")
+      tslot_left = tslot.length(@args[:height]).hole(side:"y",position:"front").hole(side:"y",position:45).thread(position:"back")
+      tslot_right = tslot.length(@args[:height]).hole(side:"y",position:"front").hole(side:"y",position:45).thread(position:"back")
       tslot_top = tslot.length(@args[:right_pos]-@args[:left_pos]).holes(side:"y")
   
       assembly = tslot_left.show.translate(x:@args[:left_pos],z:-60)
