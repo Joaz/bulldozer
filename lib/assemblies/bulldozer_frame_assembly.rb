@@ -33,7 +33,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res = part
 		res+= ZAxisAssembly.new(tslot_simple:false,position:@z_tslot_position).show.translate(@main_position)
 	
-		res += YPlateAssembly.new(tslot_x:@tslot_x,tslot_y:@tslot_y,length:@y_plate_inner_length,rod_size:12,position:-20+@y_plate_position).show.translate(@main_position)
+		res += YAxisAssembly.new(tslot_x:@tslot_x,tslot_y:@tslot_y,length:@y_plate_inner_length,rod_size:12,position:-20+@y_plate_position).show.translate(@main_position)
 		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+40,y:@z_tslot_position,x:-2.5).translate(z:30)
 
 		res += BulldozerAssembly.new(position:5+@bulldozer_position).show.translate(@main_position)

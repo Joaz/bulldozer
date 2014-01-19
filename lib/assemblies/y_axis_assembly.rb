@@ -1,4 +1,4 @@
-class YPlateAssembly < CrystalScad::Assembly
+class YAxisAssembly < CrystalScad::Assembly
   def initialize(args={})
     @args = args
     @args[:length] ||= 430
