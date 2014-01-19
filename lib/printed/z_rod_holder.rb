@@ -11,19 +11,21 @@ class ZRodHolder < CrystalScad::Assembly
 	end
 	
   def tslot_mount(show, additional_wall_length=0)
-    res = cube([30+additional_wall_length,5,30]).color(@@printed_color)	
+    res = cube([30+additional_wall_length,y=14,30]).color(@@printed_color)	
     res += cube([8,5,5]).translate(x:11,y:-5).color(@@printed_color)	
 
-		res -= long_slot(d:4.4,h:10,l:14).rotate(y:90,z:90).translate(x:15,y:-3,z:25)
-		bolt = Bolt.new(4,12)
-		washer = Washer.new(4.3)		
-		res += bolt.show.rotate(x:90).translate(x:15,y:6,z:20) if show
-		res += washer.show.rotate(x:90).translate(x:15,y:6,z:20) if show
-    res
+		res -= long_slot(d:4.4,h:y+0.2,l:14).rotate(y:90,z:90).translate(x:15,y:-0.1,z:25)
+		bolt = Bolt.new(4,20,washer:true)
+		
+		t = TSlotNut.new(bolt_size:4)
+		res += bolt.show.rotate(x:90).translate(x:15,y:y,z:20) if show
+		res += t.show.translate(t.threads_top.position_on(bolt)).rotate(x:90).translate(x:15,y:-10,z:20) if show
+
+		res
   end
 
 	def part(show)
-    res = tslot_mount(show,5) 
+    res = tslot_mount(show,5).translate(y:-30) 
    # res += tslot_mount(show).rotate(z:-90).translate(x:30) 
     res += tslot_mount(show).rotate(z:-90).translate(x:30,y:-30) 
      

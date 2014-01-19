@@ -6,10 +6,12 @@ class ZAxisAssembly < CrystalScad::Assembly
     @args[:right_pos] = 325 # right of y-tslot
     @args[:height] = 483 # total height from bottom
     @args[:tslot_simple] ||= false
+		@tslot_configuration = 1
+
   end
  
 	def tslot
-		TSlot.new(size:30,configuration:2,simple:@args[:tslot_simple])	
+		TSlot.new(size:30,configuration:@tslot_configuration,simple:@args[:tslot_simple])	
 	end
 	
   def show
@@ -33,13 +35,15 @@ class ZAxisAssembly < CrystalScad::Assembly
 	def bolts
     		
 		res = nil
-		(0..1).each do |i|		
+		(0..@tslot_configuration-1).each do |i|		
 			# lower bolts
 		
 			b = Bolt.new(8,40,washer:true)
 			t = TSlotNut.new(bolt_size:8)
-			res += b.show.rotate(y:90).translate(y:15+30*i,z:-45)
-			res += t.show.translate(t.threads_top.position_on(b)).rotate(z:90).rotate(y:90).translate(x:40,y:15+30*i,z:-45)
+			(0..1).each do |f|			
+				res += b.show.rotate(y:90).translate(y:15+30*i,z:-45+30*f)
+				res += t.show.translate(t.threads_top.position_on(b)).rotate(z:90).rotate(y:-90).translate(x:30,y:15+30*i,z:-45+30*f)
+			end
 
 			# upper bolts
 			b = Bolt.new(8,50,washer:true)
