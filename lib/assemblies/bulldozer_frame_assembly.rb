@@ -33,7 +33,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res = part
 		res+= ZAxisAssembly.new(tslot_simple:false,position:@z_tslot_position).show.translate(@main_position)
 	
-		res += YPlateAssembly.new(length:@y_plate_inner_length,rod_size:12,position:-20+@y_plate_position).show.translate(@main_position).translate(z:3.5,y:30,x:35)
+		res += YPlateAssembly.new(tslot_x:@tslot_x,tslot_y:@tslot_y,length:@y_plate_inner_length,rod_size:12,position:-20+@y_plate_position).show.translate(@main_position)
 		res += XAxisAssembly.new(position:15+200).show.translate(@main_position).translate(z:100+40,y:@z_tslot_position,x:-2.5).translate(z:30)
 
 		res += BulldozerAssembly.new(position:5+@bulldozer_position).show.translate(@main_position)
@@ -123,7 +123,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 
 
 		# lower base tslot
-		res += printer_rect.translate(@main_position) 
+		#res += printer_rect.translate(@main_position) 
 		res += rubber_dampener.translate(@main_position) 
 	
 		# upper tslot
@@ -140,21 +140,6 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res
 	end
 	
-	# ugly code ahead
-	def printer_rect
-		x,y=@tslot_x,@tslot_y
-		size = 30
-		# x 
-		res = tslot_double.length(x-size*2).threads.show.rotate(x:-90,z:-90).translate(x:size,y:size)
-		res += tslot_double.length(x-size*2).threads.show.rotate(x:-90,z:-90).translate(x:size,y:y)   
-
-		# y
-		res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90)
-		res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90).mirror(x:1).translate(x:x)
-
-		res += printer_bolts		
-		res		
-	end
 	
 	def main_rect
 		x,y=@frame_x,@frame_y
@@ -199,29 +184,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += b.show.rotate(y:-90).translate(x:@frame_x+30,y:@frame_y-15,z:-15)
 	end
 
-	def printer_bolts
-		# right side	
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:90).translate(x:0,y:15,z:-15)
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:90).translate(x:0,y:15,z:-15-30)
 
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:90).translate(x:0,y:@tslot_y-15,z:-15)
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:90).translate(x:0,y:@tslot_y-15,z:-15-30)
-		# left side	
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:15,z:-15)
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:15,z:-15-30)
-
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:@tslot_y-15,z:-15)
-		b =Bolt.new(8,50,washer:true)
-		res += b.show.rotate(y:-90).translate(x:@tslot_x,y:@tslot_y-15,z:-15-30)
-
-	end
 
 	def rubber_dampener
 		res = CrystalScadObject.new
