@@ -4,28 +4,30 @@ class YRodHolder < CrystalScad::Assembly
 		@height = 12
 	end
 	
-	def part(show)
-		res = half(show)
-		res += half(show).mirror(z:1).translate(z:12*2)
+	def show
+		res = half(true)
+		res += half(true).mirror(z:1).translate(z:12*2)
 		
   	res = res.color(@@printed_color)  
 		b = Bolt.new(4,30,washer:true)
 		n = TSlotNut.new		
-		if show
-			res += b.show.mirror(z:1).translate(x:25,y:15,z:@height*2) 		
-			res += n.show.translate(n.threads_top.position_on(b)).translate(x:25,y:15)		
-		end
+
+		res += b.show.mirror(z:1).translate(x:25,y:15,z:@height*2) 		
+		res += n.show.translate(n.threads_top.position_on(b)).translate(x:25,y:15)		
+
 	
 		b = Bolt.new(4,30,washer:true)
 		n = TSlotNut.new		
-		if show
-			res += b.show.mirror(z:1).translate(x:-30,y:15,z:@height*2) 		
-			res += n.show.translate(n.threads_top.position_on(b)).rotate(z:90).translate(x:-30,y:15)		
-		end
+		res += b.show.mirror(z:1).translate(x:-30,y:15,z:@height*2) 		
+		res += n.show.translate(n.threads_top.position_on(b)).rotate(z:90).translate(x:-30,y:15)		
 
 		res
 	end
 	
+	def output
+		res = half(false)
+		res += half(false).mirror(x:1).translate(y:-31)
+	end
 
 	def half(show)
 		res = cube([90,30,@height]).center_x
