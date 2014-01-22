@@ -3,7 +3,7 @@ class CarbonFibrePlate < CrystalScad::Assembly
 		super
 		@args[:x] ||= 200
 		@args[:y] ||= 200
-		@args[:z] ||= 3	
+		@args[:z] ||= 1	
 		
 	end	
 

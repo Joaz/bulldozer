@@ -10,12 +10,12 @@ class Heatbed
   end
   
   def description
-    "Heatbed pcb"
+    "Heatbed pcb, Aluminium"
   end
   
   def show
     bed = cube([@size[:x],@size[:y],@size[:z]])
     # leaving it simple here, no holes
-    bed.color("OrangeRed")
+    bed.color("Silver")
   end
 end

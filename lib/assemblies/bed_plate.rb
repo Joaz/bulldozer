@@ -1,18 +1,21 @@
-class BedPlate
+class BedPlate < CrystalScad::Assembly
 	attr_accessor :size
 	def initialize(args={})
-		@size=args
-		
+		@size=args	
 		@bolt_positions = [{x:9,y:9},{x:9+206,y:9},{x:9,y:9+206},{x:9+206,y:9+206}]
-	  
-	  @@bom.add(description) unless args[:no_bom] == true
+  
 	  @bolt_height = @size[:z]
 	end
-
-  def description
-    "laminated plywood cut #{@size[:x]}x#{@size[:y]}, thickness=#{@size[:z]}mm"
-  end
-  
+	
+	def tslot
+	  TSlot.new(size:15)
+	end
+	
+	def part(show)
+	  tslot.length(220).show.rotate(x:-90)
+	end 
+	
+=begin  
 	def output
 		r = cube([@size[:x],@size[:y],@size[:z]])
 
@@ -23,6 +26,7 @@ class BedPlate
 	def show
 		output+bolts+nuts(3)+heatbed+nuts
 	end
+=end
 
 	def bolts
 		@bolt_positions.each do |pos|

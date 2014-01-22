@@ -68,7 +68,7 @@ parts.each do |part|
   end
 
 end
-assemblies = [XAxisAssembly,YAxisAssembly,ZAxisAssembly,YMotorMount,TSlotMount,YRodHolder]
+assemblies = [XAxisAssembly,YAxisAssembly,ZAxisAssembly,YMotorMount,TSlotMount,YRodHolder,BedPlate]
 assemblies.each do |part|
 	name = part.to_s.underscore
 	part.new.show.save("output/assemblies/#{name}.scad","$fn=64;")
