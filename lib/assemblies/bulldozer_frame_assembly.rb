@@ -17,7 +17,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 	  @y_plate_position = 0
 
 
-		@show_side_plates = true
+		@show_side_plates = false
 		@door_rotation = 135
 	end
 	

@@ -7,12 +7,11 @@ class BedPlate < CrystalScad::Assembly
 	  @bolt_height = @size[:z]
 	end
 	
-	def tslot
-	  TSlot.new(size:15)
-	end
 	
 	def part(show)
-	  tslot.length(220).show.rotate(x:-90)
+	  res = YPlate.new.show
+	  res += Heatbed.new.show.translate(x:6,y:6,z:10)
+	  
 	end 
 	
 =begin  

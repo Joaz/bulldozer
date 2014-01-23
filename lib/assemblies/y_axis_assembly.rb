@@ -17,8 +17,8 @@ class YAxisAssembly < CrystalScad::Assembly
   
   def show
 		res = printer_rect
-  	res += Rod.new(length:@args[:length]).show.translate(y:5,x:rod_position_left=45,z:12)   
-  	res += Rod.new(length:@args[:length]).show.translate(y:5,x:rod_position_right=250,z:12)   
+  	res += Rod.new(length:@args[:length]).show.translate(y:5,x:rod_position_left=45+30,z:12)   
+  	res += Rod.new(length:@args[:length]).show.translate(y:5,x:rod_position_right=250-30,z:12)   
     
 
 		res += YMotorMount.new.show.rotate(z:-90).rotate(y:90).translate(x:@args[:bed_size_x]/2+21,y:@tslot_y-60+9)
