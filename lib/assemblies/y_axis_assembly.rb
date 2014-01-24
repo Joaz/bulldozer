@@ -48,10 +48,10 @@ class YAxisAssembly < CrystalScad::Assembly
     moving_table += BedPlateBearingMount.new.output.mirror(x:1).translate(x:@args[:bed_size_x],z:-@args[:bed_size_z],y:(@args[:bed_size_y]-holder_left.holder_length)/5*4)          
    
     moving_table += bed_plate.show.translate(z:-1)
-    moving_table += CarbonFibrePlate.new.show.translate(x:12,y:12,z:20)
+    moving_table += CarbonFibrePlate.new.show.translate(x:12,y:12,z:18.5)
 		
 		moving_table += YBeltHolder.new.show.translate(x:90,y:80,z:3)
-
+moving_table.translate(z:5)
 	end
 
 	def tslot_double

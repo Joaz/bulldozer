@@ -2,57 +2,40 @@ class BedPlate < CrystalScad::Assembly
 	attr_accessor :size
 	def initialize(args={})
 		@size=args	
-		@bolt_positions = [{x:9,y:9},{x:9+206,y:9},{x:9,y:9+206},{x:9+206,y:9+206}]
-  
+
 	  @bolt_height = @size[:z]
+	  @heatbed_pos = {x:6,y:6,z:18}
+	  @heatbed = Heatbed.new
 	end
 	
 	
 	def part(show)
 	  res = YPlate.new.show
-	  res += Heatbed.new.show.translate(x:6,y:6,z:10)
+
+	  res += @heatbed.show.translate(@heatbed_pos)
+	  res += bolts.translate(@heatbed_pos)
+	  
 	  
 	end 
 	
-=begin  
-	def output
-		r = cube([@size[:x],@size[:y],@size[:z]])
-
-		r = r-bolts		
-		return r.color("SaddleBrown")	
-	end
-	
-	def show
-		output+bolts+nuts(3)+heatbed+nuts
-	end
-=end
-
 	def bolts
-		@bolt_positions.each do |pos|
-			@bolt += Bolt.new(3,25).output.translate(pos)		
-		end
-		@bolt
+		res = nil
+		@heatbed.hole_positions.each do |pos|
+      dbolt = DistanceBoltM4.new.show
+      # nuts on the distance bolt
+      nut = Nut.new(4)
+      dbolt += nut.show.rotate(z:15).translate(z:9)
+      nut = Nut.new(4)
+      dbolt += nut.show.rotate(z:30).translate(z:9+nut.height)
+      # lower bolt
+      bolt = Bolt.new(4,8,washer:true)
+      dbolt += bolt.show.translate(z:-3)
+      
+      res += dbolt.translate(x:pos[:x],y:pos[:y],z:-(9+nut.height*2)+0.4)
+    end
+    res
 	end
 
-	def nuts(count=1)
-		@nut_height = Nut.new(3,no_bom:true).height + 0.05
-	
-		(1..count).each do |i| 		
-			@bolt_positions.each do |pos|
-				@nut += Nut.new(3).show.	translate(pos).translate(z:@bolt_height)
-			end		
-		  @bolt_height += @nut_height
-		end
-
-		@nut 
-	end	
-	
-	def heatbed
-	  bed = Heatbed.new
-	  output = bed.show.translate(x:5,y:5,z:@bolt_height)
-	  @bolt_height+= bed.size[:z]
-	  output
-	end
 	
 
 end

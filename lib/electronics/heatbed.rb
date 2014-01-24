@@ -15,12 +15,22 @@ class Heatbed < CrystalScad::Assembly
   end
   
   def description
-    "Heatbed pcb, Aluminium"
+    "Heatbed pcb, Aluminium, with holes threaded M4"
   end
   
   def show
-    bed = cube([@x,@y,@z])
+    bed = cube([@x,@y,@z]).color("Silver")
     # leaving it simple here, no holes
-    bed.color("Silver")
+    bed-=threads_bottom
+    bed
   end
+  
+  def threads_bottom
+    res = []
+    @hole_positions.each do |pos|
+      res << ScrewThread.new(x:pos[:x],y:pos[:y],size:4,depth:@z+0.01)
+    end 
+    res
+  end 
+  
 end
