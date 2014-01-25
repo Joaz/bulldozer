@@ -19,7 +19,7 @@ class YPlate < CrystalScad::Assembly
     end
     
     # cutout for wires to go through
-    res -= hull(circle(d:10),circle(d:10).translate(x:30)).translate(x:@x/2-15,y:@y-40)
+    res -= hull(circle(d:10),circle(d:10).translate(x:30)).translate(x:@x/2+20,y:45)
     # FIXME: make hole for zip ties
     # check where the wires exit
     
