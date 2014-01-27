@@ -17,7 +17,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 	  @y_plate_position = 0
 
 
-		@show_side_plates = false
+		@show_side_plates = true
 		@door_rotation = 135
 	end
 	
@@ -40,22 +40,25 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += BulldozerRodHolder.new.show(:right).translate(@main_position).translate(x:330,y:-7,z:-75)
 		res += BulldozerRodHolder.new.show(:left).translate(@main_position).translate(x:-35,y:-7,z:-75)
 
+    res += PSU_sp320_12.new.show.rotate(z:-90).translate(x:@frame_x-300,y:@frame_y-30,z:35)
 
 		# bottom sheet		
-		res += AluminiumCompositeSheet.new(x:@frame_x,y:@frame_y).show.translate(z:30)
+		res += AluminiumCompositeSheet.new(bolt_margin:0.5,x:@frame_x,y:@frame_y).show.translate(z:30)
 		if @show_side_plates
 			# top sheet
-			res += AluminiumCompositeSheet.new(bolt_size:8,with_nut:false,x:@frame_x+60,y:@frame_y).show.translate(x:-30,z:@frame_z+30)
+			res += AluminiumCompositeSheet.new(bolt_size:8,bolt_margin:1,with_nut:false,x:@frame_x+60,y:@frame_y).show.translate(x:-30,z:@frame_z+30)
 
 			# back wall 
-			res += AluminiumCompositeSheet.new(x:@frame_x+60,y:@frame_z-@container_z).show.mirror(z:1).rotate(x:90).translate(x:-30,y:@frame_y,z:@container_z+30)
+			res += AluminiumCompositeSheet.new(bolt_margin:0.5,x:@frame_x+60,y:@frame_z-@container_z).show.mirror(z:1).rotate(x:90).translate(x:-30,y:@frame_y,z:@container_z+30)
 
+			# bottom back wall 
+			res += AluminiumCompositeSheet.new(bolt_margin:0.5,x:@frame_x-70,y:@container_z+30).show.mirror(z:1).rotate(x:90).translate(x:-30,y:@frame_y,z:0)
 
 		
 			# left wall
-			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).mirror(x:1).translate(y:30)
+			res += AluminiumCompositeSheet.new(bolt_margin:0.5,x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).mirror(x:1).translate(y:30)
 			# right wall
-			res += AluminiumCompositeSheet.new(x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
+			res += AluminiumCompositeSheet.new(bolt_margin:0.5,x:@frame_y-60,y:@frame_z+30).show.rotate(x:90,z:90).translate(x:@frame_x,y:30)
 		end   
     # container back wall
     
