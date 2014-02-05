@@ -1,0 +1,12 @@
+watch( 'bulldozer.rb' )  {|md|
+   system("./bulldozer.rb")
+}
+
+watch( 'lib/(.*)\.rb' )  {|md|
+   system("./bulldozer.rb")
+}
+
+watch( 'lib/*/(.*)\.rb' )  {|md|
+   system("./bulldozer.rb")
+}
+
