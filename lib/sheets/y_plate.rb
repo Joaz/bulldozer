@@ -19,15 +19,32 @@ class YPlate < CrystalScad::Assembly
     end
     
     # cutout for wires to go through
-    res -= hull(circle(d:10),circle(d:10).translate(x:30)).translate(x:@x/2+20,y:45)
+    res -= hull(circle(d:10),circle(d:10).translate(x:30)).translate(x:@x/2+20,y:@y-45)
     # FIXME: make hole for zip ties
     # check where the wires exit
+    
+    
+    # cutouts for the belt holder, M4, 55mm apart    
+    res -= circle(d:4.4).translate(x:@x/2+55/2.0,y:@y/2)
+    res -= circle(d:4.4).translate(x:@x/2-55/2.0,y:@y/2)
+    
+    # cutouts for the y bearing holders, M4, 30mm apart      
+    res -= circle(d:4.4).translate(x:7.5,y:@y/2)
+    res -= circle(d:4.4).translate(x:7+30,y:@y/2)
+
+    res -= circle(d:4.4).translate(x:@x-6,y:40)
+    res -= circle(d:4.4).translate(x:@x-6-30,y:40)
+
+    res -= circle(d:4.4).translate(x:@x-6,y:@y-40)
+    res -= circle(d:4.4).translate(x:@x-6-30,y:@y-40)
+
+ 
     
     res
   end 
   
   def show
-    res = output.linear_extrude(h:@z).color(r:60,b:60,g:60)
+    res = output.linear_extrude(h:@z).color("red") #.color(r:60,b:60,g:60)
   
 
   end

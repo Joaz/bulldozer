@@ -17,7 +17,7 @@ class MotorMount < CrystalScad::Assembly
   def part(show)
   	motor =  Nema17.new
   	motor_model = motor.show.rotate(x:0).translate(z:-47)
-    motor_model +=  Pulley.new.show.mirror(z:1).translate(z:17)
+    motor_model +=  Pulley.new.show.mirror(z:1).translate(z:17+8)
     
 		res += cube([42,42,@thickness]).center_xy
 		# use only 3 bolts

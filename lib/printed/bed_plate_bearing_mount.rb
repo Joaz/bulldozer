@@ -24,38 +24,46 @@ class BedPlateBearingMount < CrystalScad::Assembly
       @rod_position_z = -@plate_thickness
        
     end
-    
-    def show
-      part(true)
-    end
-    
-    def output
-      part(false)
-    end
+
     
     def part(show)
      
 
       part = @base 
       # extend for wood screw that goes under the bed
-      part+= cube([10,@holder_length,@holder_height]).translate(x:@diameter+@side_thickness_x*2)
+      part+= cube([42,@holder_length,@holder_height]).translate(x:@diameter+@side_thickness_x*2-32)
+      
+      distance_part = cube([42,@holder_length,10]).translate(x:@diameter+@side_thickness_x*2-32)
+      
       
       bearing_cut = cylinder(d:@diameter,h:@length).rotate(x:90).translate(x:@base.x/2,y:@base.y-@side_thickness_y)
       bearing_cut2 = cylinder(d:@diameter,h:@length).rotate(x:90).translate(x:@base.x/2,y:@base.y-@side_thickness_y,z:@diameter/2)
     
       part -= hull(bearing_cut,bearing_cut2).translate(z:@side_thickness_base+@diameter/2)
       part -= cylinder(d:@rod_diameter*1.3,h:@length+@side_thickness_y*2+0.2).rotate(x:-90).translate(x:@base.x/2,y:-0.1,z:@side_thickness_base+@diameter/2) 
-      # side mount wall
-      part += cube([@side_thickness_screw_wall, @holder_length, @plate_thickness+@holder_height]).translate(x:-@side_thickness_screw_wall)
-      part -= WoodScrew.new.output.rotate(y:90).translate(x:-@side_thickness_screw_wall-0.1,y:@holder_length/3,z:@holder_height+@plate_thickness/2)
-      part -= WoodScrew.new.output.rotate(y:90).translate(x:-@side_thickness_screw_wall-0.1,y:@holder_length/3*2,z:@holder_height+@plate_thickness/2)
- 
-      part -= WoodScrew.new(length:30).output.rotate(y:0).translate(x:@holder_length-7.5,y:@holder_length/2,z:-0.1)
-      
-      part += @bearing.show.rotate(x:90).translate(x:@base.x/2,y:@base.y-@side_thickness_y,z:@side_thickness_base+@diameter/2) if show
+     
+    
       part = part.color(@@printed_color)
+      part += @bearing.show.rotate(x:90).translate(x:@base.x/2,y:@base.y-@side_thickness_y,z:@side_thickness_base+@diameter/2) if show
+
+      b = Bolt.new(4,40,washer:true)
+      part -= b.output.rotate(y:0).translate(x:@holder_length-7.5,y:@holder_length/2,z:-0.1)
+      distance_part -= b.output.rotate(y:0).translate(x:@holder_length-7.5,y:@holder_length/2,z:-0.1)
+      part += b.show.rotate(y:0).translate(x:@holder_length-7.5,y:@holder_length/2,z:-0.1) if show
+
+      b = Bolt.new(4,40,washer:true)
+      part -= b.output.rotate(y:0).translate(x:@holder_length-7.5-30,y:@holder_length/2,z:-0.1)
+      distance_part -= b.output.rotate(y:0).translate(x:@holder_length-7.5-30,y:@holder_length/2,z:-0.1)
+      part += b.show.rotate(y:0).translate(x:@holder_length-7.5-30,y:@holder_length/2,z:-0.1) if show
+
+
       # return it with flat part that goes onto the plate = z:0
-      return part.translate(z:-@holder_height/2)
+      if show
+        return part.translate(z:-@holder_height/2) + distance_part.translate(z:11)
+      else
+        res = part 
+        res +=  distance_part.translate(x:43)
+      end
       
     end
     
