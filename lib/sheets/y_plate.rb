@@ -29,14 +29,14 @@ class YPlate < CrystalScad::Assembly
     res -= circle(d:4.4).translate(x:@x/2-55/2.0,y:@y/2)
     
     # cutouts for the y bearing holders, M4, 30mm apart      
-    res -= circle(d:4.4).translate(x:7.5,y:@y/2)
-    res -= circle(d:4.4).translate(x:7+30,y:@y/2)
+    res -= circle(d:4.4).translate(x:6.5,y:@y/2)
+    res -= circle(d:4.4).translate(x:6.5+30,y:@y/2)
 
-    res -= circle(d:4.4).translate(x:@x-6,y:40)
-    res -= circle(d:4.4).translate(x:@x-6-30,y:40)
+    res -= circle(d:4.4).translate(x:@x-6.5,y:40)
+    res -= circle(d:4.4).translate(x:@x-6.5-30,y:40)
 
-    res -= circle(d:4.4).translate(x:@x-6,y:@y-40)
-    res -= circle(d:4.4).translate(x:@x-6-30,y:@y-40)
+    res -= circle(d:4.4).translate(x:@x-6.5,y:@y-40)
+    res -= circle(d:4.4).translate(x:@x-6.5-30,y:@y-40)
 
  
     

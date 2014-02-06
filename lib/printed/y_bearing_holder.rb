@@ -17,7 +17,7 @@ class YBearingHolder < CrystalScad::Assembly
       @diameter+=@diameter_margin
          
       @holder_length = @length+@side_thickness_y*2
-      @holder_height = 33.0/2
+      @holder_height = 42.0/2
 
     end
 
@@ -46,7 +46,7 @@ class YBearingHolder < CrystalScad::Assembly
 
       [1,-1].each do |i|
       
-        b = Bolt.new(4,40,washer:true,no_bom:!bottom)
+        b = Bolt.new(4,50,washer:true,no_bom:!bottom)
         res -= b.output.rotate(y:0).translate(x:i*15,y:@holder_length/2,z:-0.1)
         res += b.show.rotate(y:0).translate(x:i*15,y:@holder_length/2,z:-0.1) if show and bottom
       end 
