@@ -47,7 +47,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly rescue nil
 
-parts = [RumbaMount,ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,BedPlateBearingMount,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
+parts = [RumbaMount,ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,YBearingHolder,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
@@ -68,7 +68,7 @@ parts.each do |part|
   end
 
 end
-assemblies = [XAxisAssembly,YAxisAssembly,ZAxisAssembly,YMotorMount,TSlotMount,YRodHolder,BedPlate,SHF12,PSU_sp320_12]
+assemblies = [XAxisAssembly,YAxisAssembly,ZAxisAssembly,YMotorMount,TSlotMount,YRodHolder,BedPlate,SHF12,PSU_sp320_12,YBearingHolder]
 assemblies.each do |part|
 	name = part.to_s.underscore
 	part.new.show.save("output/assemblies/#{name}.scad","$fn=64;")
