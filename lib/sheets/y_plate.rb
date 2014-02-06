@@ -19,9 +19,13 @@ class YPlate < CrystalScad::Assembly
     end
     
     # cutout for wires to go through
-    res -= hull(circle(d:10),circle(d:10).translate(x:30)).translate(x:@x/2+20,y:@y-45)
-    # FIXME: make hole for zip ties
-    # check where the wires exit
+    res -= hull(circle(d:10),circle(d:10).translate(x:15)).translate(x:@x/2+40,y:@y-45)
+
+    res -= circle(d:4.4).translate(x:@x/2+40,y:@y-45-10)
+    res -= circle(d:4.4).translate(x:@x/2+40,y:@y-45+10)
+
+    res -= circle(d:4.4).translate(x:@x/2+40+15,y:@y-45-10)
+    res -= circle(d:4.4).translate(x:@x/2+40+15,y:@y-45+10)
     
     
     # cutouts for the belt holder, M4, 55mm apart    

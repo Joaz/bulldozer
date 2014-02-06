@@ -56,7 +56,7 @@ class YAxisAssembly < CrystalScad::Assembly
     moving_table += YBearingHolder.new.show.translate(x:@rod_position_right-@bed_position_x,y:200-31.1-12,z:-@args[:bed_size_z]-10)          
    
     moving_table += bed_plate.show.translate(z:-1)
-  #  moving_table += CarbonFibrePlate.new.show.translate(x:12,y:12,z:18.5)
+    moving_table += CarbonFibrePlate.new.show.translate(x:12,y:12,z:18.5)
 		
 		moving_table += YBeltHolder.new.show.translate(x:95.5,y:107)
     moving_table.translate(z:5)

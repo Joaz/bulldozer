@@ -57,6 +57,9 @@ end
 unless Dir.exists?("output/stl")
   Dir.mkdir("output/stl")
 end
+unless Dir.exists?("output/dxf")
+  Dir.mkdir("output/dxf")
+end
 
 parts.each do |part|
   name = part.to_s.underscore
@@ -66,14 +69,25 @@ parts.each do |part|
     system("openscad -o output/stl/#{name}.stl output/#{name}.scad")
     system("admesh output/stl/#{name}.stl -b output/#{name}.stl")
   end
-
 end
+
 assemblies = [XAxisAssembly,YAxisAssembly,ZAxisAssembly,YMotorMount,TSlotMount,YRodHolder,BedPlate,SHF12,PSU_sp320_12,YBearingHolder]
 assemblies.each do |part|
 	name = part.to_s.underscore
 	part.new.show.save("output/assemblies/#{name}.scad","$fn=64;")
 end  
   
+# dxf stuff
+[YPlate].each do |part|
+  name = part.to_s.underscore
+  part.new.output.save("output/#{name}.scad","$fn=64;")
+  if ARGV[0] == "build"
+    puts "Building #{name}..."
+    system("openscad -o output/dxf/#{name}.dxf output/#{name}.scad")
+  end
+end
+
+
 
 
 

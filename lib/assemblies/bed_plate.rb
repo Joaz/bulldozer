@@ -12,7 +12,7 @@ class BedPlate < CrystalScad::Assembly
 	def part(show)
 	  res = YPlate.new.show
 
-#	  res += @heatbed.show.translate(@heatbed_pos)
+	  res += @heatbed.show.translate(@heatbed_pos)
 	  res += bolts.translate(@heatbed_pos)
 	  
 	  
