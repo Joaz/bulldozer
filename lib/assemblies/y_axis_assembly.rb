@@ -52,13 +52,13 @@ class YAxisAssembly < CrystalScad::Assembly
     holder_left=YBearingHolder.new
     moving_table = holder_left.show.translate(x:@rod_position_left-@bed_position_x,y:96,z:-@args[:bed_size_z]-10)          
     # holders on the right side
-    moving_table += YBearingHolder.new.show.translate(x:@rod_position_right-@bed_position_x,y:23,z:-@args[:bed_size_z]-10)          
-    moving_table += YBearingHolder.new.show.translate(x:@rod_position_right-@bed_position_x,y:200-31.1,z:-@args[:bed_size_z]-10)          
+    moving_table += YBearingHolder.new.show.translate(x:@rod_position_right-@bed_position_x,y:23+12,z:-@args[:bed_size_z]-10)          
+    moving_table += YBearingHolder.new.show.translate(x:@rod_position_right-@bed_position_x,y:200-31.1-12,z:-@args[:bed_size_z]-10)          
    
     moving_table += bed_plate.show.translate(z:-1)
   #  moving_table += CarbonFibrePlate.new.show.translate(x:12,y:12,z:18.5)
 		
-		moving_table += YBeltHolder.new.show.translate(x:96,y:107)
+		moving_table += YBeltHolder.new.show.translate(x:95.5,y:107)
     moving_table.translate(z:5)
 	end
 
@@ -75,8 +75,8 @@ class YAxisAssembly < CrystalScad::Assembly
 		res += tslot_double.length(x-size*2).threads.show.rotate(x:-90,z:-90).translate(x:size,y:y)   
 
 		# y
-	#	res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90)
-	#	res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90).mirror(x:1).translate(x:x)
+		res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90)
+		res += tslot_double.length(y).holes(side:"y").show.rotate(x:-90).mirror(x:1).translate(x:x)
 
 		res += printer_bolts		
 		res		

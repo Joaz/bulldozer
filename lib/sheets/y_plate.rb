@@ -32,11 +32,11 @@ class YPlate < CrystalScad::Assembly
     res -= circle(d:4.4).translate(x:6.5,y:@y/2)
     res -= circle(d:4.4).translate(x:6.5+30,y:@y/2)
 
-    res -= circle(d:4.4).translate(x:@x-6.5,y:40)
-    res -= circle(d:4.4).translate(x:@x-6.5-30,y:40)
+    res -= circle(d:4.4).translate(x:@x-6.5,y:52)
+    res -= circle(d:4.4).translate(x:@x-6.5-30,y:52)
 
-    res -= circle(d:4.4).translate(x:@x-6.5,y:@y-40)
-    res -= circle(d:4.4).translate(x:@x-6.5-30,y:@y-40)
+    res -= circle(d:4.4).translate(x:@x-6.5,y:@y-52)
+    res -= circle(d:4.4).translate(x:@x-6.5-30,y:@y-52)
 
  
     
@@ -44,7 +44,7 @@ class YPlate < CrystalScad::Assembly
   end 
   
   def show
-    res = output.linear_extrude(h:@z).color("red") #.color(r:60,b:60,g:60)
+    res = output.linear_extrude(h:@z).color(r:60,b:60,g:60)
   
 
   end
