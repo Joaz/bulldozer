@@ -5,8 +5,12 @@ class DoorSheet < CrystalScad::Assembly
 		@x = args[:x] || 300				
 		@y = args[:y] || 200				
 		@z = args[:z] || 5		
-
+    @@bom.add description
 	end
+	
+	def description
+	  "Clear sheet, #{@x}x#{@y}mm thickness #{@z}mm"	
+  end
 
 	def output
 		return @output unless @output == nil	
