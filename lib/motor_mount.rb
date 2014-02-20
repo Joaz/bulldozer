@@ -31,7 +31,9 @@ class MotorMount < CrystalScad::Assembly
     res = res.color(@@printed_color)
 		 
 		bolts = create_bolts("top",res,motor,height:@thickness,bolt_height:@bolt_height,washer:@washer)[0..2]
-		res += bolts
+#		puts bolts.inspect
+		res -= bolts
+	#	res += bolts if show
 
     res += motor_model if show
    

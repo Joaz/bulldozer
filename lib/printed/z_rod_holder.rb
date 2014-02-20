@@ -7,7 +7,7 @@ class ZRodHolder < CrystalScad::Assembly
 	def output
 		res = part(false)
 	
-		res+= part(false).mirror(x:1).translate(y:-12,x:25)
+		res+= part(false).mirror(x:1).translate(y:-20,x:23)
 	end
 	
   def tslot_mount(show, additional_wall_length=0)
