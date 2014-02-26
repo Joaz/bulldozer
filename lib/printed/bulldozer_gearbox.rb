@@ -19,6 +19,9 @@ class BulldozerGearbox < CrystalScad::Printed
 
 		bottom -= motor.output.translate(z:-motor.args[:length]-1)
     bottom += motor.show.translate(z:-motor.args[:length]) if show
+    # motor shaft cutout on top    
+    top -= cylinder(d:10,h:30)
+
     
 		mount = TSlotMount.new(tslot_args={peg:false,thickness:18,bolt_length:25})
 		bottom+=mount.part(show).rotate(y:-90).translate(x:-size_x/2+22,y:-22)
