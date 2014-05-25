@@ -57,32 +57,35 @@ class ZAxisAssembly < CrystalScad::Assembly
   def z_axis_drive
 		assembly = ZMotorMount.new.show.translate(x:@args[:left_pos],y:-3,z:-60)
 		assembly += ZMotorMount.new.show.mirror(x:1).translate(x:@args[:right_pos],y:-3,z:-60)
+		assembly += XEndMotor.new.show.rotate(z:-90).translate(x:@args[:left_pos]-13,y:-27,z:60)
 
-		assembly += ZAcmeBearingHolderLower.new.show.rotate(z:180).translate(x:@args[:left_pos]+30,z:42)
-		assembly += ZAcmeBearingHolderLower.new.show(false).mirror(x:1).rotate(z:180).translate(x:@args[:right_pos]-30,z:42)
+		# smooth rod center y from threaded rod: x:17,y:-2.9
 
-		assembly += ZAcmeBearingHolderUpper.new.show.rotate(z:180).mirror(z:1).translate(x:@args[:left_pos]+30,z:423)
-		assembly += ZAcmeBearingHolderUpper.new.show.mirror(x:1).rotate(z:180).mirror(z:1).translate(x:@args[:right_pos]-30,z:423)
+#		assembly += ZAcmeBearingHolderLower.new.show.rotate(z:180).translate(x:@args[:left_pos]+30,z:42)
+#		assembly += ZAcmeBearingHolderLower.new.show(false).mirror(x:1).rotate(z:180).translate(x:@args[:right_pos]-30,z:42)
+
+#		assembly += ZAcmeBearingHolderUpper.new.show.rotate(z:180).mirror(z:1).translate(x:@args[:left_pos]+30,z:423)
+#		assembly += ZAcmeBearingHolderUpper.new.show.mirror(x:1).rotate(z:180).mirror(z:1).translate(x:@args[:right_pos]-30,z:423)
     
     
-		assembly += AcmeRod.new(top_bearing_offset:-3).show.translate(x:@args[:left_pos]+4,y:-27,z:32)
-    assembly += AcmeRod.new(top_bearing_offset:-3).show.translate(x:@args[:right_pos]-4,y:-27,z:32)
+#		assembly += AcmeRod.new(top_bearing_offset:-3).show.translate(x:@args[:left_pos]+4,y:-27,z:32)
+#    assembly += AcmeRod.new(top_bearing_offset:-3).show.translate(x:@args[:right_pos]-4,y:-27,z:32)
     assembly += Coupling.new.show.translate(x:@args[:left_pos]+4,y:-27,z:15)
     assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:-27,z:15)
 
     rod_position_left = 18
     rod_position_right = @args[:right_pos]-30-18
     
-    assembly += Rod.new(length:405).show.rotate(x:90).translate(y:52,x:rod_position_left,z:2)
-    assembly += Rod.new(length:405).show.rotate(x:90).translate(y:52,x:rod_position_right,z:2)
+    assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(x:@args[:left_pos]-13,y:-27-2.9,z:10)
+    assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(y:52,x:rod_position_right,z:2)
     
 
 	# bottom
-    assembly += ZRodHolder.new.show.translate(y:60,x:rod_position_left-48,z:0)
-    assembly += ZRodHolder.new.show.mirror(x:1).translate(y:60,x:rod_position_right+48,z:0)
+#    assembly += ZRodHolder.new.show.translate(y:60,x:rod_position_left-48,z:0)
+#    assembly += ZRodHolder.new.show.mirror(x:1).translate(y:60,x:rod_position_right+48,z:0)
     # top
-    assembly += ZRodHolder.new.show.mirror(z:1).translate(y:60,x:rod_position_left-48,z:@args[:height]-60)
-    assembly += ZRodHolder.new.show.mirror(z:1).mirror(x:1).translate(y:60,x:rod_position_right+48,z:@args[:height]-60)
+#    assembly += ZRodHolder.new.show.mirror(z:1).translate(y:60,x:rod_position_left-48,z:@args[:height]-60)
+#    assembly += ZRodHolder.new.show.mirror(z:1).mirror(x:1).translate(y:60,x:rod_position_right+48,z:@args[:height]-60)
 
 
     assembly

@@ -17,7 +17,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 	  @y_plate_position = 0
 
 
-		@show_side_plates = true
+		@show_side_plates = false
 		@door_rotation = 135
 	end
 	
@@ -89,7 +89,7 @@ class BulldozerFrameAssembly < CrystalScad::Assembly
 		res += t.show.translate(t.threads_top.position_on(b)).rotate(y:90).translate(npos).translate(x:-30)
 
 	
-
+	
 		# bottom doors
 		res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:@door_rotation,z_offset:10).show.translate(x:-0,y:-10,z:30+0.5)
 		res += Door.new(sheet:DoorSheet.new(x:@frame_x/2-1,y:@container_z-1),rotation:@door_rotation,z_offset:10).show.mirror(x:1).translate(x:@frame_x,y:-10,z:30+0.5)
