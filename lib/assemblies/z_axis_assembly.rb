@@ -59,7 +59,7 @@ class ZAxisAssembly < CrystalScad::Assembly
 		assembly += ZMotorMount.new.show.mirror(x:1).translate(x:@args[:right_pos],y:-3,z:-60)
 		assembly += XEndMotor.new.show.rotate(z:-90).translate(x:@args[:left_pos]-13,y:-27,z:60)
 
-		# smooth rod center y from threaded rod: x:17,y:-2.9
+		# smooth rod center y from threaded rod: x:17,y:-2
 
 #		assembly += ZAcmeBearingHolderLower.new.show.rotate(z:180).translate(x:@args[:left_pos]+30,z:42)
 #		assembly += ZAcmeBearingHolderLower.new.show(false).mirror(x:1).rotate(z:180).translate(x:@args[:right_pos]-30,z:42)
@@ -76,7 +76,7 @@ class ZAxisAssembly < CrystalScad::Assembly
     rod_position_left = 18
     rod_position_right = @args[:right_pos]-30-18
     
-    assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(x:@args[:left_pos]-13,y:-27-2.9,z:10)
+    assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(x:@args[:left_pos]-13,y:-27-2,z:10)
     assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(y:52,x:rod_position_right,z:2)
     
 
