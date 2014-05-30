@@ -1,59 +1,51 @@
-class ZMotorMount < CrystalScad::Assembly
+class ZMotorMount < CrystalScad::Printed
 
 	def initialize(args={})
-		super
-		@args[:thickness] ||= 5
+		@motor_mount_thickness = 6
 	end
 
 	def show
-		part.rotate(z:180).translate(x:30,y:3)
+		part(true).rotate(z:180).translate(x:30,y:3)
 	end
 
 	def output
-	  res =	part(true).rotate(x:90,z:90)
-		res+=	part(true).rotate(x:90,z:90).mirror(y:1).translate(y:-2)
+	  res =	part(false)#.rotate(x:90,z:90)
+		res+=	part(false).mirror(x:1).translate(x:-50)
 		res
 	end
 
-	def part(output=false)
-		motor_mount_thickness = 6
-		motor_position = 67
-		bearing_position = 102
-		res = cube([30,@args[:thickness],bearing_position]).color(@@printed_color)	
-
-
-		# tslot mounts
-
-		2.times do |i|
-			bolt = Bolt.new(4,12)
-			washer = Washer.new(4.3)
-		  res -= long_slot(d:4.4,h:10,l:14).rotate(x:90,y:90).translate(x:15,y:9,z:19+i*78)				
-		
-		#	res -= hull(cylinder(d:4.4,h:10),cylinder(d:4.4,h:10).translate(x:14)).rotate(x:90,y:90).translate(x:15,y:9,z:19+i*78)				
-			unless output == true
-				res += bolt.show.rotate(x:90).translate(x:15,y:@args[:thickness]+1,z:7+i*85) 
-				res += washer.show.rotate(x:90).translate(x:15,y:@args[:thickness]+1,z:7+i*85) 
-			end
-			i+=1
-		end
-
-		# motor holder
+  def motor_mount_base(show)
 		motor = Nema17.new
-		
-		res += cube([48,47+2,motor_mount_thickness]).translate(z:motor_position).color(@@printed_color)	
-		res -= cylinder(d:24,h:motor_mount_thickness+0.2).translate(x:26,y:27,z:motor_position-0.1)		
-		res += motor.show.translate(x:22+4,y:22+@args[:thickness],z:20) unless output == true
+    res = cube([46,46,@motor_mount_thickness]).center_xy.translate(x:1)
+    
+  	res -= cylinder(d:24,h:@motor_mount_thickness+0.2).translate(z:-0.1)		
+    res = res.color(@@printed_color)	
+  	res += motor.show.translate(z:-47) if show
 		
 		# screw holes
 		[-1,1].each do |i|	
 			[-1,1].each do |f|	
 				bolt = Bolt.new(3,10)
-				res -= bolt.output.translate(x:26+i*15.7,y:27+f*15.7,z:motor_position)
-				res += bolt.show.mirror(z:1).translate(x:26+i*15.7,y:27+f*15.7,z:motor_position+motor_mount_thickness) unless output == true
+				res -= bolt.output.translate(x:i*15.7,y:f*15.7)
+				res += bolt.show.mirror(z:1).translate(x:i*15.7,y:f*15.7,z:@motor_mount_thickness) if show
 		
 			end
 		end
 
+	
+    res
+  end
+
+	def part(show)
+		res = motor_mount_base(show)
+	
+	  mount = TSlotMount.new(additional_wall_length:13)
+	  res += mount.part(show).translate(x:-23,y:-28)
+	  mount = TSlotMount.new(thickness:13,bolt_length:25)
+	  res += mount.part(show).rotate(z:-90).translate(x:7,y:-28)
+		
+    # 10mm rod hole   
+    res -= cylinder(d:10.4,h:@motor_mount_thickness+0.2).translate(x:17,y:2,z:-0.1)
 
 
 		res

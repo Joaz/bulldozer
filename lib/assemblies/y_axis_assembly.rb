@@ -39,7 +39,7 @@ class YAxisAssembly < CrystalScad::Assembly
 		#res += YRodHolder.new.show.translate(x:rod_position_right)
 		#res += YRodHolder.new.show.mirror(y:1).translate(x:rod_position_right,y:@tslot_y)
 
-		#fixed += YEndstopHolder.new.show.translate(y:438,z:-5)
+	  res += YEndstop.new.show.rotate(z:-90).translate(y:470,z:0)
 
     
 
