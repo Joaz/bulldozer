@@ -47,7 +47,7 @@ save("bom.txt",@@bom.output)
 save("bulldozer.scad",assembly.scad_output,"$fn=64;") if assembly
 save("part.scad",subassembly.scad_output,"$fn=64;") if subassembly rescue nil
 
-parts = [YzBracket,BulldozerGearbox,BulldozerRodHolder,BulldozerIdler, BulldozerArmBearingSupport, BulldozerAcmeNutHolder,ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,YBearingHolder,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
+parts = [YEndstop,YzBracket,BulldozerGearbox,BulldozerRodHolder,BulldozerIdler, BulldozerArmBearingSupport, BulldozerAcmeNutHolder,ZAcmeBearingHolderLower,ZAcmeBearingHolderUpper,XCarriage,ZLinearBearingHolder,YMotorMount,YBearingHolder,XAxisAcmeNutHolder, XAxisMountingPart,YBeltHolder,YBeltIdler,YRodHolder,ZMotorMount,ZRodHolder,XBeltIdler]
 unless Dir.exists?("output")
   Dir.mkdir("output")
 end
