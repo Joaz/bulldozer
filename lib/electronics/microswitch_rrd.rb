@@ -1,7 +1,7 @@
 class MicroswitchRrd < CrystalScad::Assembly
 
 	def initialize(args={})
-		@bolt_height = 16
+		@bolt_height = 20
  		@x = 40
 		@y = 16
 		@z = 1.6
@@ -23,9 +23,9 @@ class MicroswitchRrd < CrystalScad::Assembly
 
 		if !show
 			# bolts coming through		  
-			res += cylinder(d:3.5,h:@bolt_height).translate(x:17,y:13.5,z:-0.1-@bolt_height+@z)
-		  res += cylinder(d:3.5,h:@bolt_height).translate(x:17+19,y:13.5,z:-0.1-@bolt_height+@z)
-		  res += cylinder(d:3.5,h:@bolt_height).translate(x:2,y:13.5,z:-0.1-@bolt_height+@z)
+			res += cylinder(d:3.5,h:@bolt_height*2).translate(x:17,y:13.5,z:-0.1-@bolt_height+@z)
+		  res += cylinder(d:3.5,h:@bolt_height*2).translate(x:17+19,y:13.5,z:-0.1-@bolt_height+@z)
+		  res += cylinder(d:3.5,h:@bolt_height*2).translate(x:2,y:13.5,z:-0.1-@bolt_height+@z)
 		
 			# additional cutouts for through hole component solder pins on the bottom of the pcb
 
