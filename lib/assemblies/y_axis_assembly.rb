@@ -3,12 +3,12 @@ class YAxisAssembly < CrystalScad::Assembly
     @args = args
 
     @args[:rod_size] ||= 12    
-    @args[:position] ||= 245 
+    @args[:position] ||= 225 
     @args[:bed_size_x] ||= 226
     @args[:bed_size_y] ||= 226       
     @args[:bed_size_z] ||= 12
 		@args[:tslot_x] ||= 295
-		@args[:tslot_y] ||= 495
+		@args[:tslot_y] ||= 465
 		@tslot_x,@tslot_y = @args[:tslot_x],@args[:tslot_y]
 		@bed_position_x = 34.5
 		@bed_position_z = 1.5
@@ -39,7 +39,7 @@ class YAxisAssembly < CrystalScad::Assembly
 		#res += YRodHolder.new.show.translate(x:rod_position_right)
 		#res += YRodHolder.new.show.mirror(y:1).translate(x:rod_position_right,y:@tslot_y)
 
-	  res += YEndstop.new.show.rotate(z:180).translate(x:70,y:491,z:0)
+	  res += YEndstop.new.show.rotate(z:180).translate(x:70,y:465,z:0)
 
     
 
