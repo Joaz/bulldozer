@@ -45,7 +45,7 @@ class ZMotorMount < CrystalScad::Printed
 	  res += mount.part(show).rotate(z:-90).translate(x:7,y:-28)
 		
     # 10mm rod hole   
-    res -= cylinder(d:10.4,h:@motor_mount_thickness+0.2).translate(x:17,y:2,z:-0.1)
+    res -= cylinder(d:10.4,h:@motor_mount_thickness+0.2).translate(x:17,y:-2,z:-0.1)
 
 
 		res

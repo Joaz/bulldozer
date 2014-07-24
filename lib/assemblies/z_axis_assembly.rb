@@ -57,7 +57,8 @@ class ZAxisAssembly < CrystalScad::Assembly
   def z_axis_drive
 		assembly = ZMotorMount.new.show.translate(x:@args[:left_pos]-23,y:-31,z:0)
 		assembly += ZMotorMount.new.show.mirror(x:1).translate(x:@args[:right_pos],y:-3,z:-60)
-		assembly += XEndMotor.new.show.rotate(z:90,x:180).translate(x:@args[:left_pos]-10,y:-29,z:120)
+	  
+		assembly += XEndMotor.new.show.rotate(z:90,x:180).translate(x:@args[:left_pos]-10,y:-26,z:120)
 
     assembly += ZEndstop.new.show.rotate(z:90).translate(x:-30,z:50)
 		# smooth rod center y from threaded rod: x:17,y:-2
@@ -74,10 +75,14 @@ class ZAxisAssembly < CrystalScad::Assembly
     assembly += Coupling.new.show.translate(x:@args[:left_pos]+7,y:-28,z:15)
     assembly += Coupling.new.show.translate(x:@args[:right_pos]-4,y:-27,z:15)
 
+    assembly += cylinder(d:5,h:300).translate(x:@args[:left_pos]+7,y:-28,z:15).color("black")
+    assembly += cylinder(d:5,h:300).translate(x:@args[:right_pos]-4,y:-27,z:15).color("black")
+
+
     rod_position_left = 18
     rod_position_right = @args[:right_pos]-30-18
     
-    assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(x:@args[:left_pos]-10,y:-28-2,z:5)
+    assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(x:@args[:left_pos]-10,y:-28+2,z:5)
     assembly += Rod.new(size:10,length:405).show.rotate(x:90).translate(y:52,x:rod_position_right,z:2)
     
 
