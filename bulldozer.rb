@@ -28,7 +28,9 @@ require_all "lib/**/*.rb"
 
 
 
-assembly = BulldozerFrameAssembly.new.show
+
+#assembly = BulldozerFrameAssembly.new.show
+assembly = PrinterAssembly.new.show
 
 
 
