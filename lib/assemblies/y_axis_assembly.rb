@@ -8,7 +8,7 @@ class YAxisAssembly < CrystalScad::Assembly
     @args[:bed_size_y] ||= 226       
     @args[:bed_size_z] ||= 12
 		@args[:tslot_x] ||= 295
-		@args[:tslot_y] ||= 465
+		@args[:tslot_y] ||= 470 # 465
 		@tslot_x,@tslot_y = @args[:tslot_x],@args[:tslot_y]
 		@bed_position_x = 34.5
 		@bed_position_z = 1.5
