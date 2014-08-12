@@ -1,7 +1,7 @@
 class ZMotorMount < CrystalScad::Printed
 
 	def initialize(args={})
-		@motor_mount_thickness = 6
+		@motor_mount_thickness = 8
 	end
 
 	def show

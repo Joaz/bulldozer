@@ -90,9 +90,9 @@ class ZAxisAssembly < CrystalScad::Assembly
 #    assembly += ZRodHolder.new.show.translate(y:60,x:rod_position_left-48,z:0)
 #    assembly += ZRodHolder.new.show.mirror(x:1).translate(y:60,x:rod_position_right+48,z:0)
     # top
-#    assembly += ZRodHolder.new.show.mirror(z:1).translate(y:60,x:rod_position_left-48,z:@args[:height]-60)
-#    assembly += ZRodHolder.new.show.mirror(z:1).mirror(x:1).translate(y:60,x:rod_position_right+48,z:@args[:height]-60)
-
+    assembly += ZRodHolder.new.show.translate(x:@args[:left_pos]-23,y:-31,z:@args[:height]-90) 
+    assembly += ZRodHolder.new.show.mirror(x:1).translate(x:@args[:right_pos]+23,y:-31,z:@args[:height]-90) 
+    
 
     assembly
   end
