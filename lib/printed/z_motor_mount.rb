@@ -25,7 +25,7 @@ class ZMotorMount < CrystalScad::Printed
 		# screw holes
 		[-1,1].each do |i|	
 			[-1,1].each do |f|	
-				bolt = Bolt.new(3,10)
+				bolt = Bolt.new(3,10,additional_diameter:0.6)
 				res -= bolt.output.translate(x:i*15.7,y:f*15.7)
 				res += bolt.show.mirror(z:1).translate(x:i*15.7,y:f*15.7,z:@motor_mount_thickness) if show
 		
